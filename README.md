@@ -7,6 +7,7 @@ App móvil para hacer seguimiento de series y películas. Proyecto de portfolio.
 ---
 
 ## Features
+
 - 🔐 Autenticación (login / registro) con Supabase Auth
 - 🔍 Búsqueda de series y películas vía TMDB
 - 📋 Lista personal con estados: Por ver · Viendo · Completada · Pausada
@@ -15,32 +16,37 @@ App móvil para hacer seguimiento de series y películas. Proyecto de portfolio.
 - 📈 Estadísticas de consumo
 
 ## Tech Stack
-| Área | Tecnología |
-|------|-----------|
-| Mobile | React Native + Expo SDK 51 |
-| Navigation | Expo Router (file-based) |
-| Backend | Supabase (Auth + PostgreSQL + RLS) |
-| API externa | TMDB API v3 |
-| Estado global | Zustand |
-| HTTP client | Axios |
-| Build/Deploy | EAS Build → Google Play |
+
+| Área          | Tecnología                             |
+| ------------- | -------------------------------------- |
+| Mobile        | React Native + Expo SDK 55             |
+| Navigation    | React Navigation (stack + bottom tabs) |
+| Backend       | Supabase (Auth + PostgreSQL + RLS)     |
+| API externa   | TMDB API v3                            |
+| Estado global | Zustand                                |
+| HTTP client   | Axios                                  |
+| Build/Deploy  | EAS Build → Google Play                |
 
 ## Estructura de carpetas
+
 ```
 series-tracker/
-├── app/                    # Rutas (Expo Router)
-│   ├── (auth)/             # Login, Register
-│   ├── (tabs)/             # Home, Search, MyList, Profile
-│   └── series/[id].tsx     # Detalle de serie
-├── components/             # Componentes reutilizables
-├── hooks/                  # Custom hooks (useAuth, useSeries...)
-├── services/               # TMDB API client, Supabase client
-├── stores/                 # Zustand stores
-├── types/                  # TypeScript types
-└── supabase/               # Migrations, schema SQL
+├── src/
+│   ├── navigation/         # RootNavigator, AuthNavigator, MainNavigator, types
+│   ├── screens/
+│   │   ├── auth/           # LoginScreen, RegisterScreen
+│   │   └── main/           # HomeScreen, SearchScreen, ProfileScreen
+│   ├── components/         # Componentes reutilizables
+│   ├── hooks/              # Custom hooks (useAuth, useSeries...)
+│   ├── services/           # TMDB API client, Supabase client
+│   └── types/              # TypeScript types globales
+├── assets/                 # Imágenes, fuentes, iconos
+├── App.tsx                 # Entry point (monta RootNavigator)
+└── app.json                # Config de Expo
 ```
 
 ## Setup
+
 ```bash
 npx create-expo-app series-tracker --template blank-typescript
 cd series-tracker
@@ -48,6 +54,7 @@ npm install
 ```
 
 Copia `.env.example` → `.env` y rellena:
+
 ```
 EXPO_PUBLIC_SUPABASE_URL=
 EXPO_PUBLIC_SUPABASE_ANON_KEY=
@@ -55,6 +62,7 @@ EXPO_PUBLIC_TMDB_API_KEY=
 ```
 
 ## Modelo de datos principal (Supabase)
+
 ```sql
 create table user_series (
   id               uuid primary key default gen_random_uuid(),
