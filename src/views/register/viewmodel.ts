@@ -1,11 +1,8 @@
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import type { AuthStackParamList } from '../../navigation/types';
+import { ScreenType, type RootParamsList } from '../../navigation/types';
 
-type RegisterNavProp = NativeStackNavigationProp<
-  AuthStackParamList,
-  'Register'
->;
+type RegisterNavProp = NativeStackNavigationProp<RootParamsList, ScreenType.REGISTER>;
 
 export const useViewModel = () => {
   const navigation = useNavigation<RegisterNavProp>();

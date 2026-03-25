@@ -1,23 +1,29 @@
-import type { NativeStackScreenProps } from '@react-navigation/native-stack';
-import type { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
+// ─── Screen names ────────────────────────────────────────────────────────────
+// Enum centralizado para todos los nombres de pantalla.
+// Usar siempre ScreenType.X en lugar de strings literales.
+export enum ScreenType {
+  // Auth
+  LOGIN = 'Login',
+  REGISTER = 'Register',
+  // Main (contenedor de tabs)
+  TABS = 'Tabs',
+  // Tabs
+  HOME = 'Home',
+  SEARCH = 'Search',
+  PROFILE = 'Profile',
+}
 
-// ─── Auth Stack ─────────────────────────────────────────────────────────────
-export type AuthStackParamList = {
-  Login: undefined;
-  Register: undefined;
+// ─── Param lists ─────────────────────────────────────────────────────────────
+// RootParamsList: pantallas del stack raíz (auth + entrada a tabs)
+export type RootParamsList = {
+  [ScreenType.LOGIN]: undefined;
+  [ScreenType.REGISTER]: undefined;
+  [ScreenType.TABS]: undefined;
 };
 
-// ─── Main Tabs ───────────────────────────────────────────────────────────────
-export type MainTabParamList = {
-  Home: undefined;
-  Search: undefined;
-  Profile: undefined;
+// TabParamsList: pantallas internas del tab navigator
+export type TabParamsList = {
+  [ScreenType.HOME]: undefined;
+  [ScreenType.SEARCH]: undefined;
+  [ScreenType.PROFILE]: undefined;
 };
-
-// ─── Screen props helpers ────────────────────────────────────────────────────
-export type LoginScreenProps = NativeStackScreenProps<AuthStackParamList, 'Login'>;
-export type RegisterScreenProps = NativeStackScreenProps<AuthStackParamList, 'Register'>;
-
-export type HomeScreenProps = BottomTabScreenProps<MainTabParamList, 'Home'>;
-export type SearchScreenProps = BottomTabScreenProps<MainTabParamList, 'Search'>;
-export type ProfileScreenProps = BottomTabScreenProps<MainTabParamList, 'Profile'>;
