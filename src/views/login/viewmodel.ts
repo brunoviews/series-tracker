@@ -1,14 +1,12 @@
 import { useCallback, useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
-import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { ScreenType, type RootParamsList } from '../../navigation/types';
+import { useTranslation } from 'react-i18next';
+import { ScreenType } from '../../navigation/types';
+import { useAppNavigation } from '../../navigation/useAppNavigation';
 import { supabase } from '../../lib/supabase';
-import i18n from '../../i18n';
-
-type LoginNavProp = NativeStackNavigationProp<RootParamsList, ScreenType.LOGIN>;
 
 export const useViewModel = () => {
-  const navigation = useNavigation<LoginNavProp>();
+  const navigation = useAppNavigation();
+  const { t } = useTranslation();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -32,9 +30,9 @@ export const useViewModel = () => {
 
     if (authError) {
       if (authError.message.includes('Invalid login credentials')) {
-        setError(i18n.t('auth.errors.invalidCredentials'));
+        setError(t('auth.errors.invalidCredentials'));
       } else {
-        setError(i18n.t('auth.errors.generic'));
+        setError(t('auth.errors.generic'));
       }
       return;
     }
