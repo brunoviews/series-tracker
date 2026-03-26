@@ -5,11 +5,22 @@ const es = {
   auth: {
     login: {
       title: 'Iniciar sesión',
+      emailPlaceholder: 'Correo electrónico',
+      passwordPlaceholder: 'Contraseña',
+      submitButton: 'Entrar',
       linkToRegister: '¿No tienes cuenta? Regístrate',
     },
     register: {
-      title: 'Registro',
+      title: 'Crear cuenta',
+      emailPlaceholder: 'Correo electrónico',
+      passwordPlaceholder: 'Contraseña (mín. 6 caracteres)',
+      submitButton: 'Registrarse',
       linkToLogin: '¿Ya tienes cuenta? Inicia sesión',
+    },
+    errors: {
+      invalidCredentials: 'Email o contraseña incorrectos',
+      emailAlreadyExists: 'Ya existe una cuenta con ese email',
+      generic: 'Algo ha ido mal. Inténtalo de nuevo',
     },
   },
   tabs: {

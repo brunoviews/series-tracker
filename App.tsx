@@ -1,18 +1,55 @@
 import React from 'react';
+import { ActivityIndicator, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { ThemeProvider } from 'styled-components/native';
-import { theme } from './src/theme';
+import { useFonts } from 'expo-font';
+import {
+  SpaceMono_400Regular,
+  SpaceMono_400Regular_Italic,
+  SpaceMono_700Bold,
+  SpaceMono_700Bold_Italic,
+} from '@expo-google-fonts/space-mono';
+import {
+  DMSerifDisplay_400Regular,
+  DMSerifDisplay_400Regular_Italic,
+} from '@expo-google-fonts/dm-serif-display';
+
 // El import ejecuta la configuración de i18next como efecto de módulo
-import './src/i18n';
-import AppNavigator from './src/navigation';
-import { AuthProvider } from './src/context/AuthContext';
+import '@i18n';
+import { AuthProvider } from '@context/AuthContext';
+import { theme } from '@/theme';
+import AppNavigator from '@/navigation';
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    SpaceMono_400Regular,
+    SpaceMono_400Regular_Italic,
+    SpaceMono_700Bold,
+    SpaceMono_700Bold_Italic,
+    DMSerifDisplay_400Regular,
+    DMSerifDisplay_400Regular_Italic,
+  });
+
+  if (!fontsLoaded) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: '#131313',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <ActivityIndicator color="#C4C0FF" />
+      </View>
+    );
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <AuthProvider>
         <AppNavigator />
-        <StatusBar style="auto" />
+        <StatusBar style="light" />
       </AuthProvider>
     </ThemeProvider>
   );

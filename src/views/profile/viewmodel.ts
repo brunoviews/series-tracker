@@ -1,3 +1,10 @@
+import { useTranslation } from 'react-i18next';
+import { useAuth } from '../../context/AuthContext';
+
 export const useViewModel = () => {
-  return {};
+  const { t } = useTranslation();
+
+  const { signOut } = useAuth();
+
+  return { t, signOut };
 };

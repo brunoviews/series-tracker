@@ -14,6 +14,7 @@ import { supabase } from '../lib/supabase';
 type AuthContextValue = {
   session: Session | null;
   loading: boolean;
+  signOut: () => Promise<void>;
 };
 
 // ─── Contexto ─────────────────────────────────────────────────────────────────
@@ -29,6 +30,11 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
   // loading=true hasta que Supabase confirme el estado inicial de la sesión.
   // Evita el flash del login cuando el usuario ya tenía sesión guardada.
   const [loading, setLoading] = useState(true);
+
+  const signOut = async (): Promise<void> => {
+    await supabase.auth.signOut();
+    // onAuthStateChange recibirá SIGNED_OUT y pondrá session a null automáticamente.
+  };
 
   useEffect(() => {
     // 1. Supabase lee AsyncStorage y emite el estado inicial (INITIAL_SESSION).
@@ -47,7 +53,7 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ session, loading }}>
+    <AuthContext.Provider value={{ session, loading, signOut }}>
       {children}
     </AuthContext.Provider>
   );
