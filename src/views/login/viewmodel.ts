@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { ScreenType } from '../../navigation/types';
 import { useAppNavigation } from '../../navigation/useAppNavigation';
 import { supabase } from '../../lib/supabase';
+import { checkEmail } from '@/utils/regex';
 
 export const useViewModel = () => {
   const navigation = useAppNavigation();
@@ -12,6 +13,9 @@ export const useViewModel = () => {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const isDisable = !email.trim() || !password || !checkEmail.test(email);
+
+ 
 
   const goToRegister = useCallback(() => {
     navigation.navigate(ScreenType.REGISTER);
@@ -22,7 +26,7 @@ export const useViewModel = () => {
     setLoading(true);
 
     const { error: authError } = await supabase.auth.signInWithPassword({
-      email: email.trim(),
+      email: email,
       password,
     });
 
@@ -48,6 +52,7 @@ export const useViewModel = () => {
     setPassword,
     loading,
     error,
+    isDisable,
     signIn,
     goToRegister,
   };

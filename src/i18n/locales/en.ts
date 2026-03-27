@@ -4,17 +4,18 @@ const en = {
   },
   auth: {
     login: {
-      title: 'Sign in',
+      title: 'Welcome Back!',
       emailPlaceholder: 'Email',
       passwordPlaceholder: 'Password',
       submitButton: 'Sign in',
+
       linkToRegister: "Don't have an account? Sign up",
     },
     register: {
       title: 'Create account',
       emailPlaceholder: 'Email',
-      passwordPlaceholder: 'Password (min. 6 characters)',
-      submitButton: 'Sign up',
+      passwordPlaceholder: 'Password',
+      createAccountButton: 'Create account',
       linkToLogin: 'Already have an account? Sign in',
     },
     errors: {

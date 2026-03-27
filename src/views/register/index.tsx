@@ -1,15 +1,10 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-  Container,
-  Title,
-  Input,
-  Button,
-  ButtonText,
-  ErrorText,
-  Link,
-} from './styles';
+import { TextInput } from 'react-native-paper';
+import { Container, Title, ErrorText, Link, CustomContainer } from './styles';
 import { useViewModel } from './viewmodel';
+import { Button } from '@/components/Button';
+import { GridBackground } from '@/components/GridBackground';
 
 export default function RegisterView() {
   const {
@@ -25,35 +20,43 @@ export default function RegisterView() {
   const { t } = useTranslation();
 
   return (
-    <Container>
-      <Title>{t('auth.register.title')}</Title>
+    <CustomContainer>
+      <GridBackground />
+      <Container>
+        <Title>{t('auth.register.title')}</Title>
 
-      <Input
-        placeholder={t('auth.register.emailPlaceholder')}
-        value={email}
-        onChangeText={setEmail}
-        autoCapitalize="none"
-        keyboardType="email-address"
-        autoComplete="email"
-      />
+        <TextInput
+          label={t('auth.register.emailPlaceholder')}
+          value={email}
+          onChangeText={setEmail}
+          autoCapitalize="none"
+          keyboardType="email-address"
+          autoComplete="email"
+          style={{ width: '100%' }}
+        />
 
-      <Input
-        placeholder={t('auth.register.passwordPlaceholder')}
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-        autoComplete="new-password"
-      />
+        <TextInput
+          label={t('auth.register.passwordPlaceholder')}
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry
+          autoComplete="new-password"
+          mode="flat"
+          style={{ width: '100%' }}
+        />
 
-      {error && <ErrorText>{error}</ErrorText>}
+        {error && <ErrorText>{error}</ErrorText>}
 
-      <Button onPress={signUp} disabled={loading}>
-        <ButtonText>
-          {loading ? '...' : t('auth.register.submitButton')}
-        </ButtonText>
-      </Button>
+        <Button
+          onPress={signUp}
+          disabled={loading}
+          variant="primary"
+          isLoading={loading}
+          title={t('auth.register.createAccountButton')}
+        />
 
-      <Link onPress={goToLogin}>{t('auth.register.linkToLogin')}</Link>
-    </Container>
+        <Link onPress={goToLogin}>{t('auth.register.linkToLogin')}</Link>
+      </Container>
+    </CustomContainer>
   );
 }

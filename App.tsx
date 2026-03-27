@@ -2,6 +2,7 @@ import React from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { ThemeProvider } from 'styled-components/native';
+import { PaperProvider } from 'react-native-paper';
 import { useFonts } from 'expo-font';
 import {
   SpaceMono_400Regular,
@@ -47,10 +48,12 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <AuthProvider>
-        <AppNavigator />
-        <StatusBar style="light" />
-      </AuthProvider>
+      <PaperProvider>
+        <AuthProvider>
+          <AppNavigator />
+          <StatusBar style="light" />
+        </AuthProvider>
+      </PaperProvider>
     </ThemeProvider>
   );
 }

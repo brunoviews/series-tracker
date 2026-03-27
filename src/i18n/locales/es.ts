@@ -4,7 +4,7 @@ const es = {
   },
   auth: {
     login: {
-      title: 'Iniciar sesión',
+      title: '¡Bienvenido de nuevo!',
       emailPlaceholder: 'Correo electrónico',
       passwordPlaceholder: 'Contraseña',
       submitButton: 'Entrar',
@@ -13,8 +13,8 @@ const es = {
     register: {
       title: 'Crear cuenta',
       emailPlaceholder: 'Correo electrónico',
-      passwordPlaceholder: 'Contraseña (mín. 6 caracteres)',
-      submitButton: 'Registrarse',
+      passwordPlaceholder: 'Contraseña)',
+      createAccountButton: 'Crear cuenta',
       linkToLogin: '¿Ya tienes cuenta? Inicia sesión',
     },
     errors: {

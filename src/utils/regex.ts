@@ -1,0 +1,1 @@
+export const checkEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

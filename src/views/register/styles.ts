@@ -1,58 +1,36 @@
 import styled from 'styled-components/native';
+import Text from '@components/Text';
 
 export const Container = styled.View`
-  flex: 1;
   align-items: center;
   justify-content: center;
-  background-color: ${({ theme }) => theme.colors.fill.default.main};
   padding: ${({ theme }) => theme.spacing.md}px;
-`;
-
-export const Title = styled.Text`
-  font-size: ${({ theme }) => theme.typography['title-1'].fontSize}px;
-  font-weight: ${({ theme }) => theme.typography['title-1'].fontWeight};
-  margin-bottom: ${({ theme }) => theme.spacing.lg}px;
-  color: ${({ theme }) => theme.colors.textIcon.default.strong};
-`;
-
-export const Input = styled.TextInput`
+  gap: 16px;
   width: 100%;
-  background-color: ${({ theme }) => theme.colors.components.input.fill};
-  border-width: 1px;
-  border-color: ${({ theme }) => theme.colors.stroke.default.weak};
-  border-radius: ${({ theme }) => theme.borderRadius.md}px;
-  padding: ${({ theme }) => theme.spacing.md}px;
-  margin-bottom: ${({ theme }) => theme.spacing.sm}px;
-  font-size: ${({ theme }) => theme.typography['body-2-regular'].fontSize}px;
-  color: ${({ theme }) => theme.colors.textIcon.default.main};
+  border-radius: ${({ theme }) => theme.borderRadius.lg}px;
 `;
 
-export const Button = styled.TouchableOpacity`
+export const Title = styled(Text).attrs({ variant: 'title-1' })`
+  text-align: center;
   width: 100%;
-  background-color: ${({ theme }) =>
-    theme.colors.components.button.primary.default.fill};
-  border-radius: ${({ theme }) => theme.borderRadius.md}px;
-  padding: ${({ theme }) => theme.spacing.md}px;
-  align-items: center;
-  margin-top: ${({ theme }) => theme.spacing.sm}px;
-  opacity: ${({ disabled }) => (disabled ? 0.6 : 1)};
-`;
-
-export const ButtonText = styled.Text`
-  color: ${({ theme }) =>
-    theme.colors.components.button.primary.default.textIcon};
-  font-size: ${({ theme }) => theme.typography['label'].fontSize}px;
-  font-weight: ${({ theme }) => theme.typography['label'].fontWeight};
 `;
 
 export const ErrorText = styled.Text`
   color: ${({ theme }) => theme.colors.textIcon.semantic.error.main};
-  font-size: ${({ theme }) => theme.typography['caption'].fontSize}px;
-  margin-bottom: ${({ theme }) => theme.spacing.sm}px;
+  font-size: ${({ theme }) => theme.typography['body-2-regular'].fontSize}px;
 `;
 
 export const Link = styled.Text`
-  color: ${({ theme }) => theme.colors.textIcon.primary.main};
-  font-size: ${({ theme }) => theme.typography['body-2-regular'].fontSize}px;
-  margin-top: ${({ theme }) => theme.spacing.md}px;
+  color: ${({ theme }) => theme.colors.textIcon.default.strong};
+  font-size: ${({ theme }) => theme.typography['body-1-regular'].fontSize}px;
+  text-decoration: underline;
+`;
+
+export const CustomContainer = styled.View`
+  background-color: #020617;
+  padding: ${({ theme }) => theme.spacing.md}px;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 `;

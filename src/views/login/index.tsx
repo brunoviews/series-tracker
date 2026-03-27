@@ -1,15 +1,19 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { TextInput } from 'react-native-paper';
 import {
   Container,
   Title,
-  Input,
-  Button,
-  ButtonText,
   ErrorText,
   Link,
+  CustomContainer,
+  AppName,
+  SubTitle,
 } from './styles';
 import { useViewModel } from './viewmodel';
+import { Button } from '@/components/Button';
+import { GridBackground } from '@/components/GridBackground';
+import { TitlesContainer } from '@/components/TitlesContainer';
 
 export default function LoginView() {
   const {
@@ -21,39 +25,52 @@ export default function LoginView() {
     error,
     signIn,
     goToRegister,
+    isDisable,
   } = useViewModel();
   const { t } = useTranslation();
 
   return (
-    <Container>
-      <Title>{t('auth.login.title')}</Title>
+    <CustomContainer>
+      <GridBackground />
+      <TitlesContainer>
+        <AppName>MyWatchList</AppName>
+        <SubTitle>Track what you watch</SubTitle>
+      </TitlesContainer>
+      <Container>
+        <Title>Log in</Title>
 
-      <Input
-        placeholder={t('auth.login.emailPlaceholder')}
-        value={email}
-        onChangeText={setEmail}
-        autoCapitalize="none"
-        keyboardType="email-address"
-        autoComplete="email"
-      />
+        <TextInput
+          label={t('auth.login.emailPlaceholder')}
+          value={email}
+          onChangeText={setEmail}
+          autoCapitalize="none"
+          keyboardType="email-address"
+          autoComplete="email"
+          style={{ width: '100%' }}
+        />
 
-      <Input
-        placeholder={t('auth.login.passwordPlaceholder')}
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-        autoComplete="password"
-      />
+        <TextInput
+          label={t('auth.login.passwordPlaceholder')}
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry
+          autoComplete="password"
+          mode="flat"
+          style={{ width: '100%' }}
+        />
 
-      {error && <ErrorText>{error}</ErrorText>}
+        {error && <ErrorText>{error}</ErrorText>}
 
-      <Button onPress={signIn} disabled={loading}>
-        <ButtonText>
-          {loading ? '...' : t('auth.login.submitButton')}
-        </ButtonText>
-      </Button>
+        <Button
+          onPress={signIn}
+          disabled={isDisable || loading}
+          variant="primary"
+          isLoading={loading}
+          title={t('auth.login.submitButton')}
+        />
 
-      <Link onPress={goToRegister}>{t('auth.login.linkToRegister')}</Link>
-    </Container>
+        <Link onPress={goToRegister}>{t('auth.login.linkToRegister')}</Link>
+      </Container>
+    </CustomContainer>
   );
 }
