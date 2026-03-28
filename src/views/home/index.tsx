@@ -1,15 +1,97 @@
 import React from 'react';
+import { FlatList } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { Container, Title } from './styles';
+import { useTheme } from 'styled-components/native';
+import {
+  AvatarContainer,
+  Container,
+  GreenDot,
+  HomeHeader,
+  StatusFilterContainer,
+  StatusPill,
+  StatusPillText,
+  UserName,
+  WelcomeContainer,
+  WelcomeText,
+} from './styles';
 import { useViewModel } from './viewmodel';
+import { Avatar } from 'react-native-paper';
+import type { SeriesStatus } from './types';
+import SeriesCard from '@components/SeriesCard';
+
+const STATUSES: SeriesStatus[] = [
+  'watching',
+  'completed',
+  'planned',
+  'dropped',
+];
+
+const STATUS_I18N_KEYS = {
+  watching: 'series.status.watching',
+  completed: 'series.status.completed',
+  planned: 'series.status.planned',
+  dropped: 'series.status.dropped',
+} as const;
 
 export default function HomeView() {
-  useViewModel();
+  const {
+    firstName,
+    greetingKey,
+    activeStatus,
+    setActiveStatus,
+    filteredSeries,
+  } = useViewModel();
   const { t } = useTranslation();
+  const theme = useTheme();
 
   return (
-    <Container>
-      <Title>{t('home.title')}</Title>
-    </Container>
+    <>
+      <HomeHeader>
+        <WelcomeContainer>
+          <WelcomeText>{t(`home.greeting.${greetingKey}`)}</WelcomeText>
+          <UserName>{firstName ?? ''}</UserName>
+        </WelcomeContainer>
+        <AvatarContainer>
+          <Avatar.Image
+            size={44}
+            source={{ uri: 'https://unavatar.io/github/kikobeats' }}
+          />
+          <GreenDot />
+        </AvatarContainer>
+      </HomeHeader>
+
+      <Container>
+        <StatusFilterContainer>
+          {STATUSES.map((status) => (
+            <StatusPill
+              key={status}
+              active={status === activeStatus}
+              onPress={() => setActiveStatus(status)}
+            >
+              <StatusPillText active={status === activeStatus}>
+                {t(STATUS_I18N_KEYS[status])}
+              </StatusPillText>
+            </StatusPill>
+          ))}
+        </StatusFilterContainer>
+
+        <FlatList
+          data={filteredSeries}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => <SeriesCard {...item} />}
+          style={{ flex: 1 }}
+          contentContainerStyle={{ paddingTop: 4, paddingBottom: 100 }}
+          showsVerticalScrollIndicator={false}
+        />
+
+        {/*   <FABButton onPress={() => {}}>
+                    <PlusIcon
+                      size={26}
+                      color={theme.colors.textIcon.primary.onPrimary}
+                      weight="bold"
+                    />
+                  </FABButton> */}
+      </Container>
+    </>
   );
 }

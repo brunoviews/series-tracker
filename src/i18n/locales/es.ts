@@ -12,6 +12,8 @@ const es = {
     },
     register: {
       title: 'Crear cuenta',
+      firstNamePlaceholder: 'Nombre',
+      lastNamePlaceholder: 'Apellidos',
       emailPlaceholder: 'Correo electrónico',
       passwordPlaceholder: 'Contraseña)',
       createAccountButton: 'Crear cuenta',
@@ -30,12 +32,30 @@ const es = {
   },
   home: {
     title: 'Mis series',
+    greeting: {
+      morning: 'Buenos días,',
+      afternoon: 'Buenas tardes,',
+      evening: 'Buenas noches,',
+    },
+  },
+  series: {
+    status: {
+      watching: 'Viendo',
+      completed: 'Completadas',
+      planned: 'Por ver',
+      dropped: 'Abandonadas',
+    },
   },
   search: {
     title: 'Buscar',
   },
   profile: {
     title: 'Perfil',
+  },
+
+  homeView: {
+    appName: 'MyWatchList',
+    welcome: 'Hola, {{name}}',
   },
 } as const;
 

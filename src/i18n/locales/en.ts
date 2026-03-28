@@ -13,6 +13,8 @@ const en = {
     },
     register: {
       title: 'Create account',
+      firstNamePlaceholder: 'First name',
+      lastNamePlaceholder: 'Last name',
       emailPlaceholder: 'Email',
       passwordPlaceholder: 'Password',
       createAccountButton: 'Create account',
@@ -31,12 +33,31 @@ const en = {
   },
   home: {
     title: 'My series',
+    welcome: 'Hello',
+    greeting: {
+      morning: 'Good morning,',
+      afternoon: 'Good afternoon,',
+      evening: 'Good evening,',
+    },
+  },
+  series: {
+    status: {
+      watching: 'Watching',
+      completed: 'Completed',
+      planned: 'Plan to watch',
+      dropped: 'Dropped',
+    },
   },
   search: {
     title: 'Search',
   },
   profile: {
     title: 'Profile',
+  },
+
+  homeView: {
+    appName: 'MyWatchList',
+    welcome: 'Hello, {{name}}',
   },
 } as const;
 

@@ -15,6 +15,8 @@ type AuthContextValue = {
   session: Session | null;
   loading: boolean;
   signOut: () => Promise<void>;
+  userEmail?: string | null;
+
 };
 
 // ─── Contexto ─────────────────────────────────────────────────────────────────
@@ -53,7 +55,7 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ session, loading, signOut }}>
+    <AuthContext.Provider value={{ session, loading, signOut, userEmail: session?.user?.email }}>
       {children}
     </AuthContext.Provider>
   );

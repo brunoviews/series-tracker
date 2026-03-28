@@ -13,6 +13,8 @@ type RegisterNavProp = NativeStackNavigationProp<
 export const useViewModel = () => {
   const navigation = useNavigation<RegisterNavProp>();
 
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -24,14 +26,13 @@ export const useViewModel = () => {
     setError(null);
     setLoading(true);
 
-    const { error: authError } = await supabase.auth.signUp({
+    const { data, error: authError } = await supabase.auth.signUp({
       email: email.trim(),
       password,
     });
 
-    setLoading(false);
-
     if (authError) {
+      setLoading(false);
       if (authError.message.includes('User already registered')) {
         setError(i18n.t('auth.errors.emailAlreadyExists'));
       } else {
@@ -40,12 +41,22 @@ export const useViewModel = () => {
       return;
     }
 
-    // signUp exitoso: Supabase crea el usuario en auth.users,
-    // el trigger handle_new_user crea el perfil en profiles,
+    if (data.user) {
+      await supabase
+        .from('profiles')
+        .update({ first_name: firstName.trim(), last_name: lastName.trim() })
+        .eq('id', data.user.id);
+    }
+
+    setLoading(false);
     // onAuthStateChange emite SIGNED_IN y AppNavigator navega a las tabs.
   };
 
   return {
+    firstName,
+    setFirstName,
+    lastName,
+    setLastName,
     email,
     setEmail,
     password,

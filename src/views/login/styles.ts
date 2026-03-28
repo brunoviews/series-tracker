@@ -8,6 +8,7 @@ export const Container = styled.View`
   gap: 16px;
   width: 100%;
   border-radius: ${({ theme }) => theme.borderRadius.lg}px;
+
 `;
 
 export const Title = styled(Text).attrs({ variant: 'title-1' })`
@@ -18,12 +19,12 @@ export const Title = styled(Text).attrs({ variant: 'title-1' })`
 export const AppName = styled(Text).attrs({ variant: 'title-1' })`
   text-align: center;
   width: 100%;
-  color: ${({ theme }) => theme.colors.textIcon.primary.main};
+  color: ${({ theme }) => theme.colors.textIcon.default.strong};
   font-size: 42px;
   line-height: 48px;
 `;
 
-export const SubTitle = styled(Text).attrs({ variant: 'title-2' })`
+export const SubTitle = styled(Text).attrs({ variant: 'title-3' })`
   text-align: center;
   width: 100%;
   color: ${({ theme }) => theme.colors.textIcon.default.weak};

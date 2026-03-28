@@ -9,6 +9,6 @@ export const TitlesContainer = styled(SafeAreaView).attrs({
   left: 0;
   right: 0;
   align-items: center;
-  padding-horizontal: ${({ theme }) => theme.spacing.md}px;
-  gap: 12px;
+  padding: 16px ${({ theme }) => theme.spacing.md}px;
+  gap: 8px;
 `;

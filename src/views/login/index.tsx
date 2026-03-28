@@ -14,6 +14,8 @@ import { useViewModel } from './viewmodel';
 import { Button } from '@/components/Button';
 import { GridBackground } from '@/components/GridBackground';
 import { TitlesContainer } from '@/components/TitlesContainer';
+import { MonitorPlayIcon, TelevisionIcon } from 'phosphor-react-native';
+import { theme } from '@/theme';
 
 export default function LoginView() {
   const {
@@ -32,7 +34,9 @@ export default function LoginView() {
   return (
     <CustomContainer>
       <GridBackground />
+     
       <TitlesContainer>
+         <TelevisionIcon size={60} color={theme.colors.fill.primary.container} weight='light' />
         <AppName>MyWatchList</AppName>
         <SubTitle>Track what you watch</SubTitle>
       </TitlesContainer>

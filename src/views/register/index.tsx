@@ -8,6 +8,10 @@ import { GridBackground } from '@/components/GridBackground';
 
 export default function RegisterView() {
   const {
+    firstName,
+    setFirstName,
+    lastName,
+    setLastName,
     email,
     setEmail,
     password,
@@ -24,6 +28,24 @@ export default function RegisterView() {
       <GridBackground />
       <Container>
         <Title>{t('auth.register.title')}</Title>
+
+        <TextInput
+          label={t('auth.register.firstNamePlaceholder')}
+          value={firstName}
+          onChangeText={setFirstName}
+          autoCapitalize="words"
+          autoComplete="given-name"
+          style={{ width: '100%' }}
+        />
+
+        <TextInput
+          label={t('auth.register.lastNamePlaceholder')}
+          value={lastName}
+          onChangeText={setLastName}
+          autoCapitalize="words"
+          autoComplete="family-name"
+          style={{ width: '100%' }}
+        />
 
         <TextInput
           label={t('auth.register.emailPlaceholder')}

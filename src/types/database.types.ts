@@ -18,19 +18,25 @@ export type Database = {
         Row: {
           avatar_url: string | null;
           created_at: string;
+          first_name: string | null;
           id: string;
+          last_name: string | null;
           username: string | null;
         };
         Insert: {
           avatar_url?: string | null;
           created_at?: string;
+          first_name?: string | null;
           id: string;
+          last_name?: string | null;
           username?: string | null;
         };
         Update: {
           avatar_url?: string | null;
           created_at?: string;
+          first_name?: string | null;
           id?: string;
+          last_name?: string | null;
           username?: string | null;
         };
         Relationships: [];
@@ -224,26 +230,39 @@ export const Constants = {
   },
 } as const;
 
-// ─── Tipos de conveniencia ────────────────────────────────────────────────────
-// Generados por la CLI pero con refinamientos manuales encima.
-// Si regeneras los tipos con la CLI, solo tendrás que volver a añadir este bloque.
+// ─── Tipos manuales del proyecto ─────────────────────────────────────────────
+// Estos tipos se añaden a mano y hay que revisarlos tras cada regeneración.
 
 export type SeriesStatus = 'watching' | 'completed' | 'planned' | 'dropped';
 
-// Fila completa de cada tabla
-export type Profile = Tables<'profiles'>;
-export type UserSeries = Omit<Tables<'user_series'>, 'status'> & {
-  status: SeriesStatus;
+export type Profile = {
+  id: string;
+  username: string | null;
+  first_name: string | null;
+  last_name: string | null;
+  avatar_url: string | null;
+  created_at: string;
 };
 
-// Tipos para INSERT (lo que envías al crear una fila)
-export type InsertUserSeries = Omit<
-  Database['public']['Tables']['user_series']['Insert'],
-  'status'
-> & { status: SeriesStatus };
+export type UserSeries = {
+  id: string;
+  user_id: string;
+  tmdb_series_id: number;
+  series_name: string;
+  poster_path: string | null;
+  status: SeriesStatus;
+  rating: number | null;
+  notes: string | null;
+  current_season: number | null;
+  current_episode: number | null;
+  created_at: string;
+  updated_at: string;
+};
 
-// Tipos para UPDATE (lo que envías al actualizar una fila)
-export type UpdateUserSeries = Omit<
-  Database['public']['Tables']['user_series']['Update'],
-  'status'
-> & { status?: SeriesStatus };
+export type InsertUserSeries = Omit<
+  UserSeries,
+  'id' | 'created_at' | 'updated_at'
+>;
+export type UpdateUserSeries = Partial<
+  Omit<UserSeries, 'id' | 'user_id' | 'created_at' | 'updated_at'>
+>;
