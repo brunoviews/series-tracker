@@ -6,7 +6,8 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "prepare": "husky"
   },
   "dependencies": {
     "@expo-google-fonts/dm-serif-display": "^0.4.2",
@@ -36,8 +37,11 @@
     "styled-components": "^6.3.12"
   },
   "devDependencies": {
+    "@commitlint/cli": "^20.5.0",
+    "@commitlint/config-conventional": "^20.5.0",
     "@types/react": "~19.2.2",
     "babel-plugin-module-resolver": "^5.0.3",
+    "husky": "^9.1.7",
     "typescript": "~5.9.2"
   },
   "private": true

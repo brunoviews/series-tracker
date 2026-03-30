@@ -48,6 +48,7 @@ const es = {
   },
   search: {
     title: 'Buscar',
+    placeholder: 'Busca una serie o película...',
   },
   profile: {
     title: 'Perfil',

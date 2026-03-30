@@ -1,7 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { supabase } from '../../lib/supabase';
 import type { HomeSeries, SeriesStatus } from './types';
+import { useNavigation } from '@react-navigation/native';
+import { ScreenType, TabParamsList } from '@/navigation/types';
+import { BottomTabNavigationProp } from 'node_modules/@react-navigation/bottom-tabs/lib/typescript/src/types';
 
 const MOCK_SERIES: HomeSeries[] = [
   {
@@ -71,6 +74,11 @@ export const useViewModel = () => {
   const { session } = useAuth();
   const [activeStatus, setActiveStatus] = useState<SeriesStatus>('watching');
   const [firstName, setFirstName] = useState<string | null>(null);
+  const navigation = useNavigation<BottomTabNavigationProp<TabParamsList>>();
+
+  const handleAddSeries = useCallback(() => {
+    navigation.navigate(ScreenType.SEARCH);
+  }, [navigation]);
 
   useEffect(() => {
     if (!session?.user?.id) return;
@@ -99,5 +107,6 @@ export const useViewModel = () => {
     activeStatus,
     setActiveStatus,
     filteredSeries,
+    handleAddSeries,
   };
 };
