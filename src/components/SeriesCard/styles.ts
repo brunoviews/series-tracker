@@ -76,7 +76,8 @@ export const EpisodeBadge = styled.View`
 `;
 
 export const EpisodeBadgeText = styled(Text).attrs({ variant: 'caption' })`
-  color: ${({ theme }) => theme.colors.fill.primary.main};
+  color: ${({ theme }) => theme.colors.textIcon.default.strong};
+  font-weight: 700;
 `;
 
 export const BottomRow = styled.View`
@@ -95,5 +96,5 @@ export const StatusDot = styled.View<{ $status: SeriesStatus }>`
 
 export const StatusLabel = styled(Text).attrs({ variant: 'caption' })`
   color: ${({ theme }) => theme.colors.textIcon.default.strong};
-
+  font-weight: 700;
 `;

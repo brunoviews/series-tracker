@@ -15,7 +15,7 @@ const Tab = createBottomTabNavigator<TabParamsList>();
 
 const ACTIVE_COLOR = '#C4C0FF';
 const INACTIVE_COLOR = '#C7C4D8';
-const TAB_BG = '#131313';
+const TAB_BG = '#1c1c1e';
 
 export default function MainNavigator() {
   const insets = useSafeAreaInsets();

@@ -1,7 +1,6 @@
 import React from 'react';
 import { FlatList } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { useTheme } from 'styled-components/native';
 import {
   AvatarContainer,
   Container,
@@ -18,6 +17,7 @@ import { useViewModel } from './viewmodel';
 import { Avatar } from 'react-native-paper';
 import type { SeriesStatus } from './types';
 import SeriesCard from '@components/SeriesCard';
+import AddButton from '@/components/AddButton';
 
 const STATUSES: SeriesStatus[] = [
   'watching',
@@ -40,16 +40,16 @@ export default function HomeView() {
     activeStatus,
     setActiveStatus,
     filteredSeries,
+    handleAddSeries,
   } = useViewModel();
   const { t } = useTranslation();
-  const theme = useTheme();
 
   return (
     <>
       <HomeHeader>
         <WelcomeContainer>
-          <WelcomeText>{t(`home.greeting.${greetingKey}`)}</WelcomeText>
-          <UserName>{firstName ?? ''}</UserName>
+          <WelcomeText>{t(`home.greeting.${greetingKey}`)} 👋</WelcomeText>
+          <UserName>{firstName}</UserName>
         </WelcomeContainer>
         <AvatarContainer>
           <Avatar.Image
@@ -83,14 +83,7 @@ export default function HomeView() {
           contentContainerStyle={{ paddingTop: 4, paddingBottom: 100 }}
           showsVerticalScrollIndicator={false}
         />
-
-        {/*   <FABButton onPress={() => {}}>
-                    <PlusIcon
-                      size={26}
-                      color={theme.colors.textIcon.primary.onPrimary}
-                      weight="bold"
-                    />
-                  </FABButton> */}
+        <AddButton onPress={handleAddSeries} />
       </Container>
     </>
   );

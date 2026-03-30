@@ -107,21 +107,3 @@ export const StatusPillText = styled(Text).attrs({ variant: 'caption' })<{
   font-weight: 700;
 `;
 
-export const FABButton = styled.TouchableOpacity`
-  position: absolute;
-  bottom: 24px;
-  right: 0px;
-  width: 56px;
-  height: 56px;
-  border-radius: 28px;
-  background-color: ${({ theme }) => theme.colors.fill.primary.main};
-  align-items: center;
-  justify-content: center;
-  ${({ theme }) => ({
-    shadowColor: theme.colors.fill.primary.main,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.4,
-    shadowRadius: 8,
-    elevation: 8,
-  })}
-`;

@@ -28,6 +28,9 @@ ios/
 # EAS
 .eas/
 
+# Supabase CLI temp
+supabase/.temp/
+
 # OS
 .DS_Store
 Thumbs.db
