@@ -1,11 +1,11 @@
-import { SafeAreaView } from 'react-native-safe-area-context';
-import styled from 'styled-components/native';
 import Text from '@/components/Text';
 import { ScrollView } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import styled from 'styled-components/native';
 
 export const Container = styled.View`
   flex: 1;
-  background-color: ${({ theme }) => theme.colors.fill.default.main};
+  background-color: ${({ theme }) => theme.colors.fill.default.base};
   align-items: left;
   padding: ${({ theme }) => theme.spacing.md}px;
 `;
@@ -39,10 +39,10 @@ export const HomeHeader = styled(SafeAreaView).attrs({
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: ${({ theme }) => theme.colors.components.bottomTab.fill};
+ background-color: ${({ theme }) => theme.colors.fill.default.base};
   padding: ${({ theme }) => theme.spacing.md}px;
   border-bottom-width: 1px;
-  border-bottom-color: ${({ theme }) => theme.colors.fill.default.medium};
+  border-bottom-color: ${({ theme }) => theme.colors.fill.primary.main};
 `;
 
 export const GreenDot = styled.View`

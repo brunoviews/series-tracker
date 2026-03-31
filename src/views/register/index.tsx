@@ -1,10 +1,10 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { TextInput } from 'react-native-paper';
-import { Container, Title, ErrorText, Link, CustomContainer } from './styles';
+import { Container, CustomContainer, ErrorText, Link, Title } from './styles';
 import { useViewModel } from './viewmodel';
 import { Button } from '@/components/Button';
 import { GridBackground } from '@/components/GridBackground';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { TextInput } from 'react-native-paper';
 
 export default function RegisterView() {
   const {

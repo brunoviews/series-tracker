@@ -1,6 +1,6 @@
-import styled from 'styled-components/native';
-import type { TextVariant } from '@theme/types';
 import { variantStyles } from './styles';
+import type { TextVariant } from '@theme/types';
+import styled from 'styled-components/native';
 
 type Props = {
   variant?: TextVariant;

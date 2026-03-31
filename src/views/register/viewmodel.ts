@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import i18n from '../../i18n';
+import { supabase } from '../../lib/supabase';
+import { type RootParamsList,ScreenType } from '../../navigation/types';
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { ScreenType, type RootParamsList } from '../../navigation/types';
-import { supabase } from '../../lib/supabase';
-import i18n from '../../i18n';
+import { useState } from 'react';
 
 type RegisterNavProp = NativeStackNavigationProp<
   RootParamsList,

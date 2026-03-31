@@ -1,7 +1,7 @@
-import { theme } from '@/theme';
-import { PlusIcon } from 'phosphor-react-native';
 import { Container } from './styles';
 import { AddButtonProps } from './types';
+import { theme } from '@/theme';
+import { PlusIcon } from 'phosphor-react-native';
 
 export default function AddButton({
   onPress,

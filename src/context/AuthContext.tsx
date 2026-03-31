@@ -1,3 +1,5 @@
+import { supabase } from '../lib/supabase';
+import { Session } from '@supabase/supabase-js';
 import React, {
   createContext,
   FC,
@@ -6,8 +8,6 @@ import React, {
   useEffect,
   useState,
 } from 'react';
-import { Session } from '@supabase/supabase-js';
-import { supabase } from '../lib/supabase';
 
 // ─── Tipos ────────────────────────────────────────────────────────────────────
 

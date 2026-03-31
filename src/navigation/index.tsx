@@ -1,15 +1,15 @@
+import { useAuth } from '../context/AuthContext';
+import LoginView from '../views/login';
+import RegisterView from '../views/register';
+import { generalStackScreenOptions,rootStackScreenOptions } from './constants';
+import MainNavigator from './MainNavigator';
+import { navigationRef } from './service';
+import { type RootParamsList,ScreenType } from './types';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import { FC } from 'react';
 import { ActivityIndicator, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { navigationRef } from './service';
-import { rootStackScreenOptions, generalStackScreenOptions } from './constants';
-import { ScreenType, type RootParamsList } from './types';
-import LoginView from '../views/login';
-import RegisterView from '../views/register';
-import MainNavigator from './MainNavigator';
-import { useAuth } from '../context/AuthContext';
 
 const { Navigator, Group, Screen } =
   createNativeStackNavigator<RootParamsList>();

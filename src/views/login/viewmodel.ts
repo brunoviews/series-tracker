@@ -1,9 +1,9 @@
-import { useCallback, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { supabase } from '../../lib/supabase';
 import { ScreenType } from '../../navigation/types';
 import { useAppNavigation } from '../../navigation/useAppNavigation';
-import { supabase } from '../../lib/supabase';
 import { checkEmail } from '@/utils/regex';
+import { useCallback, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export const useViewModel = () => {
   const navigation = useAppNavigation();

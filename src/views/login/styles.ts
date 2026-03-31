@@ -1,5 +1,5 @@
-import styled from 'styled-components/native';
 import Text from '@components/Text';
+import styled from 'styled-components/native';
 
 export const Container = styled.View`
   align-items: center;
@@ -8,7 +8,6 @@ export const Container = styled.View`
   gap: 16px;
   width: 100%;
   border-radius: ${({ theme }) => theme.borderRadius.lg}px;
-
 `;
 
 export const Title = styled(Text).attrs({ variant: 'title-1' })`

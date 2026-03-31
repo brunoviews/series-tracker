@@ -1,5 +1,5 @@
-import { css } from 'styled-components/native';
 import type { TextVariant } from '@theme/types';
+import { css } from 'styled-components/native';
 
 // Cada clave mapea a un bloque css`` con las propiedades tipográficas correspondientes.
 // Al estar en css`` (no en objetos planos), styled-components las interpola directamente

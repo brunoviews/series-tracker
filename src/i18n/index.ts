@@ -1,8 +1,8 @@
+import en from './locales/en';
+import es from './locales/es';
+import { getLocales } from 'expo-localization';
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import { getLocales } from 'expo-localization';
-import es from './locales/es';
-import en from './locales/en';
 
 // Detecta el idioma del dispositivo. Si no es 'en', usamos 'es' como fallback.
 const deviceLanguage = getLocales()[0]?.languageCode === 'en' ? 'en' : 'es';

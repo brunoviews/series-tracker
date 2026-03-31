@@ -1,6 +1,3 @@
-import React from 'react';
-import { FlatList } from 'react-native';
-import { useTranslation } from 'react-i18next';
 import {
   AvatarContainer,
   Container,
@@ -13,11 +10,14 @@ import {
   WelcomeContainer,
   WelcomeText,
 } from './styles';
-import { useViewModel } from './viewmodel';
-import { Avatar } from 'react-native-paper';
 import type { SeriesStatus } from './types';
-import SeriesCard from '@components/SeriesCard';
+import { useViewModel } from './viewmodel';
 import AddButton from '@/components/AddButton';
+import SeriesCard from '@components/SeriesCard';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { FlatList } from 'react-native';
+import { Avatar } from 'react-native-paper';
 
 const STATUSES: SeriesStatus[] = [
   'watching',

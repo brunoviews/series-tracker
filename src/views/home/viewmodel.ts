@@ -1,10 +1,10 @@
-import { useState, useEffect, useCallback } from 'react';
-import { useAuth } from '@/context/AuthContext';
-import { supabase } from '../../lib/supabase';
 import type { HomeSeries, SeriesStatus } from './types';
-import { useNavigation } from '@react-navigation/native';
+import { useAuth } from '@/context/AuthContext';
+import { supabase } from '@/lib/supabase';
 import { ScreenType, TabParamsList } from '@/navigation/types';
-import { BottomTabNavigationProp } from 'node_modules/@react-navigation/bottom-tabs/lib/typescript/src/types';
+import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
+import { useNavigation } from '@react-navigation/native';
+import { useCallback, useEffect, useState } from 'react';
 
 const MOCK_SERIES: HomeSeries[] = [
   {
