@@ -54,6 +54,11 @@ const es = {
     title: 'Perfil',
   },
 
+  modal: {
+    addSerie: 'Añadir serie',
+    cancel: 'Cancelar',
+    confirm: 'Confirmar',
+  },
   homeView: {
     appName: 'MyWatchList',
     welcome: 'Hola, {{name}}',

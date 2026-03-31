@@ -1,17 +1,17 @@
-import type { SeriesStatus } from '@/types/database.types';
+import { SeriesStatus } from '@/types/database.types';
 import Text from '@components/Text';
 import styled from 'styled-components/native';
 
-const getStatusColor = (status: SeriesStatus): string => {
+const getStatusColor = (status: SeriesStatus) => {
   switch (status) {
-    case 'watching':
-      return '#f0dc2d';
-    case 'completed':
-      return '#C4C0FF';
-    case 'planned':
-      return '#D3D3D3';
-    case 'dropped':
-      return '#F2485A';
+    case SeriesStatus.Watching:
+      return '#FBBF24';
+    case SeriesStatus.Completed:
+      return '#2DD4BF';
+    case SeriesStatus.Planned:
+      return '#94A3B8';
+    case SeriesStatus.Dropped:
+      return '#F43F5E';
   }
 };
 

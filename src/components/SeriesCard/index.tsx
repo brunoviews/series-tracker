@@ -66,7 +66,7 @@ export default function SeriesCard({
           <SeriesTitle numberOfLines={2}>{series_name}</SeriesTitle>
           {rating !== null && (
             <RatingContainer>
-              <StarIcon size={16} color="#fec935" weight="fill" />
+              <StarIcon size={16} color="#FBBF24" weight="fill" />
               <RatingText>{rating.toFixed(1)}</RatingText>
             </RatingContainer>
           )}
@@ -82,7 +82,7 @@ export default function SeriesCard({
 
         <BottomRow>
           {status === 'completed' ? (
-            <CheckCircleIcon size={16} color="#22c55e" weight="bold" />
+            <CheckCircleIcon size={16} color="#22C55E" weight="bold" />
           ) : (
             <StatusDot $status={status} />
           )}

@@ -36,6 +36,6 @@ export const ResultRating = styled(Text).attrs({ variant: 'label' })`
 export const RatingYearContainer = styled.View`
   flex-direction: row;
   align-items: center;
-
+  margin-top: 4px;
   gap: 2px;
 `;

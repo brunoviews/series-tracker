@@ -25,7 +25,7 @@ export function GridBackground() {
             y1={0}
             x2={0}
             y2={24}
-            stroke="rgba(79,79,79,0.18)"
+            stroke="rgba(45, 100, 120, 0.15)"
             strokeWidth={1}
           />
           <Line
@@ -33,7 +33,7 @@ export function GridBackground() {
             y1={0}
             x2={14}
             y2={0}
-            stroke="rgba(79,79,79,0.18)"
+            stroke="rgba(45, 100, 120, 0.15)"
             strokeWidth={1}
           />
         </Pattern>

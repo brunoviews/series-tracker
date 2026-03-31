@@ -22,7 +22,7 @@ export const SearchInput = styled.TextInput`
   width: 100%;
   padding: ${({ theme }) => theme.spacing.md}px;
   border-width: 1px;
-  border-color: #8781ff7d;
+  border-color: ${({ theme }) => theme.colors.stroke.primary.weak};
   border-radius: 12px;
   margin-top: ${({ theme }) => theme.spacing.md}px;
   color: ${({ theme }) => theme.colors.textIcon.default.strong};

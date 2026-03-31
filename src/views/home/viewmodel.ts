@@ -1,7 +1,8 @@
-import type { HomeSeries, SeriesStatus } from './types';
+import type { HomeSeries } from './types';
 import { useAuth } from '@/context/AuthContext';
 import { supabase } from '@/lib/supabase';
 import { ScreenType, TabParamsList } from '@/navigation/types';
+import { SeriesStatus } from '@/types/database.types';
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { useNavigation } from '@react-navigation/native';
 import { useCallback, useEffect, useState } from 'react';
@@ -11,7 +12,7 @@ const MOCK_SERIES: HomeSeries[] = [
     id: '1',
     series_name: 'The Bear',
     poster_path: null,
-    status: 'watching',
+    status: SeriesStatus.Watching,
     rating: 4.8,
     current_season: 2,
     current_episode: 5,
@@ -20,7 +21,7 @@ const MOCK_SERIES: HomeSeries[] = [
     id: '2',
     series_name: 'Severance',
     poster_path: null,
-    status: 'completed',
+    status: SeriesStatus.Completed,
     rating: 4.9,
     current_season: 1,
     current_episode: 9,
@@ -29,7 +30,7 @@ const MOCK_SERIES: HomeSeries[] = [
     id: '3',
     series_name: 'The Last of Us',
     poster_path: null,
-    status: 'watching',
+    status: SeriesStatus.Watching,
     rating: 4.7,
     current_season: 1,
     current_episode: 3,
@@ -38,7 +39,7 @@ const MOCK_SERIES: HomeSeries[] = [
     id: '4',
     series_name: 'Succession',
     poster_path: null,
-    status: 'completed',
+    status: SeriesStatus.Completed,
     rating: 5.0,
     current_season: 4,
     current_episode: 10,
@@ -47,7 +48,7 @@ const MOCK_SERIES: HomeSeries[] = [
     id: '5',
     series_name: 'The White Lotus',
     poster_path: null,
-    status: 'planned',
+    status: SeriesStatus.Planned,
     rating: null,
     current_season: null,
     current_episode: null,
@@ -56,7 +57,7 @@ const MOCK_SERIES: HomeSeries[] = [
     id: '5',
     series_name: 'The White Lotus',
     poster_path: null,
-    status: 'dropped',
+    status: SeriesStatus.Dropped,
     rating: null,
     current_season: null,
     current_episode: null,
@@ -72,7 +73,9 @@ const getGreetingKey = (): 'morning' | 'afternoon' | 'evening' => {
 
 export const useViewModel = () => {
   const { session } = useAuth();
-  const [activeStatus, setActiveStatus] = useState<SeriesStatus>('watching');
+  const [activeStatus, setActiveStatus] = useState<SeriesStatus>(
+    SeriesStatus.Watching,
+  );
   const [firstName, setFirstName] = useState<string | null>(null);
   const navigation = useNavigation<BottomTabNavigationProp<TabParamsList>>();
 

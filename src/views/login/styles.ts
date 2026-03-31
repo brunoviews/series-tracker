@@ -41,7 +41,7 @@ export const Link = styled.Text`
 `;
 
 export const CustomContainer = styled.View`
-  background-color: #020617;
+  background-color: ${({ theme }) => theme.colors.fill.default.base};
   padding: ${({ theme }) => theme.spacing.md}px;
   flex: 1;
   align-items: center;

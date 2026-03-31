@@ -1,57 +1,57 @@
 export const colors = {
   fill: {
     default: {
-      base: '#0D0D0D', // fondo absoluto — never pure black
-      main: '#131313', // fondo de pantallas
-      weak: '#1C1B1B', // secciones secundarias
-      medium: '#2A2A2A', // cards interactivas
-      strong: '#333333', // elementos elevados
-      dim: '#0F0F0F', // overlays / scrim
-      bright: '#3A3A3A', // estado activo / hover
+      base: '#070B11', // fondo absoluto — deep blue-black
+      main: '#0C1219', // fondo de pantallas
+      weak: '#141C27', // secciones secundarias
+      medium: '#1C2635', // cards interactivas
+      strong: '#253244', // elementos elevados
+      dim: '#080C12', // overlays / scrim
+      bright: '#2A3749', // estado activo / hover
     },
     primary: {
-      main: '#C4C0FF', // Vivid Violet — acento principal
-      container: '#8781FF', // extremo del gradiente en CTAs
-      variant: '#1E1B2E', // superficie con tinte violeta
+      main: '#2DD4BF', // Electric Teal — acento principal
+      container: '#14B8A6', // teal profundo para gradientes en CTAs
+      variant: '#0D2D28', // superficie con tinte teal
     },
     semantic: {
       error: {
-        main: '#F2485A',
-        weak: '#3B1219',
+        main: '#F43F5E',
+        weak: '#2D1219',
       },
       success: {
-        main: '#4CAF50',
-        weak: '#1B3A1C',
+        main: '#22C55E',
+        weak: '#0F291B',
       },
     },
   },
 
   stroke: {
     default: {
-      main: '#938F99',
-      weak: '#49454F',
-      subtle: 'rgba(255, 255, 255, 0.06)',
+      main: '#475569',
+      weak: '#334155',
+      subtle: 'rgba(148, 163, 184, 0.06)',
     },
     primary: {
-      main: '#C4C0FF',
-      weak: 'rgba(196, 192, 255, 0.4)',
+      main: '#2DD4BF',
+      weak: 'rgba(45, 212, 191, 0.35)',
     },
   },
 
   textIcon: {
     default: {
-      strong: '#FFFFFF', // títulos principales — uso restringido
-      main: '#E8E6F0', // texto general
-      medium: '#C7C4D8', // texto secundario / muted
-      weak: '#938F99', // placeholders / deshabilitado
+      strong: '#F1F5F9', // títulos principales — uso restringido
+      main: '#CBD5E1', // texto general
+      medium: '#94A3B8', // texto secundario / muted
+      weak: '#64748B', // placeholders / deshabilitado
     },
     primary: {
-      main: '#C4C0FF',
-      onPrimary: '#0D0D0D', // texto encima del acento violeta
+      main: '#2DD4BF',
+      onPrimary: '#070B11', // texto encima del acento teal
     },
     semantic: {
       error: {
-        main: '#F2485A',
+        main: '#F43F5E',
       },
     },
   },
@@ -60,35 +60,35 @@ export const colors = {
     button: {
       primary: {
         default: {
-          fill: '#C4C0FF',
-          fillPressed: '#8781FF',
-          textIcon: '#0D0D0D',
+          fill: '#2DD4BF',
+          fillPressed: '#14B8A6',
+          textIcon: '#070B11',
         },
         disabled: {
-          fill: '#2A2A2A',
-          textIcon: '#938F99',
+          fill: '#1C2635',
+          textIcon: '#64748B',
         },
       },
       ghost: {
         default: {
-          stroke: '#C4C0FF',
-          textIcon: '#C4C0FF',
-          fillPressed: 'rgba(196, 192, 255, 0.1)',
+          stroke: '#2DD4BF',
+          textIcon: '#2DD4BF',
+          fillPressed: 'rgba(45, 212, 191, 0.1)',
         },
       },
     },
     input: {
-      fill: '#1C1B1B',
-      fillFocused: '#2A2A2A',
+      fill: '#141C27',
+      fillFocused: '#1C2635',
       stroke: 'rgba(0,0,0,0)',
-      strokeFocused: 'rgba(196, 192, 255, 0.4)',
-      placeholder: '#938F99',
+      strokeFocused: 'rgba(45, 212, 191, 0.35)',
+      placeholder: '#64748B',
     },
     bottomTab: {
-      fill: '#131313',
-      iconDefault: '#938F99',
-      iconActive: '#C4C0FF',
-      indicator: '#1E1B2E',
+      fill: '#0C1219',
+      iconDefault: '#64748B',
+      iconActive: '#2DD4BF',
+      indicator: '#0D2D28',
     },
   },
 

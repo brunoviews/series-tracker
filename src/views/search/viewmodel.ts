@@ -1,12 +1,24 @@
-import type { TmdbSeries } from '../../lib/tmdb';
-import { getPosterUrl, searchSeries } from '../../lib/tmdb';
+import type { TmdbSeries } from '@lib/tmdb';
+import { getPosterUrl, searchSeries } from '@lib/tmdb';
 import { useEffect, useState } from 'react';
 
 export const useViewModel = () => {
   const [searchText, setSearchText] = useState('');
   const [results, setResults] = useState<TmdbSeries[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [selectedSerie, setSelectedSerie] = useState<TmdbSeries | null>(null);
+
+  const openModal = (serie: TmdbSeries) => {
+    setSelectedSerie(serie);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setSelectedSerie(null);
+    setIsModalOpen(false);
+  };
 
   useEffect(() => {
     // Si el texto está vacío, limpia los resultados y no hagas nada más
@@ -47,5 +59,15 @@ export const useViewModel = () => {
     return () => clearTimeout(timer);
   }, [searchText]); // El efecto se ejecuta cada vez que cambia searchText
 
-  return { searchText, setSearchText, results, isLoading, error };
+  return {
+    searchText,
+    setSearchText,
+    results,
+    isLoading,
+    error,
+    isModalOpen,
+    openModal,
+    closeModal,
+    selectedSerie,
+  };
 };

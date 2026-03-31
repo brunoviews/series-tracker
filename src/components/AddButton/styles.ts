@@ -15,7 +15,7 @@ export const Container = styled.TouchableOpacity<{
   height: ${({ height }) => (height ? `${height}px` : '56px')};
   border-radius: ${({ width, height }) =>
     width && height ? `${Math.min(width, height) / 2}px` : '28px'};
-  background-color: #6c63ff;
+  background-color: #14b8a6;
   align-items: center;
   justify-content: center;
 `;
