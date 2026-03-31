@@ -1,6 +1,6 @@
-import type { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { ScreenType, type TabParamsList } from '../../navigation/types';
 import type { SeriesStatus } from '@/types/database.types';
+import type { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 
 export type { SeriesStatus };
 

@@ -1,9 +1,9 @@
+import { supabase } from '@/lib/supabase';
+import { ScreenType } from '@/navigation/types';
+import { useAppNavigation } from '@/navigation/useAppNavigation';
+import { checkEmail } from '@/utils/regex';
 import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ScreenType } from '../../navigation/types';
-import { useAppNavigation } from '../../navigation/useAppNavigation';
-import { supabase } from '../../lib/supabase';
-import { checkEmail } from '@/utils/regex';
 
 export const useViewModel = () => {
   const navigation = useAppNavigation();
@@ -14,8 +14,6 @@ export const useViewModel = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const isDisable = !email.trim() || !password || !checkEmail.test(email);
-
- 
 
   const goToRegister = useCallback(() => {
     navigation.navigate(ScreenType.REGISTER);

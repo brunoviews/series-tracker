@@ -1,6 +1,6 @@
-import styled from 'styled-components/native';
-import Text from '@components/Text';
 import type { SeriesStatus } from '@/types/database.types';
+import Text from '@components/Text';
+import styled from 'styled-components/native';
 
 const getStatusColor = (status: SeriesStatus): string => {
   switch (status) {

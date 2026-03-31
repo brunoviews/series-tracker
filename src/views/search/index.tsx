@@ -1,11 +1,11 @@
-import React from 'react';
-import { ActivityIndicator, FlatList } from 'react-native';
-import { useTranslation } from 'react-i18next';
 import { Container, SearchInput, Title } from './styles';
 import { useViewModel } from './viewmodel';
-import { theme } from '@/theme';
 import SearchResultCard from '@/components/SearchResultCard';
-import { TmdbSeries } from '@/lib/tmdb';
+import type { TmdbSeries } from '@/lib/tmdb';
+import { theme } from '@/theme';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { ActivityIndicator, FlatList } from 'react-native';
 
 export default function SearchView() {
   const { searchText, setSearchText, results, isLoading } = useViewModel();

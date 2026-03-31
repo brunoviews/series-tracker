@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next';
+import AddButton from '../AddButton';
 import {
   CardContainer,
   Container,
@@ -7,24 +7,21 @@ import {
   ResultTitle,
   ResultYear,
 } from './styles';
+import type { TmdbSeries } from '@/lib/tmdb';
+import DefaultImg from '@assets/img/default-fallback-image.png';
 import { StarIcon } from 'phosphor-react-native';
 
-import AddButton from '../AddButton';
-import { TmdbSeries } from '@/lib/tmdb';
-
 export default function SearchResultCard({
-  id,
   name,
   poster_path,
   first_air_date,
   vote_average,
 }: TmdbSeries) {
-  const { t } = useTranslation();
   return (
     <Container>
       <CardContainer
         imageStyle={{ borderRadius: 6 }}
-        source={{ uri: poster_path || undefined }}
+        source={poster_path ? { uri: poster_path } : DefaultImg}
       >
         <AddButton
           onPress={() => {}}
@@ -40,7 +37,10 @@ export default function SearchResultCard({
       <RatingYearContainer>
         <StarIcon size={12} color="#FDCC0D" weight="fill" />
         <ResultRating>{vote_average.toFixed(1)}/10</ResultRating>
-        <ResultYear> · {new Date(first_air_date).getFullYear()}</ResultYear>
+        <ResultYear>
+          {' '}
+          · {first_air_date ? new Date(first_air_date).getFullYear() : 'N/A'}
+        </ResultYear>
       </RatingYearContainer>
     </Container>
   );

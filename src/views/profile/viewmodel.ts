@@ -1,5 +1,5 @@
+import { useAuth } from '@/context/AuthContext';
 import { useTranslation } from 'react-i18next';
-import { useAuth } from '../../context/AuthContext';
 
 export const useViewModel = () => {
   const { t } = useTranslation();

@@ -1,15 +1,15 @@
-import React from 'react';
+import HomeView from '../views/home';
+import ProfileView from '../views/profile';
+import SearchView from '../views/search';
+import { ScreenType, type TabParamsList } from './types';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {
   HouseIcon,
   MagnifyingGlassIcon,
   UserIcon,
 } from 'phosphor-react-native';
+import React from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { ScreenType, type TabParamsList } from './types';
-import HomeView from '../views/home';
-import SearchView from '../views/search';
-import ProfileView from '../views/profile';
 
 const Tab = createBottomTabNavigator<TabParamsList>();
 

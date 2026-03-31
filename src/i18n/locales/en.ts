@@ -50,7 +50,7 @@ const en = {
   },
   search: {
     title: 'Search',
-    placeholder: 'Search for a series or movie...',
+    placeholder: 'Search for a series...',
   },
   profile: {
     title: 'Profile',

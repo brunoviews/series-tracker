@@ -1,11 +1,3 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { useTheme } from 'styled-components/native';
-import {
-  CheckCircleIcon,
-  ImageSquareIcon,
-  StarIcon,
-} from 'phosphor-react-native';
 import {
   BottomRow,
   CardContainer,
@@ -22,6 +14,14 @@ import {
   TopRow,
 } from './styles';
 import type { SeriesCardProps } from './types';
+import {
+  CheckCircleIcon,
+  ImageSquareIcon,
+  StarIcon,
+} from 'phosphor-react-native';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { useTheme } from 'styled-components/native';
 
 const STATUS_I18N_KEYS = {
   watching: 'series.status.watching',

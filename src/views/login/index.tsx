@@ -1,21 +1,21 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { TextInput } from 'react-native-paper';
 import {
+  AppName,
   Container,
-  Title,
+  CustomContainer,
   ErrorText,
   Link,
-  CustomContainer,
-  AppName,
   SubTitle,
+  Title,
 } from './styles';
 import { useViewModel } from './viewmodel';
 import { Button } from '@/components/Button';
 import { GridBackground } from '@/components/GridBackground';
 import { TitlesContainer } from '@/components/TitlesContainer';
-import { MonitorPlayIcon, TelevisionIcon } from 'phosphor-react-native';
 import { theme } from '@/theme';
+import { TelevisionIcon } from 'phosphor-react-native';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { TextInput } from 'react-native-paper';
 
 export default function LoginView() {
   const {
@@ -34,9 +34,13 @@ export default function LoginView() {
   return (
     <CustomContainer>
       <GridBackground />
-     
+
       <TitlesContainer>
-         <TelevisionIcon size={60} color={theme.colors.fill.primary.container} weight='light' />
+        <TelevisionIcon
+          size={60}
+          color={theme.colors.fill.primary.container}
+          weight="light"
+        />
         <AppName>MyWatchList</AppName>
         <SubTitle>Track what you watch</SubTitle>
       </TitlesContainer>

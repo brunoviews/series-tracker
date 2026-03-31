@@ -1,5 +1,5 @@
-import { createNavigationContainerRef } from '@react-navigation/native';
 import type { RootParamsList } from './types';
+import { createNavigationContainerRef } from '@react-navigation/native';
 
 // Referencia al NavigationContainer.
 // Permite navegar desde fuera del árbol de React (p.ej. listeners de Supabase Auth).
