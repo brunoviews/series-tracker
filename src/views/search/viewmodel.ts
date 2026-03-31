@@ -1,6 +1,6 @@
 import type { TmdbSeries } from '../../lib/tmdb';
-import { getPosterUrl,searchSeries } from '../../lib/tmdb';
-import { useEffect,useState } from 'react';
+import { getPosterUrl, searchSeries } from '../../lib/tmdb';
+import { useEffect, useState } from 'react';
 
 export const useViewModel = () => {
   const [searchText, setSearchText] = useState('');

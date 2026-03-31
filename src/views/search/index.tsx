@@ -1,7 +1,7 @@
 import { Container, SearchInput, Title } from './styles';
 import { useViewModel } from './viewmodel';
 import SearchResultCard from '@/components/SearchResultCard';
-import { TmdbSeries } from '@/lib/tmdb';
+import type { TmdbSeries } from '@/lib/tmdb';
 import { theme } from '@/theme';
 import React from 'react';
 import { useTranslation } from 'react-i18next';

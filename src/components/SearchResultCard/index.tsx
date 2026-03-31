@@ -7,12 +7,11 @@ import {
   ResultTitle,
   ResultYear,
 } from './styles';
-import { TmdbSeries } from '@/lib/tmdb';
+import type { TmdbSeries } from '@/lib/tmdb';
 import DefaultImg from '@assets/img/default-fallback-image.png';
 import { StarIcon } from 'phosphor-react-native';
 
 export default function SearchResultCard({
-  id,
   name,
   poster_path,
   first_air_date,

@@ -1,10 +1,10 @@
 import { useAuth } from '../context/AuthContext';
 import LoginView from '../views/login';
 import RegisterView from '../views/register';
-import { generalStackScreenOptions,rootStackScreenOptions } from './constants';
+import { generalStackScreenOptions, rootStackScreenOptions } from './constants';
 import MainNavigator from './MainNavigator';
 import { navigationRef } from './service';
-import { type RootParamsList,ScreenType } from './types';
+import { type RootParamsList, ScreenType } from './types';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
