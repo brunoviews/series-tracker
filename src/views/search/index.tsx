@@ -14,10 +14,13 @@ export default function SearchView() {
     setSearchText,
     results,
     isLoading,
+    isAdding,
     isModalOpen,
     openModal,
     closeModal,
     selectedSerie,
+    addSeries,
+    userSeriesMap,
   } = useViewModel();
   const { t } = useTranslation();
 
@@ -40,7 +43,11 @@ export default function SearchView() {
           columnWrapperStyle={{ gap: 32, justifyContent: 'center' }}
           contentContainerStyle={{ gap: 32, paddingBottom: 16 }}
           renderItem={({ item }) => (
-            <SearchResultCard serie={item} onAdd={() => openModal(item)} />
+            <SearchResultCard
+              serie={item}
+              onAdd={() => openModal(item)}
+              userSeriesMap={userSeriesMap}
+            />
           )}
           style={{ flex: 1 }}
           showsVerticalScrollIndicator={false}
@@ -50,6 +57,8 @@ export default function SearchView() {
       <AddSerieModal
         isOpen={isModalOpen}
         onCancel={closeModal}
+        onConfirm={addSeries}
+        isLoading={isAdding}
         serie={selectedSerie}
       />
     </Container>

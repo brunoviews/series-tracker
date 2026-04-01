@@ -1,7 +1,6 @@
 import Text from '@components/Text';
 import styled from 'styled-components/native';
 
-
 export const Container = styled.View`
   flex: 1;
   justify-content: center;
@@ -46,10 +45,9 @@ export const CloseButton = styled.TouchableOpacity`
 
 // ─── Poster ──────────────────────────────────────────────────────────
 
-
 export const PosterContainer = styled.View`
-  width: 100px;
-  height: 140px;
+  width: 140px;
+  height: 160px;
   border-radius: 12px;
   overflow: hidden;
   align-self: center;
@@ -123,40 +121,4 @@ export const ActionRow = styled.View`
   margin-top: 4px;
 `;
 
-export const CancelAction = styled.Pressable`
-  flex: 1;
-  padding: 14px;
-  border-radius: 12px;
-  align-items: center;
-  justify-content: center;
-  border-width: 1.5px;
-  border-color: ${({ theme }) => theme.colors.stroke.default.main};
-`;
 
-export const ConfirmAction = styled.Pressable<{ $disabled?: boolean }>`
-  flex: 1;
-  padding: 14px;
-  border-radius: 12px;
-  align-items: center;
-  justify-content: center;
-  background-color: ${({ $disabled, theme }) =>
-    $disabled
-      ? theme.colors.components.button.primary.disabled.fill
-      : theme.colors.components.button.primary.default.fill};
-`;
-
-export const ActionText = styled(Text).attrs({ variant: 'label' })<{
-  $variant: 'cancel' | 'confirm';
-  $disabled?: boolean;
-}>`
-  font-weight: 700;
-  text-transform: uppercase;
-  color: ${({ $variant, $disabled, theme }) => {
-    if ($variant === 'confirm') {
-      return $disabled
-        ? theme.colors.components.button.primary.disabled.textIcon
-        : theme.colors.textIcon.primary.onPrimary;
-    }
-    return theme.colors.textIcon.default.main;
-  }};
-`;

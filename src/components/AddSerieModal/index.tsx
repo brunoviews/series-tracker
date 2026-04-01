@@ -1,10 +1,7 @@
 import {
   ActionRow,
-  ActionText,
   BadgePressable,
-  CancelAction,
   CloseButton,
-  ConfirmAction,
   Container,
   Content,
   ContentTitle,
@@ -22,6 +19,7 @@ import { useViewModel } from './viewmodel';
 import { theme } from '@/theme';
 import { SeriesStatus } from '@/types/database.types';
 import DefaultImg from '@assets/img/default-fallback-image.png';
+import { Button } from '@components/Button';
 import {
   CalendarBlankIcon,
   CheckCircleIcon,
@@ -31,7 +29,7 @@ import {
 } from 'phosphor-react-native';
 import { FC, memo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Modal } from 'react-native';
+import { Modal, View } from 'react-native';
 
 // ─── Constantes fuera del componente ─────────────────────────────────
 // No dependen de props ni state → definirlas aquí evita que se
@@ -75,6 +73,7 @@ const AddSerieModal: FC<AddSerieModalProps> = ({
   isOpen,
   onCancel,
   onConfirm,
+  isLoading = false,
   serie,
 }) => {
   const { selectedStatus, handleSelectStatus, resetStatus } = useViewModel();
@@ -112,7 +111,11 @@ const AddSerieModal: FC<AddSerieModalProps> = ({
           </HeaderContainer>
 
           <PosterContainer>
-            <PosterImage source={serie?.poster_path ? { uri: serie.poster_path } : DefaultImg} />
+            <PosterImage
+              source={
+                serie?.poster_path ? { uri: serie.poster_path } : DefaultImg
+              }
+            />
           </PosterContainer>
 
           <ContentTitle>{serie?.name ?? ''}</ContentTitle>
@@ -143,18 +146,22 @@ const AddSerieModal: FC<AddSerieModalProps> = ({
           </StatusContainer>
 
           <ActionRow>
-            <CancelAction onPress={handleCancel}>
-              <ActionText $variant="cancel">{t('modal.cancel')}</ActionText>
-            </CancelAction>
-            <ConfirmAction
-              onPress={handleConfirm}
-              disabled={!selectedStatus}
-              $disabled={!selectedStatus}
-            >
-              <ActionText $variant="confirm" $disabled={!selectedStatus}>
-                {t('modal.confirm')}
-              </ActionText>
-            </ConfirmAction>
+            <View style={{ flex: 1 }}>
+              <Button
+                variant="ghost"
+                title={t('modal.cancel')}
+                onPress={handleCancel}
+              />
+            </View>
+            <View style={{ flex: 1 }}>
+              <Button
+                variant="primary"
+                title={t('modal.confirm')}
+                onPress={handleConfirm}
+                disabled={!selectedStatus || isLoading}
+                isLoading={isLoading}
+              />
+            </View>
           </ActionRow>
         </Content>
       </Container>

@@ -5,5 +5,6 @@ export type AddSerieModalProps = {
   isOpen: boolean;
   onConfirm?: (status: SeriesStatus) => void;
   onCancel?: () => void;
+  isLoading?: boolean;
   serie: TmdbSeries | null;
 };

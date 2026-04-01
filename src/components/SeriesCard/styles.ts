@@ -83,18 +83,21 @@ export const EpisodeBadgeText = styled(Text).attrs({ variant: 'caption' })`
 export const BottomRow = styled.View`
   flex-direction: row;
   align-items: center;
-  gap: 6px;
   margin-top: 8px;
 `;
 
-export const StatusDot = styled.View<{ $status: SeriesStatus }>`
-  width: 8px;
-  height: 8px;
-  border-radius: 4px;
+export const StatusBadge = styled.View<{ $status: SeriesStatus }>`
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px 3px 6px;
+  border-radius: 99px;
   background-color: ${({ $status }) => getStatusColor($status)};
 `;
 
-export const StatusLabel = styled(Text).attrs({ variant: 'caption' })`
-  color: ${({ theme }) => theme.colors.textIcon.default.strong};
+export const StatusBadgeText = styled(Text).attrs({ variant: 'caption' })`
+  color: #0a0a0a;
   font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 `;

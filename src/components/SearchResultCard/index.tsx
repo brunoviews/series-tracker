@@ -2,18 +2,28 @@ import AddButton from '../AddButton';
 import {
   CardContainer,
   Container,
+  CurrentStatus,
+  CurrentStatusBadge,
   RatingYearContainer,
   ResultRating,
   ResultTitle,
   ResultYear,
 } from './styles';
 import { SearchResultCardProps } from './types';
+import { SeriesStatus } from '@/types/database.types';
 import DefaultImg from '@assets/img/default-fallback-image.png';
-import { StarIcon } from 'phosphor-react-native';
+import {
+  BookmarkIcon,
+  CheckCircleIcon,
+  ProhibitIcon,
+  StarIcon,
+  TelevisionIcon,
+} from 'phosphor-react-native';
 
 export default function SearchResultCard({
   serie,
   onAdd,
+  userSeriesMap,
 }: SearchResultCardProps) {
   return (
     <Container>
@@ -21,6 +31,31 @@ export default function SearchResultCard({
         imageStyle={{ borderRadius: 6 }}
         source={serie.poster_path ? { uri: serie.poster_path } : DefaultImg}
       >
+        {userSeriesMap[serie.id] &&
+          (() => {
+            const status = userSeriesMap[serie.id];
+            const iconProps = {
+              size: 16,
+              color: '#0a0a0a',
+              weight: 'fill',
+            } as const;
+            const icon =
+              status === SeriesStatus.Watching ? (
+                <TelevisionIcon {...iconProps} />
+              ) : status === SeriesStatus.Completed ? (
+                <CheckCircleIcon {...iconProps} />
+              ) : status === SeriesStatus.Planned ? (
+                <BookmarkIcon {...iconProps} />
+              ) : (
+                <ProhibitIcon {...iconProps} />
+              );
+            return (
+              <CurrentStatusBadge status={status}>
+                {icon}
+                <CurrentStatus>{status}</CurrentStatus>
+              </CurrentStatusBadge>
+            );
+          })()}
         <AddButton
           onPress={() => onAdd()}
           width={32}
@@ -28,6 +63,7 @@ export default function SearchResultCard({
           iconSize={16}
           bottom={8}
           right={8}
+          buttonType="options"
         />
       </CardContainer>
 

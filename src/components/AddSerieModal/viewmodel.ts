@@ -17,7 +17,5 @@ export const useViewModel = () => {
     setSelectedStatus(null);
   }, []);
 
-  
-
   return { selectedStatus, handleSelectStatus, resetStatus };
 };

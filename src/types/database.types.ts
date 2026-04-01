@@ -272,8 +272,19 @@ export type UserSeries = {
 
 export type InsertUserSeries = Omit<
   UserSeries,
-  'id' | 'created_at' | 'updated_at'
->;
+  | 'id'
+  | 'created_at'
+  | 'updated_at'
+  | 'rating'
+  | 'notes'
+  | 'current_season'
+  | 'current_episode'
+> & {
+  rating?: number | null;
+  notes?: string | null;
+  current_season?: number | null;
+  current_episode?: number | null;
+};
 export type UpdateUserSeries = Partial<
   Omit<UserSeries, 'id' | 'user_id' | 'created_at' | 'updated_at'>
 >;

@@ -11,7 +11,11 @@ export const Button: FC<ButtonProps> = ({
 }) => {
   return (
     <Container variant={variant} disabled={disabled} onPress={onPress}>
-      {isLoading ? <LoadingSpinner /> : <ButtonText>{title}</ButtonText>}
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : (
+        <ButtonText variant={variant}>{title}</ButtonText>
+      )}
     </Container>
   );
 };

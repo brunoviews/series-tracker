@@ -1,68 +1,11 @@
-import type { HomeSeries } from './types';
 import { useAuth } from '@/context/AuthContext';
 import { supabase } from '@/lib/supabase';
 import { ScreenType, TabParamsList } from '@/navigation/types';
-import { SeriesStatus } from '@/types/database.types';
+import { getUserSeries } from '@/services/userSeries';
+import { SeriesStatus, UserSeries } from '@/types/database.types';
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { useNavigation } from '@react-navigation/native';
 import { useCallback, useEffect, useState } from 'react';
-
-const MOCK_SERIES: HomeSeries[] = [
-  {
-    id: '1',
-    series_name: 'The Bear',
-    poster_path: null,
-    status: SeriesStatus.Watching,
-    rating: 4.8,
-    current_season: 2,
-    current_episode: 5,
-  },
-  {
-    id: '2',
-    series_name: 'Severance',
-    poster_path: null,
-    status: SeriesStatus.Completed,
-    rating: 4.9,
-    current_season: 1,
-    current_episode: 9,
-  },
-  {
-    id: '3',
-    series_name: 'The Last of Us',
-    poster_path: null,
-    status: SeriesStatus.Watching,
-    rating: 4.7,
-    current_season: 1,
-    current_episode: 3,
-  },
-  {
-    id: '4',
-    series_name: 'Succession',
-    poster_path: null,
-    status: SeriesStatus.Completed,
-    rating: 5.0,
-    current_season: 4,
-    current_episode: 10,
-  },
-  {
-    id: '5',
-    series_name: 'The White Lotus',
-    poster_path: null,
-    status: SeriesStatus.Planned,
-    rating: null,
-    current_season: null,
-    current_episode: null,
-  },
-  {
-    id: '5',
-    series_name: 'The White Lotus',
-    poster_path: null,
-    status: SeriesStatus.Dropped,
-    rating: null,
-    current_season: null,
-    current_episode: null,
-  },
-];
 
 const getGreetingKey = (): 'morning' | 'afternoon' | 'evening' => {
   const hour = new Date().getHours();
@@ -77,6 +20,7 @@ export const useViewModel = () => {
     SeriesStatus.Watching,
   );
   const [firstName, setFirstName] = useState<string | null>(null);
+  const [userSeries, setUserSeries] = useState<UserSeries[]>([]);
   const navigation = useNavigation<BottomTabNavigationProp<TabParamsList>>();
 
   const handleAddSeries = useCallback(() => {
@@ -98,11 +42,23 @@ export const useViewModel = () => {
       }
     };
 
+    const fetchSeries = async () => {
+      try {
+        const data = await getUserSeries(session.user.id);
+        setUserSeries(data);
+      } catch (e) {
+        console.error('Error cargando series:', e);
+      }
+    };
+
     fetchProfile();
+    fetchSeries();
   }, [session?.user?.id]);
 
+
+
   const greetingKey = getGreetingKey();
-  const filteredSeries = MOCK_SERIES.filter((s) => s.status === activeStatus);
+  const filteredSeries = userSeries.filter((s) => s.status === activeStatus);
 
   return {
     firstName,

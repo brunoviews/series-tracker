@@ -9,26 +9,45 @@ import {
   RatingContainer,
   RatingText,
   SeriesTitle,
-  StatusDot,
-  StatusLabel,
+  StatusBadge,
+  StatusBadgeText,
   TopRow,
 } from './styles';
 import type { SeriesCardProps } from './types';
+import { SeriesStatus } from '@/types/database.types';
 import {
+  BookmarkIcon,
   CheckCircleIcon,
   ImageSquareIcon,
+  ProhibitIcon,
   StarIcon,
+  TelevisionIcon,
 } from 'phosphor-react-native';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'styled-components/native';
 
-const STATUS_I18N_KEYS = {
-  watching: 'series.status.watching',
-  completed: 'series.status.completed',
-  planned: 'series.status.planned',
-  dropped: 'series.status.dropped',
-} as const;
+const STATUS_I18N_KEYS: Record<SeriesStatus, string> = {
+  [SeriesStatus.Watching]: 'series.status.watching',
+  [SeriesStatus.Completed]: 'series.status.completed',
+  [SeriesStatus.Planned]: 'series.status.planned',
+  [SeriesStatus.Dropped]: 'series.status.dropped',
+};
+
+const STATUS_ICONS: Record<SeriesStatus, React.ReactElement> = {
+  [SeriesStatus.Watching]: (
+    <TelevisionIcon size={16} color="#0a0a0a" weight="fill" />
+  ),
+  [SeriesStatus.Completed]: (
+    <CheckCircleIcon size={16} color="#0a0a0a" weight="fill" />
+  ),
+  [SeriesStatus.Planned]: (
+    <BookmarkIcon size={16} color="#0a0a0a" weight="fill" />
+  ),
+  [SeriesStatus.Dropped]: (
+    <ProhibitIcon size={16} color="#0a0a0a" weight="fill" />
+  ),
+};
 
 export default function SeriesCard({
   series_name,
@@ -81,12 +100,13 @@ export default function SeriesCard({
         )}
 
         <BottomRow>
-          {status === 'completed' ? (
-            <CheckCircleIcon size={16} color="#22C55E" weight="bold" />
-          ) : (
-            <StatusDot $status={status} />
-          )}
-          <StatusLabel>{t(STATUS_I18N_KEYS[status])}</StatusLabel>
+          <StatusBadge $status={status}>
+            {STATUS_ICONS[status]}
+            {}
+            <StatusBadgeText>
+              {t(STATUS_I18N_KEYS[status] as any)}
+            </StatusBadgeText>
+          </StatusBadge>
         </BottomRow>
       </InfoContainer>
     </CardContainer>
