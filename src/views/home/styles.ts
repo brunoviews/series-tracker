@@ -39,7 +39,7 @@ export const HomeHeader = styled(SafeAreaView).attrs({
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
- background-color: ${({ theme }) => theme.colors.fill.default.base};
+  background-color: ${({ theme }) => theme.colors.fill.default.base};
   padding: ${({ theme }) => theme.spacing.md}px;
   border-bottom-width: 1px;
   border-bottom-color: ${({ theme }) => theme.colors.fill.primary.main};
@@ -49,7 +49,7 @@ export const GreenDot = styled.View`
   width: 16px;
   height: 16px;
   border-radius: 8px;
-  background-color: #22c55e;
+  background-color: ${({ theme }) => theme.colors.fill.semantic.success.main};
   position: absolute;
   bottom: -4px;
   right: 0px;
@@ -63,7 +63,7 @@ export const AvatarContainer = styled.View`
   height: 50px;
   border-radius: 50%;
   border-width: 2px;
-  border-color: #c4c0ff96;
+  border-color: ${({ theme }) => theme.colors.stroke.primary.weak};
   align-items: center;
   justify-content: center;
 `;
@@ -106,4 +106,3 @@ export const StatusPillText = styled(Text).attrs({ variant: 'caption' })<{
       : theme.colors.textIcon.default.medium};
   font-weight: 700;
 `;
-

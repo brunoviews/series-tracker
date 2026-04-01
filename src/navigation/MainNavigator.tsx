@@ -13,9 +13,9 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const Tab = createBottomTabNavigator<TabParamsList>();
 
-const ACTIVE_COLOR = '#C4C0FF';
-const INACTIVE_COLOR = '#C7C4D8';
-const TAB_BG = '#1c1c1e';
+const ACTIVE_COLOR = '#2DD4BF';
+const INACTIVE_COLOR = '#94A3B8';
+const TAB_BG = '#0C1219';
 
 export default function MainNavigator() {
   const insets = useSafeAreaInsets();
@@ -27,7 +27,7 @@ export default function MainNavigator() {
         tabBarStyle: {
           backgroundColor: TAB_BG,
           borderTopWidth: 1,
-          borderTopColor: '#2A2A2A',
+          borderTopColor: '#1C2635',
           height: 64 + insets.bottom,
           paddingBottom: 10 + insets.bottom,
           paddingTop: 8,

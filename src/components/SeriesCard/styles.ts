@@ -1,17 +1,17 @@
-import type { SeriesStatus } from '@/types/database.types';
+import { SeriesStatus } from '@/types/database.types';
 import Text from '@components/Text';
 import styled from 'styled-components/native';
 
-const getStatusColor = (status: SeriesStatus): string => {
+const getStatusColor = (status: SeriesStatus) => {
   switch (status) {
-    case 'watching':
-      return '#f0dc2d';
-    case 'completed':
-      return '#C4C0FF';
-    case 'planned':
-      return '#D3D3D3';
-    case 'dropped':
-      return '#F2485A';
+    case SeriesStatus.Watching:
+      return '#FBBF24';
+    case SeriesStatus.Completed:
+      return '#2DD4BF';
+    case SeriesStatus.Planned:
+      return '#94A3B8';
+    case SeriesStatus.Dropped:
+      return '#F43F5E';
   }
 };
 
@@ -83,18 +83,21 @@ export const EpisodeBadgeText = styled(Text).attrs({ variant: 'caption' })`
 export const BottomRow = styled.View`
   flex-direction: row;
   align-items: center;
-  gap: 6px;
   margin-top: 8px;
 `;
 
-export const StatusDot = styled.View<{ $status: SeriesStatus }>`
-  width: 8px;
-  height: 8px;
-  border-radius: 4px;
+export const StatusBadge = styled.View<{ $status: SeriesStatus }>`
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px 3px 6px;
+  border-radius: 99px;
   background-color: ${({ $status }) => getStatusColor($status)};
 `;
 
-export const StatusLabel = styled(Text).attrs({ variant: 'caption' })`
-  color: ${({ theme }) => theme.colors.textIcon.default.strong};
+export const StatusBadgeText = styled(Text).attrs({ variant: 'caption' })`
+  color: #0a0a0a;
   font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 `;

@@ -1,21 +1,36 @@
 import { AppTheme, ThemeVariant } from '@/theme/types';
 import styled from 'styled-components/native';
 
-const getVariantStyles = (variant: ThemeVariant, theme: AppTheme ) => {
+const getVariantStyles = (variant: ThemeVariant, theme: AppTheme) => {
   switch (variant) {
     case 'primary':
       return {
-        backgroundColor: theme.colors.components.button.primary.default.fillPressed,
+        backgroundColor: theme.colors.components.button.primary.default.fill,
         borderRadius: theme.borderRadius.md,
         padding: theme.spacing.md,
         alignItems: 'center',
         justifyContent: 'center',
-        opacity: 1,
       };
-    }
-    
+    case 'ghost':
+      return {
+        backgroundColor: 'transparent',
+        borderRadius: theme.borderRadius.md,
+        padding: theme.spacing.md,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderWidth: 1.5,
+        borderColor: theme.colors.stroke.default.main,
+      };
+    case 'neutral':
+      return {
+        backgroundColor: theme.colors.fill.default.strong,
+        borderRadius: theme.borderRadius.md,
+        padding: theme.spacing.md,
+        alignItems: 'center',
+        justifyContent: 'center',
+      };
   }
-
+};
 
 export const Container = styled.TouchableOpacity<{ variant: ThemeVariant }>`
   ${({ variant, theme }) => getVariantStyles(variant, theme)}
@@ -26,22 +41,19 @@ export const Container = styled.TouchableOpacity<{ variant: ThemeVariant }>`
   justify-content: center;
 `;
 
-
-
 export const LoadingSpinner = styled.ActivityIndicator.attrs(({ theme }) => ({
   color: theme.colors.textIcon.default.strong,
   size: 'small',
-  
-}))`
+}))``;
 
-`;
-
-export const ButtonText = styled.Text`
-  color: ${({ theme }) =>
-    theme.colors.textIcon.default.strong};
-    font-size: 14px;
-    text-transform: uppercase;
-    width: 100%;
-    text-align: center;
-    font-weight: 800;
+export const ButtonText = styled.Text<{ variant: ThemeVariant }>`
+  color: ${({ variant, theme }) =>
+    variant === 'primary'
+      ? theme.colors.textIcon.primary.onPrimary
+      : theme.colors.textIcon.default.main};
+  font-size: 14px;
+  text-transform: uppercase;
+  width: 100%;
+  text-align: center;
+  font-weight: 800;
 `;

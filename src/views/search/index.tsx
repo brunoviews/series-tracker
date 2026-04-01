@@ -1,5 +1,6 @@
 import { Container, SearchInput, Title } from './styles';
 import { useViewModel } from './viewmodel';
+import AddSerieModal from '@/components/AddSerieModal';
 import SearchResultCard from '@/components/SearchResultCard';
 import type { TmdbSeries } from '@/lib/tmdb';
 import { theme } from '@/theme';
@@ -8,7 +9,19 @@ import { useTranslation } from 'react-i18next';
 import { ActivityIndicator, FlatList } from 'react-native';
 
 export default function SearchView() {
-  const { searchText, setSearchText, results, isLoading } = useViewModel();
+  const {
+    searchText,
+    setSearchText,
+    results,
+    isLoading,
+    isAdding,
+    isModalOpen,
+    openModal,
+    closeModal,
+    selectedSerie,
+    addSeries,
+    userSeriesMap,
+  } = useViewModel();
   const { t } = useTranslation();
 
   return (
@@ -27,12 +40,27 @@ export default function SearchView() {
           data={results}
           keyExtractor={(item) => String(item.id)}
           numColumns={2}
-          columnWrapperStyle={{ gap: 12, justifyContent: 'center' }}
-          contentContainerStyle={{ gap: 12, paddingBottom: 16 }}
-          renderItem={({ item }) => <SearchResultCard {...item} />}
+          columnWrapperStyle={{ gap: 32, justifyContent: 'center' }}
+          contentContainerStyle={{ gap: 32, paddingBottom: 16 }}
+          renderItem={({ item }) => (
+            <SearchResultCard
+              serie={item}
+              onAdd={() => openModal(item)}
+              userSeriesMap={userSeriesMap}
+            />
+          )}
           style={{ flex: 1 }}
+          showsVerticalScrollIndicator={false}
         />
       )}
+
+      <AddSerieModal
+        isOpen={isModalOpen}
+        onCancel={closeModal}
+        onConfirm={addSeries}
+        isLoading={isAdding}
+        serie={selectedSerie}
+      />
     </Container>
   );
 }

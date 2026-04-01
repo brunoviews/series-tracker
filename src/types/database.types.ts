@@ -48,7 +48,9 @@ export type Database = {
           current_season: number | null;
           id: string;
           notes: string | null;
+          poster_path: string | null;
           rating: number | null;
+          series_name: string;
           status: string;
           tmdb_series_id: number;
           updated_at: string;
@@ -60,7 +62,9 @@ export type Database = {
           current_season?: number | null;
           id?: string;
           notes?: string | null;
+          poster_path?: string | null;
           rating?: number | null;
+          series_name?: string;
           status: string;
           tmdb_series_id: number;
           updated_at?: string;
@@ -72,7 +76,9 @@ export type Database = {
           current_season?: number | null;
           id?: string;
           notes?: string | null;
+          poster_path?: string | null;
           rating?: number | null;
+          series_name?: string;
           status?: string;
           tmdb_series_id?: number;
           updated_at?: string;
@@ -233,7 +239,12 @@ export const Constants = {
 // ─── Tipos manuales del proyecto ─────────────────────────────────────────────
 // Estos tipos se añaden a mano y hay que revisarlos tras cada regeneración.
 
-export type SeriesStatus = 'watching' | 'completed' | 'planned' | 'dropped';
+export enum SeriesStatus {
+  Watching = 'watching',
+  Completed = 'completed',
+  Planned = 'planned',
+  Dropped = 'dropped',
+}
 
 export type Profile = {
   id: string;
@@ -261,8 +272,19 @@ export type UserSeries = {
 
 export type InsertUserSeries = Omit<
   UserSeries,
-  'id' | 'created_at' | 'updated_at'
->;
+  | 'id'
+  | 'created_at'
+  | 'updated_at'
+  | 'rating'
+  | 'notes'
+  | 'current_season'
+  | 'current_episode'
+> & {
+  rating?: number | null;
+  notes?: string | null;
+  current_season?: number | null;
+  current_episode?: number | null;
+};
 export type UpdateUserSeries = Partial<
   Omit<UserSeries, 'id' | 'user_id' | 'created_at' | 'updated_at'>
 >;

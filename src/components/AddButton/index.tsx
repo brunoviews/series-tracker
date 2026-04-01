@@ -1,7 +1,7 @@
 import { Container } from './styles';
 import { AddButtonProps } from './types';
 import { theme } from '@/theme';
-import { PlusIcon } from 'phosphor-react-native';
+import { DotsThreeOutlineVerticalIcon, MagnifyingGlassIcon } from 'phosphor-react-native';
 
 export default function AddButton({
   onPress,
@@ -11,6 +11,8 @@ export default function AddButton({
   bottom,
   right,
   left,
+  disabled,
+  buttonType = 'add',
 }: AddButtonProps) {
   return (
     <Container
@@ -21,12 +23,21 @@ export default function AddButton({
       right={right}
       left={left}
       activeOpacity={0.5}
-    >
-      <PlusIcon
-        size={iconSize || 14}
-        color={theme.colors.textIcon.default.strong}
-        weight="bold"
-      />
+      disabled={disabled}
+    >{
+      buttonType === 'add' ? (
+        <MagnifyingGlassIcon
+          size={iconSize || 24}
+          color={theme.colors.textIcon.default.strong}
+          weight="bold"
+        />
+      ) : (
+        <DotsThreeOutlineVerticalIcon
+          size={iconSize || 24}
+          color={theme.colors.textIcon.default.strong}
+          weight="bold"
+        />
+      )}
     </Container>
   );
 }
