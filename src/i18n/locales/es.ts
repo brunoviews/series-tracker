@@ -44,6 +44,7 @@ const es = {
       completed: 'Completadas',
       planned: 'Por ver',
       dropped: 'Abandonadas',
+      removeFromList: 'Eliminar de mis listas',
     },
   },
   search: {

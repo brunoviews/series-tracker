@@ -12,7 +12,7 @@ import {
 import { useEffect, useState } from 'react';
 
 export const useViewModel = (tmdbId: number, type: 'series' | 'movie') => {
-  const { userSeriesMap, addSeries } = useSeries();
+  const { userSeriesMap, addSeries, deleteSeries } = useSeries();
   const { session } = useAuth();
   const [detail, setDetail] = useState<
     TmdbSeriesDetail | TmdbMovieDetail | null
@@ -20,6 +20,7 @@ export const useViewModel = (tmdbId: number, type: 'series' | 'movie') => {
   const [loading, setLoading] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
+  const [isRemoving, setIsRemoving] = useState(false);
 
   const userStatus = userSeriesMap[tmdbId] ?? null;
 
@@ -45,6 +46,16 @@ export const useViewModel = (tmdbId: number, type: 'series' | 'movie') => {
       closeModal();
     } finally {
       setIsAdding(false);
+    }
+  };
+
+  const handleRemoveSeries = async () => {
+    setIsRemoving(true);
+    try {
+      await deleteSeries(tmdbId);
+      closeModal();
+    } finally {
+      setIsRemoving(false);
     }
   };
 
@@ -94,8 +105,10 @@ export const useViewModel = (tmdbId: number, type: 'series' | 'movie') => {
     cast,
     modalVisible,
     isAdding,
+    isRemoving,
     openModal,
     closeModal,
     handleAddSeries,
+    handleRemoveSeries,
   };
 };

@@ -15,11 +15,13 @@ export default function SearchView() {
     results,
     isLoading,
     isAdding,
+    isRemoving,
     isModalOpen,
     openModal,
     closeModal,
     selectedSerie,
     addSeries,
+    removeSeries,
     userSeriesMap,
   } = useViewModel();
   const { t } = useTranslation();
@@ -60,7 +62,13 @@ export default function SearchView() {
         onCancel={closeModal}
         onConfirm={addSeries}
         isLoading={isAdding}
+        isRemoving={isRemoving}
         item={selectedSerie}
+        onRemove={
+          selectedSerie && userSeriesMap[selectedSerie.id]
+            ? removeSeries
+            : undefined
+        }
       />
     </Container>
   );

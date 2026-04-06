@@ -1,4 +1,4 @@
-import { addUserSeries, getUserSeries } from '../services/userSeries';
+import { addUserSeries, deleteUserSeries, getUserSeries } from '../services/userSeries';
 import type { InsertUserSeries, UserSeries } from '../types/database.types';
 import { SeriesStatus } from '../types/database.types';
 import { useAuth } from './AuthContext';
@@ -19,6 +19,7 @@ type SeriesContextValue = {
   userSeriesMap: Record<number, SeriesStatus>;
   loading: boolean;
   addSeries: (data: InsertUserSeries) => Promise<void>;
+  deleteSeries: (tmdbSeriesId: number) => Promise<void>;
   refreshSeries: () => Promise<void>;
 };
 
@@ -77,9 +78,26 @@ export const SeriesProvider: FC<{ children: ReactNode }> = ({ children }) => {
     [refreshSeries],
   );
 
+  // Eliminar serie → delete en Supabase + refrescar la lista
+  const deleteSeries = useCallback(
+    async (tmdbSeriesId: number) => {
+      if (!session?.user?.id) return;
+      await deleteUserSeries(session.user.id, tmdbSeriesId);
+      await refreshSeries();
+    },
+    [session?.user?.id, refreshSeries],
+  );
+
   return (
     <SeriesContext.Provider
-      value={{ userSeries, userSeriesMap, loading, addSeries, refreshSeries }}
+      value={{
+        userSeries,
+        userSeriesMap,
+        loading,
+        addSeries,
+        deleteSeries,
+        refreshSeries,
+      }}
     >
       {children}
     </SeriesContext.Provider>

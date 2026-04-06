@@ -7,12 +7,17 @@ import { useEffect, useState } from 'react';
 
 export const useViewModel = () => {
   const { session } = useAuth();
-  const { userSeriesMap, addSeries: addSeriesContext } = useSeries();
+  const {
+    userSeriesMap,
+    addSeries: addSeriesContext,
+    deleteSeries,
+  } = useSeries();
   const [searchText, setSearchText] = useState('');
   const [results, setResults] = useState<TmdbSeries[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
+  const [isRemoving, setIsRemoving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [selectedSerie, setSelectedSerie] = useState<TmdbSeries | null>(null);
 
@@ -46,6 +51,19 @@ export const useViewModel = () => {
     }
   };
 
+  const removeSeries = async () => {
+    if (!selectedSerie) return;
+    setIsRemoving(true);
+    try {
+      await deleteSeries(selectedSerie.id);
+      closeModal();
+    } catch (e) {
+      console.error('Error eliminando serie:', e);
+    } finally {
+      setIsRemoving(false);
+    }
+  };
+
   useEffect(() => {
     if (searchText.trim() === '') {
       setResults([]);
@@ -76,12 +94,14 @@ export const useViewModel = () => {
     results,
     isLoading,
     isAdding,
+    isRemoving,
     error,
     isModalOpen,
     openModal,
     closeModal,
     selectedSerie,
     addSeries,
+    removeSeries,
     userSeriesMap,
   };
 };

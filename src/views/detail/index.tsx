@@ -91,9 +91,11 @@ export default function DetailView({ route }: DetailViewProps) {
     cast,
     modalVisible,
     isAdding,
+    isRemoving,
     openModal,
     closeModal,
     handleAddSeries,
+    handleRemoveSeries,
   } = useViewModel(tmdbId, type);
   const theme = useTheme();
   const { t } = useTranslation();
@@ -119,7 +121,7 @@ export default function DetailView({ route }: DetailViewProps) {
 
   const seriesDetail = type === 'series' ? (detail as TmdbSeriesDetail) : null;
   const movieDetail = type === 'movie' ? (detail as TmdbMovieDetail) : null;
-   
+
   return (
     <DetailLayout>
       {/* ── Hero backdrop ── */}
@@ -268,7 +270,6 @@ export default function DetailView({ route }: DetailViewProps) {
             </CastScroll>
           </View>
         )}
-          
       </Body>
 
       {/* ── FAB ── */}
@@ -288,8 +289,10 @@ export default function DetailView({ route }: DetailViewProps) {
         isOpen={modalVisible}
         item={detail}
         onConfirm={handleAddSeries}
+        onRemove={userStatus ? handleRemoveSeries : undefined}
         onCancel={closeModal}
         isLoading={isAdding}
+        isRemoving={isRemoving}
       />
     </DetailLayout>
   );
