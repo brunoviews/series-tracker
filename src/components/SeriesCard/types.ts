@@ -7,4 +7,6 @@ export type SeriesCardProps = {
   rating: number | null;
   current_season: number | null;
   current_episode: number | null;
+  id: number;
+  type: 'series' | 'movie';
 };

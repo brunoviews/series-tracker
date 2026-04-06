@@ -4,14 +4,17 @@ import {
   Container,
   CurrentStatus,
   CurrentStatusBadge,
-  RatingYearContainer,
+  RatingContainer,
   ResultRating,
   ResultTitle,
   ResultYear,
+  YearContainer,
 } from './styles';
 import { SearchResultCardProps } from './types';
+import { useViewModel } from './viewmodel';
 import { SeriesStatus } from '@/types/database.types';
 import DefaultImg from '@assets/img/default-fallback-image.png';
+import { getPosterUrl } from '@lib/tmdb';
 import {
   BookmarkIcon,
   CheckCircleIcon,
@@ -24,16 +27,22 @@ export default function SearchResultCard({
   serie,
   onAdd,
   userSeriesMap,
+  id,
 }: SearchResultCardProps) {
+  const { handleCardPress } = useViewModel();
   return (
-    <Container>
+    <Container onPress={() => handleCardPress(id)}>
       <CardContainer
         imageStyle={{ borderRadius: 6 }}
-        source={serie.poster_path ? { uri: serie.poster_path } : DefaultImg}
+        source={
+          serie.poster_path
+            ? { uri: getPosterUrl(serie.poster_path) ?? '' }
+            : DefaultImg
+        }
       >
         {userSeriesMap[serie.id] &&
           (() => {
-            const status = userSeriesMap[serie.id];
+            const status = userSeriesMap[serie.id] as SeriesStatus;
             const iconProps = {
               size: 16,
               color: '#0a0a0a',
@@ -56,29 +65,30 @@ export default function SearchResultCard({
               </CurrentStatusBadge>
             );
           })()}
+        <RatingContainer>
+          <StarIcon size={12} color="#FBBF24" weight="fill" />
+          <ResultRating>{serie.vote_average.toFixed(1)}</ResultRating>
+        </RatingContainer>
         <AddButton
           onPress={() => onAdd()}
-          width={32}
-          height={32}
+          width={26}
+          height={26}
           iconSize={16}
           bottom={8}
           right={8}
-          buttonType="options"
+          buttonType="add"
+          shape="square"
         />
       </CardContainer>
 
       <ResultTitle numberOfLines={1}>{serie.name}</ResultTitle>
-      <RatingYearContainer>
-        <StarIcon size={12} color="#FBBF24" weight="fill" />
-        <ResultRating>{serie.vote_average.toFixed(1)}</ResultRating>
+      <YearContainer>
         <ResultYear>
-          {' '}
-          ·{' '}
           {serie.first_air_date
             ? new Date(serie.first_air_date).getFullYear()
             : 'N/A'}
         </ResultYear>
-      </RatingYearContainer>
+      </YearContainer>
     </Container>
   );
 }

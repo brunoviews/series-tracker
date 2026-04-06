@@ -44,6 +44,9 @@ export default function HomeView() {
   } = useViewModel();
   const { t } = useTranslation();
 
+ 
+
+
   return (
     <>
       <HomeHeader>
@@ -78,12 +81,18 @@ export default function HomeView() {
         <FlatList
           data={filteredSeries}
           keyExtractor={(item) => item.id}
-          renderItem={({ item }) => <SeriesCard {...item} />}
+          renderItem={({ item }) => (
+            <SeriesCard {...item} id={item.tmdb_series_id} type="series" />
+          )}
           style={{ flex: 1 }}
           contentContainerStyle={{ paddingTop: 4, paddingBottom: 100 }}
           showsVerticalScrollIndicator={false}
         />
-        <AddButton onPress={handleAddSeries} />
+        <AddButton
+          onPress={handleAddSeries}
+          shape="circle"
+          buttonType="search"
+        />
       </Container>
     </>
   );

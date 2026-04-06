@@ -47,6 +47,7 @@ export default function SearchView() {
               serie={item}
               onAdd={() => openModal(item)}
               userSeriesMap={userSeriesMap}
+              id={item.id}
             />
           )}
           style={{ flex: 1 }}
@@ -59,7 +60,7 @@ export default function SearchView() {
         onCancel={closeModal}
         onConfirm={addSeries}
         isLoading={isAdding}
-        serie={selectedSerie}
+        item={selectedSerie}
       />
     </Container>
   );

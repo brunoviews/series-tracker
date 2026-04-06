@@ -11,14 +11,20 @@ export enum ScreenType {
   HOME = 'Home',
   SEARCH = 'Search',
   PROFILE = 'Profile',
+  // Detail
+  DETAIL = 'Detail',
 }
 
 // ─── Param lists ─────────────────────────────────────────────────────────────
-// RootParamsList: pantallas del stack raíz (auth + entrada a tabs)
+// RootParamsList: pantallas del stack raíz (auth + entrada a tabs + detail)
 export type RootParamsList = {
   [ScreenType.LOGIN]: undefined;
   [ScreenType.REGISTER]: undefined;
   [ScreenType.TABS]: undefined;
+  [ScreenType.DETAIL]: {
+    tmdbId: number;
+    type: 'series' | 'movie';
+  };
 };
 
 // TabParamsList: pantallas internas del tab navigator

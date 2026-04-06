@@ -1,4 +1,5 @@
 import { useAuth } from '../context/AuthContext';
+import DetailView from '../views/detail';
 import LoginView from '../views/login';
 import RegisterView from '../views/register';
 import { generalStackScreenOptions, rootStackScreenOptions } from './constants';
@@ -33,6 +34,7 @@ const AppNavigator: FC = () => {
         {session ? (
           <Group screenOptions={generalStackScreenOptions}>
             <Screen name={ScreenType.TABS} component={MainNavigator} />
+            <Screen name={ScreenType.DETAIL} component={DetailView} />
           </Group>
         ) : (
           <Group screenOptions={generalStackScreenOptions}>

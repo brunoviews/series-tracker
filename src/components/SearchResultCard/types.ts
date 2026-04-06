@@ -4,4 +4,5 @@ export type SearchResultCardProps = {
     serie: TmdbSeries;
     onAdd: () => void;
     userSeriesMap: Record<number, string>;
+    id: number;
 }

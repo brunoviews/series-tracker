@@ -1,7 +1,11 @@
 import { Container } from './styles';
 import { AddButtonProps } from './types';
 import { theme } from '@/theme';
-import { DotsThreeOutlineVerticalIcon, MagnifyingGlassIcon } from 'phosphor-react-native';
+import {
+  DotsThreeOutlineVerticalIcon,
+  MagnifyingGlassIcon,
+  PlusIcon,
+} from 'phosphor-react-native';
 
 export default function AddButton({
   onPress,
@@ -13,6 +17,7 @@ export default function AddButton({
   left,
   disabled,
   buttonType = 'add',
+  shape = 'circle',
 }: AddButtonProps) {
   return (
     <Container
@@ -24,20 +29,27 @@ export default function AddButton({
       left={left}
       activeOpacity={0.5}
       disabled={disabled}
-    >{
-      buttonType === 'add' ? (
-        <MagnifyingGlassIcon
+      shape={shape}
+    >
+      {buttonType === 'add' ? (
+        <PlusIcon
           size={iconSize || 24}
           color={theme.colors.textIcon.default.strong}
           weight="bold"
         />
-      ) : (
+      ) : buttonType === 'options' ? (
         <DotsThreeOutlineVerticalIcon
           size={iconSize || 24}
           color={theme.colors.textIcon.default.strong}
           weight="bold"
         />
-      )}
+      ) : buttonType === 'search' ? (
+        <MagnifyingGlassIcon
+          size={iconSize || 24}
+          color={theme.colors.textIcon.default.strong}
+          weight="bold"
+        />
+      ) : null}
     </Container>
   );
 }

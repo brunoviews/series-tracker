@@ -16,7 +16,7 @@ type AuthContextValue = {
   loading: boolean;
   signOut: () => Promise<void>;
   userEmail?: string | null;
-
+  userName?: string | null;
 };
 
 // ─── Contexto ─────────────────────────────────────────────────────────────────
@@ -29,6 +29,7 @@ const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 
 export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [session, setSession] = useState<Session | null>(null);
+  const [userName, setUserName] = useState<string | null>(null);
   // loading=true hasta que Supabase confirme el estado inicial de la sesión.
   // Evita el flash del login cuando el usuario ya tenía sesión guardada.
   const [loading, setLoading] = useState(true);
@@ -38,24 +39,49 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
     // onAuthStateChange recibirá SIGNED_OUT y pondrá session a null automáticamente.
   };
 
+  // 1. Suscripción al estado de auth — solo se monta una vez.
   useEffect(() => {
-    // 1. Supabase lee AsyncStorage y emite el estado inicial (INITIAL_SESSION).
-    //    Esto ocurre una sola vez al montar el provider.
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, newSession) => {
       setSession(newSession);
       setLoading(false);
+      // Limpia el nombre al cerrar sesión para no mostrar datos del usuario anterior.
+      if (!newSession) setUserName(null);
     });
 
-    // 2. Cuando el componente se desmonta, cancelamos la suscripción.
-    //    Sin esto, el listener seguiría activo aunque el componente ya no exista
-    //    (memory leak).
     return () => subscription.unsubscribe();
   }, []);
 
+  // 2. Fetch del perfil cuando hay sesión activa.
+  //    [session?.user?.id] → solo re-ejecuta si cambia el usuario, no en cada render.
+  useEffect(() => {
+    if (!session?.user?.id) return;
+
+    const fetchProfile = async () => {
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('first_name, last_name')
+        .eq('id', session.user.id)
+        .single();
+
+      if (!error && data) {
+        setUserName(`${data.first_name} ${data.last_name}`);
+      }
+    };
+    fetchProfile();
+  }, [session?.user?.id]);
+
   return (
-    <AuthContext.Provider value={{ session, loading, signOut, userEmail: session?.user?.email }}>
+    <AuthContext.Provider
+      value={{
+        session,
+        loading,
+        signOut,
+        userEmail: session?.user?.email,
+        userName,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
