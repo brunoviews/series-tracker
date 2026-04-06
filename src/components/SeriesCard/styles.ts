@@ -1,21 +1,11 @@
+import { STATUS_COLORS } from '@/theme/statusColors';
 import { SeriesStatus } from '@/types/database.types';
 import Text from '@components/Text';
 import styled from 'styled-components/native';
 
-const getStatusColor = (status: SeriesStatus) => {
-  switch (status) {
-    case SeriesStatus.Watching:
-      return '#FBBF24';
-    case SeriesStatus.Completed:
-      return '#2DD4BF';
-    case SeriesStatus.Planned:
-      return '#94A3B8';
-    case SeriesStatus.Dropped:
-      return '#F43F5E';
-  }
-};
+const getStatusColor = (status: SeriesStatus) => STATUS_COLORS[status];
 
-export const CardContainer = styled.View`
+export const CardContainer = styled.TouchableOpacity`
   flex-direction: row;
   background-color: ${({ theme }) => theme.colors.fill.default.medium};
   border-radius: 12px;
@@ -83,6 +73,7 @@ export const EpisodeBadgeText = styled(Text).attrs({ variant: 'caption' })`
 export const BottomRow = styled.View`
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   margin-top: 8px;
 `;
 

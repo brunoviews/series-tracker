@@ -17,9 +17,11 @@ import {
 import { AddSerieModalProps } from './types';
 import { useViewModel } from './viewmodel';
 import { theme } from '@/theme';
+import { STATUS_COLORS } from '@/theme/statusColors';
 import { SeriesStatus } from '@/types/database.types';
 import DefaultImg from '@assets/img/default-fallback-image.png';
 import { Button } from '@components/Button';
+import { getPosterUrl } from '@lib/tmdb';
 import {
   CalendarBlankIcon,
   CheckCircleIcon,
@@ -42,13 +44,7 @@ const STATUSES: SeriesStatus[] = [
   SeriesStatus.Dropped,
 ];
 
-// Cada status tiene su color propio para reforzar visualmente su significado.
-const STATUS_COLORS: Record<string, string> = {
-  [SeriesStatus.Watching]: '#2DD4BF', // teal  → activamente viendo
-  [SeriesStatus.Completed]: '#22C55E', // verde → completada
-  [SeriesStatus.Planned]: '#FBBF24', // ámbar → pendiente
-  [SeriesStatus.Dropped]: '#F43F5E', // rosa  → abandonada
-};
+// Colores de status centralizados en theme/statusColors.ts
 
 // Función pura: recibe status + color y devuelve el icono adecuado.
 // Un switch es más legible que un Record de funciones para un junior.
@@ -74,7 +70,7 @@ const AddSerieModal: FC<AddSerieModalProps> = ({
   onCancel,
   onConfirm,
   isLoading = false,
-  serie,
+  item,
 }) => {
   const { selectedStatus, handleSelectStatus, resetStatus } = useViewModel();
   const { t } = useTranslation();
@@ -113,12 +109,16 @@ const AddSerieModal: FC<AddSerieModalProps> = ({
           <PosterContainer>
             <PosterImage
               source={
-                serie?.poster_path ? { uri: serie.poster_path } : DefaultImg
+                item?.poster_path
+                  ? { uri: getPosterUrl(item.poster_path) ?? '' }
+                  : DefaultImg
               }
             />
           </PosterContainer>
 
-          <ContentTitle>{serie?.name ?? ''}</ContentTitle>
+          <ContentTitle>
+            {item ? ('name' in item ? item.name : item.title) : ''}
+          </ContentTitle>
 
           <StatusContainer>
             {STATUSES.map((status) => {

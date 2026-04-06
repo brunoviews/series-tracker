@@ -14,6 +14,7 @@ import {
   TopRow,
 } from './styles';
 import type { SeriesCardProps } from './types';
+import { useViewModel } from './viewmodel';
 import { SeriesStatus } from '@/types/database.types';
 import {
   BookmarkIcon,
@@ -27,7 +28,13 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'styled-components/native';
 
-const STATUS_I18N_KEYS: Record<SeriesStatus, string> = {
+type StatusI18nKey =
+  | 'series.status.watching'
+  | 'series.status.completed'
+  | 'series.status.planned'
+  | 'series.status.dropped';
+
+const STATUS_I18N_KEYS: Record<SeriesStatus, StatusI18nKey> = {
   [SeriesStatus.Watching]: 'series.status.watching',
   [SeriesStatus.Completed]: 'series.status.completed',
   [SeriesStatus.Planned]: 'series.status.planned',
@@ -56,15 +63,18 @@ export default function SeriesCard({
   rating,
   current_season,
   current_episode,
+  id,
+  type,
 }: SeriesCardProps) {
   const { t } = useTranslation();
   const theme = useTheme();
+  const { onPress } = useViewModel(type);
 
   const hasPoster = poster_path !== null;
   const hasProgress = current_season !== null && current_episode !== null;
 
   return (
-    <CardContainer>
+    <CardContainer onPress={() => onPress(id)} activeOpacity={0.9}>
       {hasPoster ? (
         <PosterImage
           source={{ uri: `https://image.tmdb.org/t/p/w185${poster_path}` }}
@@ -83,12 +93,6 @@ export default function SeriesCard({
       <InfoContainer>
         <TopRow>
           <SeriesTitle numberOfLines={2}>{series_name}</SeriesTitle>
-          {rating !== null && (
-            <RatingContainer>
-              <StarIcon size={16} color="#FBBF24" weight="fill" />
-              <RatingText>{rating.toFixed(1)}</RatingText>
-            </RatingContainer>
-          )}
         </TopRow>
 
         {hasProgress && (
@@ -102,11 +106,14 @@ export default function SeriesCard({
         <BottomRow>
           <StatusBadge $status={status}>
             {STATUS_ICONS[status]}
-            {}
-            <StatusBadgeText>
-              {t(STATUS_I18N_KEYS[status] as any)}
-            </StatusBadgeText>
+            <StatusBadgeText>{t(STATUS_I18N_KEYS[status])}</StatusBadgeText>
           </StatusBadge>
+          {rating !== null && (
+            <RatingContainer>
+              <StarIcon size={16} color="#FBBF24" weight="fill" />
+              <RatingText>{rating.toFixed(1)}</RatingText>
+            </RatingContainer>
+          )}
         </BottomRow>
       </InfoContainer>
     </CardContainer>

@@ -1,8 +1,8 @@
 import { useAuth } from '@/context/AuthContext';
+import { useSeries } from '@/context/SeriesContext';
 import { supabase } from '@/lib/supabase';
 import { ScreenType, TabParamsList } from '@/navigation/types';
-import { getUserSeries } from '@/services/userSeries';
-import { SeriesStatus, UserSeries } from '@/types/database.types';
+import { SeriesStatus } from '@/types/database.types';
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { useNavigation } from '@react-navigation/native';
 import { useCallback, useEffect, useState } from 'react';
@@ -16,11 +16,11 @@ const getGreetingKey = (): 'morning' | 'afternoon' | 'evening' => {
 
 export const useViewModel = () => {
   const { session } = useAuth();
+  const { userSeries } = useSeries();
   const [activeStatus, setActiveStatus] = useState<SeriesStatus>(
     SeriesStatus.Watching,
   );
   const [firstName, setFirstName] = useState<string | null>(null);
-  const [userSeries, setUserSeries] = useState<UserSeries[]>([]);
   const navigation = useNavigation<BottomTabNavigationProp<TabParamsList>>();
 
   const handleAddSeries = useCallback(() => {
@@ -42,20 +42,8 @@ export const useViewModel = () => {
       }
     };
 
-    const fetchSeries = async () => {
-      try {
-        const data = await getUserSeries(session.user.id);
-        setUserSeries(data);
-      } catch (e) {
-        console.error('Error cargando series:', e);
-      }
-    };
-
     fetchProfile();
-    fetchSeries();
   }, [session?.user?.id]);
-
-
 
   const greetingKey = getGreetingKey();
   const filteredSeries = userSeries.filter((s) => s.status === activeStatus);

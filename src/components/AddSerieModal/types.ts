@@ -1,4 +1,4 @@
-import { TmdbSeries } from '@/lib/tmdb';
+import { TmdbMovie, TmdbSeries } from '@/lib/tmdb';
 import { SeriesStatus } from '@/types/database.types';
 
 export type AddSerieModalProps = {
@@ -6,5 +6,5 @@ export type AddSerieModalProps = {
   onConfirm?: (status: SeriesStatus) => void;
   onCancel?: () => void;
   isLoading?: boolean;
-  serie: TmdbSeries | null;
+  item: TmdbSeries | TmdbMovie | null;
 };
