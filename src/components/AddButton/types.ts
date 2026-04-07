@@ -9,6 +9,6 @@ export type AddButtonProps = {
   left?: number;
   iconSize?: number;
   disabled?: boolean;
-  buttonType?: 'add' | 'options' | 'search';
+  buttonType?: 'add' | 'options' | 'search'| 'edit';
   shape?: 'circle' | 'square';
 };

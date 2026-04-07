@@ -39,8 +39,7 @@ export const useViewModel = () => {
       return;
     }
 
-    // Si no hay error, onAuthStateChange en AuthContext detecta la nueva sesión
-    // y AppNavigator navega automáticamente a las tabs. No hay que hacer nada aquí.
+    
   };
 
   return {

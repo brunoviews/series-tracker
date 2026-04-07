@@ -16,6 +16,7 @@ import {
 import type { SeriesCardProps } from './types';
 import { useViewModel } from './viewmodel';
 import { SeriesStatus } from '@/types/database.types';
+import { STATUS_COLORS } from '@/theme/statusColors';
 import {
   BookmarkIcon,
   CheckCircleIcon,
@@ -41,19 +42,18 @@ const STATUS_I18N_KEYS: Record<SeriesStatus, StatusI18nKey> = {
   [SeriesStatus.Dropped]: 'series.status.dropped',
 };
 
-const STATUS_ICONS: Record<SeriesStatus, React.ReactElement> = {
-  [SeriesStatus.Watching]: (
-    <TelevisionIcon size={16} color="#0a0a0a" weight="fill" />
-  ),
-  [SeriesStatus.Completed]: (
-    <CheckCircleIcon size={16} color="#0a0a0a" weight="fill" />
-  ),
-  [SeriesStatus.Planned]: (
-    <BookmarkIcon size={16} color="#0a0a0a" weight="fill" />
-  ),
-  [SeriesStatus.Dropped]: (
-    <ProhibitIcon size={16} color="#0a0a0a" weight="fill" />
-  ),
+const getStatusIcon = (status: SeriesStatus, color: string) => {
+  const props = { size: 16, color, weight: 'fill' } as const;
+  switch (status) {
+    case SeriesStatus.Watching:
+      return <TelevisionIcon {...props} />;
+    case SeriesStatus.Completed:
+      return <CheckCircleIcon {...props} />;
+    case SeriesStatus.Planned:
+      return <BookmarkIcon {...props} />;
+    case SeriesStatus.Dropped:
+      return <ProhibitIcon {...props} />;
+  }
 };
 
 export default function SeriesCard({
@@ -105,8 +105,10 @@ export default function SeriesCard({
 
         <BottomRow>
           <StatusBadge $status={status}>
-            {STATUS_ICONS[status]}
-            <StatusBadgeText>{t(STATUS_I18N_KEYS[status])}</StatusBadgeText>
+            {getStatusIcon(status, STATUS_COLORS[status])}
+            <StatusBadgeText $color={STATUS_COLORS[status]}>
+              {t(STATUS_I18N_KEYS[status])}
+            </StatusBadgeText>
           </StatusBadge>
           {rating !== null && (
             <RatingContainer>

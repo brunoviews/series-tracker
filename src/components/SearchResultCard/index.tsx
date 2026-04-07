@@ -12,6 +12,7 @@ import {
 } from './styles';
 import { SearchResultCardProps } from './types';
 import { useViewModel } from './viewmodel';
+import { STATUS_COLORS } from '@/theme/statusColors';
 import { SeriesStatus } from '@/types/database.types';
 import DefaultImg from '@assets/img/default-fallback-image.png';
 import { getPosterUrl } from '@lib/tmdb';
@@ -45,9 +46,10 @@ export default function SearchResultCard({
         {userSeriesMap[serie.id] &&
           (() => {
             const status = userSeriesMap[serie.id] as SeriesStatus;
+            const statusColor = STATUS_COLORS[status];
             const iconProps = {
               size: 16,
-              color: '#0a0a0a',
+              color: statusColor,
               weight: 'fill',
             } as const;
             const icon =
@@ -63,7 +65,9 @@ export default function SearchResultCard({
             return (
               <CurrentStatusBadge status={status}>
                 {icon}
-                <CurrentStatus>{t(`series.status.${status}`)}</CurrentStatus>
+                <CurrentStatus $color={statusColor}>
+                  {t(`series.status.${status}`)}
+                </CurrentStatus>
               </CurrentStatusBadge>
             );
           })()}
@@ -78,8 +82,8 @@ export default function SearchResultCard({
           iconSize={16}
           bottom={8}
           right={8}
-          buttonType="add"
-          shape="square"
+          buttonType={userSeriesMap[serie.id] ? 'edit' : 'add'}
+          shape="circle"
         />
       </CardContainer>
 

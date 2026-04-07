@@ -8,7 +8,9 @@ export const Container = styled.TouchableOpacity`
   overflow: hidden;
 `;
 
-export const CardContainer = styled.ImageBackground`
+export const CardContainer = styled.ImageBackground.attrs({
+  resizeMode: 'cover',
+})`
   flex-direction: row;
   padding: 16px;
   margin-bottom: 4px;
@@ -53,8 +55,10 @@ export const YearContainer = styled.View`
   gap: 2px;
 `;
 
-export const CurrentStatus = styled(Text).attrs({ variant: 'label' })`
-  color: #0a0a0a;
+export const CurrentStatus = styled(Text).attrs({ variant: 'label' })<{
+  $color: string;
+}>`
+  color: ${({ $color }) => $color};
   text-transform: uppercase;
   font-weight: bold;
   letter-spacing: 0.5px;
@@ -69,5 +73,7 @@ export const CurrentStatusBadge = styled.View<{ status: SeriesStatus }>`
   position: absolute;
   top: 8px;
   left: 6px;
-  background-color: ${({ status }) => STATUS_COLORS[status] ?? '#999'};
+  background-color: rgba(8, 12, 18, 0.85);
+  border-width: 1px;
+  border-color: ${({ status }) => STATUS_COLORS[status]};
 `;

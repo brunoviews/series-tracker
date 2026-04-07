@@ -96,7 +96,6 @@ const AddSerieModal: FC<AddSerieModalProps> = ({
       animationType="fade"
       transparent
       onRequestClose={handleCancel}
-      
     >
       <Container>
         {/* Overlay cierra el modal al pulsar fuera del contenido */}
@@ -137,6 +136,11 @@ const AddSerieModal: FC<AddSerieModalProps> = ({
                 <BadgePressable
                   key={status}
                   onPress={() => handleSelectStatus(status)}
+                  style={({ pressed }) =>
+                    pressed
+                      ? { transform: [{ scale: 0.93 }], opacity: 0.85 }
+                      : undefined
+                  }
                 >
                   <StatusBadge $isSelected={isSelected} $color={color}>
                     {getStatusIcon(status, iconColor)}

@@ -1,4 +1,10 @@
-import { Container, SearchInput, Title } from './styles';
+import {
+  Container,
+  ErrorText,
+  SearchInput,
+  SearchInputContainer,
+  Title,
+} from './styles';
 import { useViewModel } from './viewmodel';
 import AddSerieModal from '@/components/AddSerieModal';
 import SearchResultCard from '@/components/SearchResultCard';
@@ -23,18 +29,23 @@ export default function SearchView() {
     addSeries,
     removeSeries,
     userSeriesMap,
+    error,
   } = useViewModel();
   const { t } = useTranslation();
 
   return (
     <Container>
       <Title>{t('search.title')}</Title>
-      <SearchInput
-        placeholder={t('search.placeholder')}
-        placeholderTextColor={theme.colors.textIcon.default.weak}
-        value={searchText}
-        onChangeText={setSearchText}
-      />
+      <SearchInputContainer>
+        <SearchInput
+          placeholder={t('search.placeholder')}
+          placeholderTextColor={theme.colors.textIcon.default.weak}
+          value={searchText}
+          onChangeText={setSearchText}
+          hasError={!!error}
+        />
+        {error && <ErrorText>{error} </ErrorText>}
+      </SearchInputContainer>
       {isLoading ? (
         <ActivityIndicator color={theme.colors.textIcon.default.medium} />
       ) : (

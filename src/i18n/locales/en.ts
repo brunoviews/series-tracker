@@ -2,6 +2,14 @@ const en = {
   common: {
     appName: 'Series Tracker',
   },
+  commonErrors: {
+    Series: {
+      notFound: 'Series not found',
+      SearchingError: 'Error searching for series. Please try again.',
+      AddingError: 'Error adding series. Please try again.',
+      RemovingError: 'Error removing series. Please try again.',
+    },
+  },
   auth: {
     login: {
       title: 'Welcome Back!',
