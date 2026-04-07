@@ -22,6 +22,7 @@ import {
   StarIcon,
   TelevisionIcon,
 } from 'phosphor-react-native';
+import { useTranslation } from 'react-i18next';
 
 export default function SearchResultCard({
   serie,
@@ -29,6 +30,7 @@ export default function SearchResultCard({
   userSeriesMap,
   id,
 }: SearchResultCardProps) {
+  const { t } = useTranslation();
   const { handleCardPress } = useViewModel();
   return (
     <Container onPress={() => handleCardPress(id)}>
@@ -61,7 +63,7 @@ export default function SearchResultCard({
             return (
               <CurrentStatusBadge status={status}>
                 {icon}
-                <CurrentStatus>{status}</CurrentStatus>
+                <CurrentStatus>{t(`series.status.${status}`)}</CurrentStatus>
               </CurrentStatusBadge>
             );
           })()}

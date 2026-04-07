@@ -8,7 +8,7 @@ export const useViewModel = () => {
 
   // useCallback memoriza la función → no se recrea en cada render.
   // Si pulsas la misma badge → deselecciona; si pulsas otra → selecciona.
-  const handleSelectStatus = useCallback((status: SeriesStatus) => {
+  const handleSelectStatus = useCallback((status: SeriesStatus ) => {
     setSelectedStatus((prev) => (prev === status ? null : status));
   }, []);
 
@@ -17,5 +17,7 @@ export const useViewModel = () => {
     setSelectedStatus(null);
   }, []);
 
-  return { selectedStatus, handleSelectStatus, resetStatus };
+
+
+  return { selectedStatus, handleSelectStatus, resetStatus, };
 };

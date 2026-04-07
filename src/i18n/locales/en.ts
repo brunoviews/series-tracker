@@ -46,6 +46,7 @@ const en = {
       completed: 'Completed',
       planned: 'Plan to watch',
       dropped: 'Dropped',
+      removeFromList: 'Remove from my lists',
     },
   },
   search: {

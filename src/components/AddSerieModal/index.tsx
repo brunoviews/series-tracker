@@ -10,6 +10,7 @@ import {
   Overlay,
   PosterContainer,
   PosterImage,
+  RemoveButton,
   StatusBadge,
   StatusBadgeText,
   StatusContainer,
@@ -69,7 +70,9 @@ const AddSerieModal: FC<AddSerieModalProps> = ({
   isOpen,
   onCancel,
   onConfirm,
+  onRemove,
   isLoading = false,
+  isRemoving = false,
   item,
 }) => {
   const { selectedStatus, handleSelectStatus, resetStatus } = useViewModel();
@@ -93,6 +96,7 @@ const AddSerieModal: FC<AddSerieModalProps> = ({
       animationType="fade"
       transparent
       onRequestClose={handleCancel}
+      
     >
       <Container>
         {/* Overlay cierra el modal al pulsar fuera del contenido */}
@@ -158,11 +162,31 @@ const AddSerieModal: FC<AddSerieModalProps> = ({
                 variant="primary"
                 title={t('modal.confirm')}
                 onPress={handleConfirm}
-                disabled={!selectedStatus || isLoading}
+                disabled={!selectedStatus || isLoading || isRemoving}
                 isLoading={isLoading}
               />
             </View>
           </ActionRow>
+
+          {onRemove && (
+            <RemoveButton
+              onPress={onRemove}
+              disabled={isRemoving}
+              $disabled={isRemoving}
+            >
+              <TrashIcon
+                size={14}
+                weight="fill"
+                color={theme.colors.textIcon.semantic.error.main}
+              />
+              <StatusBadgeText
+                $isSelected
+                $color={theme.colors.textIcon.semantic.error.main}
+              >
+                {t('series.status.removeFromList')}
+              </StatusBadgeText>
+            </RemoveButton>
+          )}
         </Content>
       </Container>
     </Modal>

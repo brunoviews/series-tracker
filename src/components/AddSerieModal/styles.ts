@@ -3,6 +3,7 @@ import styled from 'styled-components/native';
 
 export const Container = styled.View`
   flex: 1;
+  align-items: center;
   justify-content: center;
   background-color: rgba(8, 12, 18, 0.8);
 `;
@@ -121,4 +122,11 @@ export const ActionRow = styled.View`
   margin-top: 4px;
 `;
 
-
+export const RemoveButton = styled.Pressable<{ $disabled?: boolean }>`
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  padding: 10px;
+  opacity: ${({ $disabled }) => ($disabled ? 0.4 : 1)};
+`;
