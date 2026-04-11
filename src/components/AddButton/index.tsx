@@ -4,8 +4,7 @@ import { theme } from '@/theme';
 import {
   DotsThreeOutlineVerticalIcon,
   MagnifyingGlassIcon,
-  PencilIcon,
-  PencilSimpleIcon ,
+  PencilSimpleIcon,
   PlusIcon,
 } from 'phosphor-react-native';
 
@@ -52,12 +51,11 @@ export default function AddButton({
           weight="bold"
         />
       ) : buttonType === 'edit' ? (
-        <PencilSimpleIcon 
+        <PencilSimpleIcon
           size={iconSize || 24}
           color={theme.colors.textIcon.default.strong}
           weight="regular"
         />
-
       ) : null}
     </Container>
   );
