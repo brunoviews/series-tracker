@@ -4,9 +4,11 @@ import { useAuth } from '@context/AuthContext';
 import type { TmdbSeries } from '@lib/tmdb';
 import { searchSeries } from '@lib/tmdb';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export const useViewModel = () => {
   const { session } = useAuth();
+  const { t } = useTranslation();
   const {
     userSeriesMap,
     addSeries: addSeriesContext,
@@ -29,11 +31,12 @@ export const useViewModel = () => {
   const closeModal = () => {
     setSelectedSerie(null);
     setIsModalOpen(false);
+    setError(null);
   };
 
   const addSeries = async (status: SeriesStatus) => {
     if (!selectedSerie || !session?.user.id) return;
-
+    setError(null);
     setIsAdding(true);
     try {
       await addSeriesContext({
@@ -46,6 +49,7 @@ export const useViewModel = () => {
       closeModal();
     } catch (e) {
       console.error('Error añadiendo serie:', e);
+      setError(t('commonErrors.Series.AddingError'));
     } finally {
       setIsAdding(false);
     }
@@ -54,11 +58,13 @@ export const useViewModel = () => {
   const removeSeries = async () => {
     if (!selectedSerie) return;
     setIsRemoving(true);
+    setError(null);
     try {
       await deleteSeries(selectedSerie.id);
       closeModal();
     } catch (e) {
       console.error('Error eliminando serie:', e);
+      setError(t('commonErrors.Series.RemovingError'));
     } finally {
       setIsRemoving(false);
     }
@@ -79,14 +85,14 @@ export const useViewModel = () => {
         setResults(data);
       } catch (e) {
         console.log(`Error buscando series: ${e}`);
-        setError((e as Error).message);
+        setError(t('commonErrors.Series.SearchingError'));
       } finally {
         setIsLoading(false);
       }
     }, 500);
 
     return () => clearTimeout(timer);
-  }, [searchText]);
+  }, [searchText, t]);
 
   return {
     searchText,

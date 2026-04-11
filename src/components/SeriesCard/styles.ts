@@ -83,11 +83,15 @@ export const StatusBadge = styled.View<{ $status: SeriesStatus }>`
   gap: 4px;
   padding: 3px 8px 3px 6px;
   border-radius: 99px;
-  background-color: ${({ $status }) => getStatusColor($status)};
+  background-color: ${({ $status }) => `${getStatusColor($status)}26`};
+  border-width: 1px;
+  border-color: ${({ $status }) => `${getStatusColor($status)}99`};
 `;
 
-export const StatusBadgeText = styled(Text).attrs({ variant: 'caption' })`
-  color: #0a0a0a;
+export const StatusBadgeText = styled(Text).attrs({ variant: 'caption' })<{
+  $color: string;
+}>`
+  color: ${({ $color }) => $color};
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;

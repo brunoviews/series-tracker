@@ -2,6 +2,14 @@ const es = {
   common: {
     appName: 'Series Tracker',
   },
+  commonErrors: {
+    Series: {
+      notFound: 'Serie no encontrada',
+      SearchingError: 'Error buscando serie. Por favor, inténtalo de nuevo.',
+      AddingError: 'Error añadiendo serie. Por favor, inténtalo de nuevo.',
+      RemovingError: 'Error eliminando serie. Por favor, inténtalo de nuevo.',
+    },
+  },
   auth: {
     login: {
       title: '¡Bienvenido de nuevo!',
