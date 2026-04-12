@@ -48,6 +48,8 @@ export type Database = {
           current_season: number | null;
           id: string;
           notes: string | null;
+          number_of_episodes: number | null;
+          number_of_seasons: number | null;
           poster_path: string | null;
           rating: number | null;
           series_name: string;
@@ -55,6 +57,7 @@ export type Database = {
           tmdb_series_id: number;
           updated_at: string;
           user_id: string;
+          vote_average: number | null;
         };
         Insert: {
           created_at?: string;
@@ -62,6 +65,8 @@ export type Database = {
           current_season?: number | null;
           id?: string;
           notes?: string | null;
+          number_of_episodes?: number | null;
+          number_of_seasons?: number | null;
           poster_path?: string | null;
           rating?: number | null;
           series_name?: string;
@@ -69,6 +74,7 @@ export type Database = {
           tmdb_series_id: number;
           updated_at?: string;
           user_id: string;
+          vote_average?: number | null;
         };
         Update: {
           created_at?: string;
@@ -76,6 +82,8 @@ export type Database = {
           current_season?: number | null;
           id?: string;
           notes?: string | null;
+          number_of_episodes?: number | null;
+          number_of_seasons?: number | null;
           poster_path?: string | null;
           rating?: number | null;
           series_name?: string;
@@ -83,6 +91,7 @@ export type Database = {
           tmdb_series_id?: number;
           updated_at?: string;
           user_id?: string;
+          vote_average?: number | null;
         };
         Relationships: [
           {
@@ -236,9 +245,7 @@ export const Constants = {
   },
 } as const;
 
-// ─── Tipos manuales del proyecto ─────────────────────────────────────────────
-// Estos tipos se añaden a mano y hay que revisarlos tras cada regeneración.
-
+// MANUALLY ADDED TYPES
 export enum SeriesStatus {
   Watching = 'watching',
   Completed = 'completed',
@@ -266,6 +273,9 @@ export type UserSeries = {
   notes: string | null;
   current_season: number | null;
   current_episode: number | null;
+  vote_average: number | null;
+  number_of_seasons: number | null;
+  number_of_episodes: number | null;
   created_at: string;
   updated_at: string;
 };
@@ -279,11 +289,17 @@ export type InsertUserSeries = Omit<
   | 'notes'
   | 'current_season'
   | 'current_episode'
+  | 'vote_average'
+  | 'number_of_seasons'
+  | 'number_of_episodes'
 > & {
   rating?: number | null;
   notes?: string | null;
   current_season?: number | null;
   current_episode?: number | null;
+  vote_average?: number | null;
+  number_of_seasons?: number | null;
+  number_of_episodes?: number | null;
 };
 export type UpdateUserSeries = Partial<
   Omit<UserSeries, 'id' | 'user_id' | 'created_at' | 'updated_at'>

@@ -113,6 +113,12 @@ const es = {
     cancel: 'Cancelar',
     confirm: 'Confirmar',
   },
+  seriesCard: {
+    seasons: 'temporada',
+    seasonsPlural: 'temporadas',
+    episodes: 'episodios',
+    userRating: 'Mi nota',
+  },
   homeView: {
     appName: 'MyWatchList',
     welcome: 'Hola, {{name}}',

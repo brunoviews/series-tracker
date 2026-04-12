@@ -49,6 +49,15 @@ export const useViewModel = (tmdbId: number, type: 'series' | 'movie') => {
         tmdb_series_id: tmdbId,
         series_name: name,
         poster_path: detail.poster_path ?? null,
+        vote_average: detail.vote_average ?? null,
+        number_of_seasons:
+          type === 'series'
+            ? (detail as TmdbSeriesDetail).number_of_seasons
+            : null,
+        number_of_episodes:
+          type === 'series'
+            ? (detail as TmdbSeriesDetail).number_of_episodes
+            : null,
         status,
       };
       await addSeries(data);
