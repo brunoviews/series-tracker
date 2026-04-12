@@ -2,7 +2,7 @@ import { useSeries } from '@/context/SeriesContext';
 import { SeriesStatus } from '@/types/database.types';
 import { useAuth } from '@context/AuthContext';
 import type { TmdbSeries } from '@lib/tmdb';
-import { searchSeries } from '@lib/tmdb';
+import { getSerieById, searchSeries } from '@lib/tmdb';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -45,11 +45,16 @@ export const useViewModel = () => {
     if (!selectedSerie || !session?.user.id) return;
     setIsAdding(true);
     try {
+      // Fetch details to get number of seasons/episodes and vote average at the time of adding
+      const details = await getSerieById(selectedSerie.id);
       await addSeriesContext({
         user_id: session.user.id,
         tmdb_series_id: selectedSerie.id,
         series_name: selectedSerie.name,
         poster_path: selectedSerie.poster_path,
+        vote_average: details?.vote_average ?? null,
+        number_of_seasons: details?.number_of_seasons ?? null,
+        number_of_episodes: details?.number_of_episodes ?? null,
         status,
       });
       setIsSuccess(true);

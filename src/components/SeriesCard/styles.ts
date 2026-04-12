@@ -5,6 +5,13 @@ import styled from 'styled-components/native';
 
 const getStatusColor = (status: SeriesStatus) => STATUS_COLORS[status];
 
+export const getRatingColor = (rating: number): string => {
+  if (rating >= 7) return '#2DD4BF';
+  if (rating >= 5) return '#FB923C';
+  if (rating >= 3) return '#fb553c';
+  return '#FB7185';
+};
+
 export const CardContainer = styled.TouchableOpacity`
   flex-direction: row;
   background-color: ${({ theme }) => theme.colors.fill.default.medium};
@@ -37,7 +44,7 @@ export const InfoContainer = styled.View`
 export const TopRow = styled.View`
   flex-direction: row;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
 `;
 
 export const SeriesTitle = styled(Text).attrs({ variant: 'headline' })`
@@ -57,17 +64,16 @@ export const RatingText = styled(Text).attrs({ variant: 'caption' })`
   font-weight: 700;
 `;
 
-export const EpisodeBadge = styled.View`
-  background-color: ${({ theme }) => theme.colors.fill.primary.variant};
-  border-radius: 6px;
-  padding: 4px 8px;
-  align-self: flex-start;
-  margin-top: 8px;
+export const MetaRow = styled.View`
+  flex-direction: row;
+  align-items: center;
+  margin-top: 6px;
 `;
 
-export const EpisodeBadgeText = styled(Text).attrs({ variant: 'caption' })`
-  color: ${({ theme }) => theme.colors.textIcon.default.strong};
-  font-weight: 700;
+export const MetaText = styled(Text).attrs({ variant: 'label' })`
+  color: ${({ theme }) => theme.colors.textIcon.default.main};
+  letter-spacing: 0.2px;
+  font-weight: 800;
 `;
 
 export const BottomRow = styled.View`
@@ -95,4 +101,22 @@ export const StatusBadgeText = styled(Text).attrs({ variant: 'caption' })<{
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+`;
+
+export const UserRatingBadge = styled.View`
+  flex-direction: row;
+  align-items: center;
+  gap: 3px;
+`;
+
+export const UserRatingLabel = styled(Text).attrs({ variant: 'caption' })`
+  color: ${({ theme }) => theme.colors.textIcon.default.medium};
+  font-weight: 700;
+`;
+
+export const UserRatingValue = styled(Text).attrs({ variant: 'caption' })<{
+  $color: string;
+}>`
+  color: ${({ $color }) => $color};
+  font-weight: 700;
 `;

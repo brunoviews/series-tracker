@@ -115,6 +115,12 @@ const en = {
     cancel: 'Cancel',
     confirm: 'Confirm',
   },
+  seriesCard: {
+    seasons: 'season',
+    seasonsPlural: 'seasons',
+    episodes: 'episodes',
+    userRating: 'My rating',
+  },
   homeView: {
     appName: 'MyWatchList',
     welcome: 'Hello, {{name}}',
