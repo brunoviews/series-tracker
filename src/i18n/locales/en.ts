@@ -10,6 +10,12 @@ const en = {
       RemovingError: 'Error removing series. Please try again.',
     },
   },
+  commonSuccess: {
+    Series: {
+      Added: 'Series updated successfully.',
+      Removed: 'Series removed successfully.',
+    },
+  },
   auth: {
     login: {
       title: 'Welcome Back!',
@@ -46,6 +52,10 @@ const en = {
       morning: 'Good morning,',
       afternoon: 'Good afternoon,',
       evening: 'Good evening,',
+    },
+    empty: {
+      title: 'Nothing here yet',
+      subtitle: 'Search for a series and start building your list.',
     },
   },
   series: {

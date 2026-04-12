@@ -20,6 +20,8 @@ export const useViewModel = () => {
   const [activeStatus, setActiveStatus] = useState<SeriesStatus>(
     SeriesStatus.Watching,
   );
+
+  const [isLoading, setIsLoading] = useState(true);
   const [firstName, setFirstName] = useState<string | null>(null);
   const navigation = useNavigation<BottomTabNavigationProp<TabParamsList>>();
 
@@ -31,6 +33,7 @@ export const useViewModel = () => {
     if (!session?.user?.id) return;
 
     const fetchProfile = async () => {
+      setIsLoading(true);
       const { data, error } = await supabase
         .from('profiles')
         .select('first_name')
@@ -40,6 +43,7 @@ export const useViewModel = () => {
       if (!error && data) {
         setFirstName(data.first_name);
       }
+      setIsLoading(false);
     };
 
     fetchProfile();
@@ -48,12 +52,29 @@ export const useViewModel = () => {
   const greetingKey = getGreetingKey();
   const filteredSeries = userSeries.filter((s) => s.status === activeStatus);
 
+  const statusCountMap: Record<SeriesStatus, number> = {
+    [SeriesStatus.Watching]: userSeries.filter(
+      (s) => s.status === SeriesStatus.Watching,
+    ).length,
+    [SeriesStatus.Completed]: userSeries.filter(
+      (s) => s.status === SeriesStatus.Completed,
+    ).length,
+    [SeriesStatus.Planned]: userSeries.filter(
+      (s) => s.status === SeriesStatus.Planned,
+    ).length,
+    [SeriesStatus.Dropped]: userSeries.filter(
+      (s) => s.status === SeriesStatus.Dropped,
+    ).length,
+  };
+
   return {
     firstName,
     greetingKey,
     activeStatus,
     setActiveStatus,
     filteredSeries,
+    statusCountMap,
     handleAddSeries,
+    isLoading,
   };
 };

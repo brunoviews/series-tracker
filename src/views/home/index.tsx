@@ -1,8 +1,12 @@
 import {
   AvatarContainer,
   Container,
+  EmptyStateContainer,
+  EmptyStateSubtitle,
+  EmptyStateText,
   GreenDot,
   HomeHeader,
+  PillCount,
   StatusFilterContainer,
   StatusPill,
   StatusPillText,
@@ -12,12 +16,13 @@ import {
 } from './styles';
 import { useViewModel } from './viewmodel';
 import AddButton from '@/components/AddButton';
+import { theme } from '@/theme';
 import { SeriesStatus } from '@/types/database.types';
 import SeriesCard from '@components/SeriesCard';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { FlatList } from 'react-native';
-import { Avatar } from 'react-native-paper';
+import { ActivityIndicator, Avatar } from 'react-native-paper';
 
 const STATUSES: SeriesStatus[] = [
   SeriesStatus.Watching,
@@ -40,12 +45,11 @@ export default function HomeView() {
     activeStatus,
     setActiveStatus,
     filteredSeries,
+    statusCountMap,
     handleAddSeries,
+    isLoading,
   } = useViewModel();
   const { t } = useTranslation();
-
- 
-
 
   return (
     <>
@@ -74,6 +78,9 @@ export default function HomeView() {
               <StatusPillText active={status === activeStatus}>
                 {t(STATUS_I18N_KEYS[status])}
               </StatusPillText>
+              <PillCount active={status === activeStatus}>
+                {statusCountMap[status]}
+              </PillCount>
             </StatusPill>
           ))}
         </StatusFilterContainer>
@@ -87,6 +94,18 @@ export default function HomeView() {
           style={{ flex: 1 }}
           contentContainerStyle={{ paddingTop: 4, paddingBottom: 100 }}
           showsVerticalScrollIndicator={false}
+          ListEmptyComponent={
+            isLoading ? (
+              <ActivityIndicator color={theme.colors.textIcon.default.medium} />
+            ) : (
+              <EmptyStateContainer>
+                <EmptyStateText>{t('home.empty.title')}</EmptyStateText>
+                <EmptyStateSubtitle>
+                  {t('home.empty.subtitle')}
+                </EmptyStateSubtitle>
+              </EmptyStateContainer>
+            )
+          }
         />
         <AddButton
           onPress={handleAddSeries}

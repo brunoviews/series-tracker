@@ -10,10 +10,12 @@ import {
   getSerieById,
 } from '@lib/tmdb';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export const useViewModel = (tmdbId: number, type: 'series' | 'movie') => {
   const { userSeriesMap, addSeries, deleteSeries } = useSeries();
   const { session } = useAuth();
+  const { t } = useTranslation();
   const [detail, setDetail] = useState<
     TmdbSeriesDetail | TmdbMovieDetail | null
   >(null);
@@ -21,15 +23,22 @@ export const useViewModel = (tmdbId: number, type: 'series' | 'movie') => {
   const [modalVisible, setModalVisible] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
   const [isRemoving, setIsRemoving] = useState(false);
+  const [snackMessage, setSnackMessage] = useState<string | null>(null);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const userStatus = userSeriesMap[tmdbId] ?? null;
 
+  const clearSnackMessage = () => {
+    setSnackMessage(null);
+    setIsSuccess(false);
+  };
   const openModal = () => setModalVisible(true);
   const closeModal = () => setModalVisible(false);
 
   const handleAddSeries = async (status: SeriesStatus) => {
     if (!detail || !session?.user.id) return;
     setIsAdding(true);
+    setSnackMessage(null);
     try {
       const name =
         type === 'series'
@@ -43,7 +52,12 @@ export const useViewModel = (tmdbId: number, type: 'series' | 'movie') => {
         status,
       };
       await addSeries(data);
+      setIsSuccess(true);
+      setSnackMessage(t('commonSuccess.Series.Added'));
       closeModal();
+    } catch (error) {
+      console.error('Error al añadir la serie:', error);
+      setSnackMessage(t('commonErrors.Series.AddingError'));
     } finally {
       setIsAdding(false);
     }
@@ -51,9 +65,15 @@ export const useViewModel = (tmdbId: number, type: 'series' | 'movie') => {
 
   const handleRemoveSeries = async () => {
     setIsRemoving(true);
+    setSnackMessage(null);
     try {
       await deleteSeries(tmdbId);
+      setIsSuccess(true);
+      setSnackMessage(t('commonSuccess.Series.Removed'));
       closeModal();
+    } catch (error) {
+      console.error('Error al eliminar la serie:', error);
+      setSnackMessage(t('commonErrors.Series.RemovingError'));
     } finally {
       setIsRemoving(false);
     }
@@ -110,5 +130,9 @@ export const useViewModel = (tmdbId: number, type: 'series' | 'movie') => {
     closeModal,
     handleAddSeries,
     handleRemoveSeries,
+    //error handling
+    snackMessage,
+    clearSnackMessage,
+    isSuccess,
   };
 };

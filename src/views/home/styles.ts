@@ -88,9 +88,12 @@ export const StatusFilterContainer = styled(ScrollView).attrs({
 `;
 
 export const StatusPill = styled.TouchableOpacity<{ active: boolean }>`
-  padding: 12px 16px;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
   margin-left: 8px;
-  border-radius: 20px;
+  border-radius: 8px;
   background-color: ${({ theme, active }) =>
     active
       ? theme.colors.fill.primary.container
@@ -105,4 +108,54 @@ export const StatusPillText = styled(Text).attrs({ variant: 'caption' })<{
       ? theme.colors.textIcon.default.strong
       : theme.colors.textIcon.default.medium};
   font-weight: 700;
+`;
+
+export const PillCount = styled(Text).attrs({ variant: 'caption' })<{
+  active: boolean;
+}>`
+  color: ${({ theme, active }) =>
+    active
+      ? theme.colors.textIcon.primary.main
+      : theme.colors.textIcon.default.weak};
+  background-color: ${({ theme, active }) =>
+    active
+      ? theme.colors.fill.primary.variant
+      : theme.colors.fill.default.base};
+  padding: 1px 6px;
+  border-radius: 10px;
+  overflow: hidden;
+  font-weight: 700;
+`;
+
+export const ItemsCounterContainer = styled.View`
+  background-color: ${({ theme }) => theme.colors.fill.default.strong};
+  border-radius: 8px;
+  padding: 4px 8px;
+  margin-left: 8px;
+`;
+
+export const ItemsCounter = styled(Text).attrs({ variant: 'caption' })`
+  color: ${({ theme }) => theme.colors.textIcon.default.medium};
+  margin-left: 4px;
+`;
+
+export const EmptyStateContainer = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  padding: ${({ theme }) => theme.spacing.lg}px;
+  gap: 12px;
+`;
+
+export const EmptyStateText = styled(Text).attrs({ variant: 'body-1-regular' })`
+  color: ${({ theme }) => theme.colors.textIcon.default.main};
+  text-align: center;
+  font-weight: 700;
+`;
+
+export const EmptyStateSubtitle = styled(Text).attrs({
+  variant: 'body-2-regular',
+})`
+  color: ${({ theme }) => theme.colors.textIcon.default.weak};
+  text-align: center;
 `;
