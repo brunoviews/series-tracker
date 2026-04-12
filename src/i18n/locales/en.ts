@@ -53,6 +53,10 @@ const en = {
       afternoon: 'Good afternoon,',
       evening: 'Good evening,',
     },
+    empty: {
+      title: 'Nothing here yet',
+      subtitle: 'Search for a series and start building your list.',
+    },
   },
   series: {
     status: {

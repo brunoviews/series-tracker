@@ -138,3 +138,24 @@ export const ItemsCounter = styled(Text).attrs({ variant: 'caption' })`
   color: ${({ theme }) => theme.colors.textIcon.default.medium};
   margin-left: 4px;
 `;
+
+export const EmptyStateContainer = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  padding: ${({ theme }) => theme.spacing.lg}px;
+  gap: 12px;
+`;
+
+export const EmptyStateText = styled(Text).attrs({ variant: 'body-1-regular' })`
+  color: ${({ theme }) => theme.colors.textIcon.default.main};
+  text-align: center;
+  font-weight: 700;
+`;
+
+export const EmptyStateSubtitle = styled(Text).attrs({
+  variant: 'body-2-regular',
+})`
+  color: ${({ theme }) => theme.colors.textIcon.default.weak};
+  text-align: center;
+`;

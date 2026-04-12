@@ -20,6 +20,8 @@ export const useViewModel = () => {
   const [activeStatus, setActiveStatus] = useState<SeriesStatus>(
     SeriesStatus.Watching,
   );
+
+  const [isLoading, setIsLoading] = useState(true);
   const [firstName, setFirstName] = useState<string | null>(null);
   const navigation = useNavigation<BottomTabNavigationProp<TabParamsList>>();
 
@@ -31,6 +33,7 @@ export const useViewModel = () => {
     if (!session?.user?.id) return;
 
     const fetchProfile = async () => {
+      setIsLoading(true);
       const { data, error } = await supabase
         .from('profiles')
         .select('first_name')
@@ -40,6 +43,7 @@ export const useViewModel = () => {
       if (!error && data) {
         setFirstName(data.first_name);
       }
+      setIsLoading(false);
     };
 
     fetchProfile();
@@ -71,5 +75,6 @@ export const useViewModel = () => {
     filteredSeries,
     statusCountMap,
     handleAddSeries,
+    isLoading,
   };
 };

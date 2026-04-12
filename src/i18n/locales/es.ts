@@ -51,6 +51,10 @@ const es = {
       afternoon: 'Buenas tardes,',
       evening: 'Buenas noches,',
     },
+    empty: {
+      title: 'Nada por aquí todavía',
+      subtitle: 'Busca una serie y empieza a construir tu lista.',
+    },
   },
   series: {
     status: {
