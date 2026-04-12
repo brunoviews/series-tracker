@@ -16,7 +16,7 @@ export const colors = {
     },
     semantic: {
       error: {
-        main: '#FB7185',
+        main: '#400404',
         weak: '#2D1219',
       },
       success: {

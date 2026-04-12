@@ -3,6 +3,9 @@ import {
   Container,
   GreenDot,
   HomeHeader,
+  ItemsCounter,
+  ItemsCounterContainer,
+  PillCount,
   StatusFilterContainer,
   StatusPill,
   StatusPillText,
@@ -40,12 +43,10 @@ export default function HomeView() {
     activeStatus,
     setActiveStatus,
     filteredSeries,
+    statusCountMap,
     handleAddSeries,
   } = useViewModel();
   const { t } = useTranslation();
-
- 
-
 
   return (
     <>
@@ -74,8 +75,12 @@ export default function HomeView() {
               <StatusPillText active={status === activeStatus}>
                 {t(STATUS_I18N_KEYS[status])}
               </StatusPillText>
+              <PillCount active={status === activeStatus}>
+                {statusCountMap[status]}
+              </PillCount>
             </StatusPill>
           ))}
+         
         </StatusFilterContainer>
 
         <FlatList

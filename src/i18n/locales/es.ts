@@ -10,6 +10,12 @@ const es = {
       RemovingError: 'Error eliminando serie. Por favor, inténtalo de nuevo.',
     },
   },
+  commonSuccess: {
+    Series: {
+      Added: 'Serie actualizada correctamente.',
+      Removed: 'Serie eliminada correctamente.',
+    },
+  },
   auth: {
     login: {
       title: '¡Bienvenido de nuevo!',

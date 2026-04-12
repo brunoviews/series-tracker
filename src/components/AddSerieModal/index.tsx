@@ -74,8 +74,10 @@ const AddSerieModal: FC<AddSerieModalProps> = ({
   isLoading = false,
   isRemoving = false,
   item,
+  initialStatus,
 }) => {
-  const { selectedStatus, handleSelectStatus, resetStatus } = useViewModel();
+  const { selectedStatus, handleSelectStatus, resetStatus } =
+    useViewModel(initialStatus);
   const { t } = useTranslation();
 
   const handleCancel = () => {

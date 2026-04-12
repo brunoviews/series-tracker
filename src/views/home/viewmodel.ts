@@ -48,12 +48,28 @@ export const useViewModel = () => {
   const greetingKey = getGreetingKey();
   const filteredSeries = userSeries.filter((s) => s.status === activeStatus);
 
+  const statusCountMap: Record<SeriesStatus, number> = {
+    [SeriesStatus.Watching]: userSeries.filter(
+      (s) => s.status === SeriesStatus.Watching,
+    ).length,
+    [SeriesStatus.Completed]: userSeries.filter(
+      (s) => s.status === SeriesStatus.Completed,
+    ).length,
+    [SeriesStatus.Planned]: userSeries.filter(
+      (s) => s.status === SeriesStatus.Planned,
+    ).length,
+    [SeriesStatus.Dropped]: userSeries.filter(
+      (s) => s.status === SeriesStatus.Dropped,
+    ).length,
+  };
+
   return {
     firstName,
     greetingKey,
     activeStatus,
     setActiveStatus,
     filteredSeries,
+    statusCountMap,
     handleAddSeries,
   };
 };

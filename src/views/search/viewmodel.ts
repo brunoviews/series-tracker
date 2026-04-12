@@ -22,6 +22,13 @@ export const useViewModel = () => {
   const [isRemoving, setIsRemoving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [selectedSerie, setSelectedSerie] = useState<TmdbSeries | null>(null);
+  const [snackMessage, setSnackMessage] = useState<string | null>(null);
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  const clearSnackMessage = () => {
+    setSnackMessage(null);
+    setIsSuccess(false);
+  };
 
   const openModal = (serie: TmdbSeries) => {
     setSelectedSerie(serie);
@@ -36,7 +43,6 @@ export const useViewModel = () => {
 
   const addSeries = async (status: SeriesStatus) => {
     if (!selectedSerie || !session?.user.id) return;
-    setError(null);
     setIsAdding(true);
     try {
       await addSeriesContext({
@@ -46,10 +52,12 @@ export const useViewModel = () => {
         poster_path: selectedSerie.poster_path,
         status,
       });
+      setIsSuccess(true);
+      setSnackMessage(t('commonSuccess.Series.Added'));
       closeModal();
     } catch (e) {
       console.error('Error añadiendo serie:', e);
-      setError(t('commonErrors.Series.AddingError'));
+      setSnackMessage(t('commonErrors.Series.AddingError'));
     } finally {
       setIsAdding(false);
     }
@@ -58,13 +66,14 @@ export const useViewModel = () => {
   const removeSeries = async () => {
     if (!selectedSerie) return;
     setIsRemoving(true);
-    setError(null);
     try {
       await deleteSeries(selectedSerie.id);
+      setIsSuccess(true);
+      setSnackMessage(t('commonSuccess.Series.Removed'));
       closeModal();
     } catch (e) {
       console.error('Error eliminando serie:', e);
-      setError(t('commonErrors.Series.RemovingError'));
+      setSnackMessage(t('commonErrors.Series.RemovingError'));
     } finally {
       setIsRemoving(false);
     }
@@ -109,5 +118,8 @@ export const useViewModel = () => {
     addSeries,
     removeSeries,
     userSeriesMap,
+    snackMessage,
+    isSuccess,
+    clearSnackMessage,
   };
 };

@@ -51,41 +51,6 @@ export const SectionTitle = styled.Text`
   padding: 0 ${({ theme }) => theme.spacing.md}px;
 `;
 
-// ─── Stats grid ───────────────────────────────────────────────────────────────
-
-export const StatsGrid = styled.View`
-  padding: 0 ${({ theme }) => theme.spacing.md}px;
-  gap: 12px;
-`;
-
-export const StatsRow = styled.View`
-  flex-direction: row;
-  gap: 12px;
-`;
-
-export const StatCard = styled.View`
-  flex: 1;
-  background-color: ${({ theme }) => theme.colors.fill.default.medium};
-  border-radius: ${({ theme }) => theme.borderRadius.md}px;
-  padding: ${({ theme }) => theme.spacing.md}px;
-  align-items: center;
-  gap: 4px;
-`;
-
-export const StatNumber = styled.Text`
-  font-family: ${({ theme }) => theme.typography['title-1'].fontFamily};
-  font-size: ${({ theme }) => theme.typography['title-1'].fontSize}px;
-  font-weight: ${({ theme }) => theme.typography['title-1'].fontWeight};
-  color: ${({ theme }) => theme.colors.textIcon.primary.main};
-`;
-
-export const StatLabel = styled.Text`
-  font-family: ${({ theme }) => theme.typography['caption'].fontFamily};
-  font-size: ${({ theme }) => theme.typography['caption'].fontSize}px;
-  font-weight: ${({ theme }) => theme.typography['title-1'].fontWeight};
-  color: ${({ theme }) => theme.colors.textIcon.default.medium};
-`;
-
 // ─── Options list ─────────────────────────────────────────────────────────────
 
 export const OptionsList = styled.View`
@@ -123,7 +88,7 @@ export const LogoutButton = styled.TouchableOpacity`
   border-radius: ${({ theme }) => theme.borderRadius.md}px;
   border-width: 1.5px;
   border-color: ${({ theme }) => theme.colors.stroke.default.main};
-  padding:  ${({ theme }) => theme.spacing.md}px;
+  padding: ${({ theme }) => theme.spacing.md}px;
   align-items: center;
   justify-content: center;
   display: flex;

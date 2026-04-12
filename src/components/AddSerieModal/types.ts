@@ -9,4 +9,5 @@ export type AddSerieModalProps = {
   isLoading?: boolean;
   isRemoving?: boolean;
   item: TmdbSeries | TmdbMovie | null;
+  initialStatus?: SeriesStatus | null;
 };
