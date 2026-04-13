@@ -1,8 +1,9 @@
-import { TmdbSeries } from "@/lib/tmdb";
+import { TmdbSeries } from '@/lib/tmdb';
+import { UserSeries } from '@/types/database.types';
 
 export type SearchResultCardProps = {
-    serie: TmdbSeries;
-    onAdd: () => void;
-    userSeriesMap: Record<number, string>;
-    id: number;
-}
+  serie: TmdbSeries;
+  onAdd: () => void;
+  userSeriesMap: Record<number, UserSeries>;
+  id: number;
+};

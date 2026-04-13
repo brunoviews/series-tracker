@@ -30,9 +30,9 @@ import {
 } from './styles';
 import type { DetailViewProps } from './types';
 import { useViewModel } from './viewmodel';
+import AddShowModal from '@/components/AddShowModal';
 import { CustomSnackbar } from '@/components/Snackbar';
 import { SeriesStatus } from '@/types/database.types';
-import AddSerieModal from '@components/AddSerieModal';
 import DetailLayout from '@components/DetailLayout';
 import type { TmdbMovieDetail, TmdbSeriesDetail } from '@lib/tmdb';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -100,6 +100,7 @@ export default function DetailView({ route }: DetailViewProps) {
     snackMessage,
     clearSnackMessage,
     isSuccess,
+    isRemovingSnack,
   } = useViewModel(tmdbId, type);
   const theme = useTheme();
   const { t } = useTranslation();
@@ -290,7 +291,7 @@ export default function DetailView({ route }: DetailViewProps) {
 
         {/* ── Modal ── */}
 
-        <AddSerieModal
+        <AddShowModal
           isOpen={modalVisible}
           item={detail}
           onConfirm={handleAddSeries}
@@ -307,6 +308,7 @@ export default function DetailView({ route }: DetailViewProps) {
         message={snackMessage ?? ''}
         isSuccess={isSuccess}
         isError={!isSuccess}
+        isRemoving={isRemovingSnack}
         duration={2500}
       />
     </>

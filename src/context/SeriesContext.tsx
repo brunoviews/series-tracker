@@ -1,6 +1,9 @@
-import { addUserSeries, deleteUserSeries, getUserSeries } from '../services/userSeries';
+import {
+  addUserSeries,
+  deleteUserSeries,
+  getUserSeries,
+} from '../services/userSeries';
 import type { InsertUserSeries, UserSeries } from '../types/database.types';
-import { SeriesStatus } from '../types/database.types';
 import { useAuth } from './AuthContext';
 import React, {
   createContext,
@@ -16,7 +19,7 @@ import React, {
 
 type SeriesContextValue = {
   userSeries: UserSeries[];
-  userSeriesMap: Record<number, SeriesStatus>;
+  userSeriesMap: Record<number, UserSeries>;
   loading: boolean;
   addSeries: (data: InsertUserSeries) => Promise<void>;
   deleteSeries: (tmdbSeriesId: number) => Promise<void>;
@@ -35,9 +38,9 @@ export const SeriesProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   // Mapa derivado: tmdb_series_id → status (para lookups rápidos en search)
-  const userSeriesMap = userSeries.reduce<Record<number, SeriesStatus>>(
+  const userSeriesMap = userSeries.reduce<Record<number, UserSeries>>(
     (acc, s) => {
-      acc[s.tmdb_series_id] = s.status;
+      acc[s.tmdb_series_id] = s;
       return acc;
     },
     {},

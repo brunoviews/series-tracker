@@ -25,17 +25,22 @@ export const useViewModel = (tmdbId: number, type: 'series' | 'movie') => {
   const [isRemoving, setIsRemoving] = useState(false);
   const [snackMessage, setSnackMessage] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isRemovingSnack, setIsRemovingSnack] = useState(false);
 
-  const userStatus = userSeriesMap[tmdbId] ?? null;
+  const userStatus = userSeriesMap[tmdbId]?.status ?? null;
 
   const clearSnackMessage = () => {
     setSnackMessage(null);
     setIsSuccess(false);
+    setIsRemovingSnack(false);
   };
   const openModal = () => setModalVisible(true);
   const closeModal = () => setModalVisible(false);
 
-  const handleAddSeries = async (status: SeriesStatus) => {
+  const handleAddSeries = async (
+    status: SeriesStatus,
+    rating?: number | null,
+  ) => {
     if (!detail || !session?.user.id) return;
     setIsAdding(true);
     setSnackMessage(null);
@@ -50,6 +55,7 @@ export const useViewModel = (tmdbId: number, type: 'series' | 'movie') => {
         series_name: name,
         poster_path: detail.poster_path ?? null,
         vote_average: detail.vote_average ?? null,
+        rating: rating ?? null,
         number_of_seasons:
           type === 'series'
             ? (detail as TmdbSeriesDetail).number_of_seasons
@@ -77,7 +83,7 @@ export const useViewModel = (tmdbId: number, type: 'series' | 'movie') => {
     setSnackMessage(null);
     try {
       await deleteSeries(tmdbId);
-      setIsSuccess(true);
+      setIsRemovingSnack(true);
       setSnackMessage(t('commonSuccess.Series.Removed'));
       closeModal();
     } catch (error) {
@@ -143,5 +149,6 @@ export const useViewModel = (tmdbId: number, type: 'series' | 'movie') => {
     snackMessage,
     clearSnackMessage,
     isSuccess,
+    isRemovingSnack,
   };
 };

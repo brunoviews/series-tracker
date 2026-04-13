@@ -24,10 +24,13 @@ export const useViewModel = () => {
   const [selectedSerie, setSelectedSerie] = useState<TmdbSeries | null>(null);
   const [snackMessage, setSnackMessage] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isRemovingSnack, setIsRemovingSnack] = useState(false);
 
   const clearSnackMessage = () => {
     setSnackMessage(null);
     setIsSuccess(false);
+    setIsRemovingSnack(false);
+
   };
 
   const openModal = (serie: TmdbSeries) => {
@@ -41,7 +44,7 @@ export const useViewModel = () => {
     setError(null);
   };
 
-  const addSeries = async (status: SeriesStatus) => {
+  const addSeries = async (status: SeriesStatus, rating?: number | null) => {
     if (!selectedSerie || !session?.user.id) return;
     setIsAdding(true);
     try {
@@ -55,6 +58,7 @@ export const useViewModel = () => {
         vote_average: details?.vote_average ?? null,
         number_of_seasons: details?.number_of_seasons ?? null,
         number_of_episodes: details?.number_of_episodes ?? null,
+        rating: rating ?? null,
         status,
       });
       setIsSuccess(true);
@@ -73,7 +77,7 @@ export const useViewModel = () => {
     setIsRemoving(true);
     try {
       await deleteSeries(selectedSerie.id);
-      setIsSuccess(true);
+      setIsRemovingSnack(true);
       setSnackMessage(t('commonSuccess.Series.Removed'));
       closeModal();
     } catch (e) {
@@ -125,6 +129,7 @@ export const useViewModel = () => {
     userSeriesMap,
     snackMessage,
     isSuccess,
+    isRemovingSnack,
     clearSnackMessage,
   };
 };

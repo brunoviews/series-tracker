@@ -6,7 +6,7 @@ import {
   Title,
 } from './styles';
 import { useViewModel } from './viewmodel';
-import AddSerieModal from '@/components/AddSerieModal';
+import AddShowModal from '@/components/AddShowModal';
 import SearchResultCard from '@/components/SearchResultCard';
 import { CustomSnackbar } from '@/components/Snackbar';
 import type { TmdbSeries } from '@/lib/tmdb';
@@ -33,6 +33,7 @@ export default function SearchView() {
     error,
     snackMessage,
     isSuccess,
+    isRemovingSnack,
     clearSnackMessage,
   } = useViewModel();
   const { t } = useTranslation();
@@ -73,7 +74,7 @@ export default function SearchView() {
           />
         )}
 
-        <AddSerieModal
+        <AddShowModal
           isOpen={isModalOpen}
           onCancel={closeModal}
           onConfirm={addSeries}
@@ -81,7 +82,14 @@ export default function SearchView() {
           isRemoving={isRemoving}
           item={selectedSerie}
           initialStatus={
-            selectedSerie ? (userSeriesMap[selectedSerie.id] ?? null) : null
+            selectedSerie
+              ? (userSeriesMap[selectedSerie.id]?.status ?? null)
+              : null
+          }
+          initialRating={
+            selectedSerie
+              ? (userSeriesMap[selectedSerie.id]?.rating ?? null)
+              : null
           }
           onRemove={
             selectedSerie && userSeriesMap[selectedSerie.id]
@@ -97,6 +105,7 @@ export default function SearchView() {
         isSuccess={isSuccess}
         isError={!isSuccess}
         duration={2500}
+        isRemoving={isRemoving}
       />
     </>
   );
