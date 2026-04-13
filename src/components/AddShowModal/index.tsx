@@ -10,13 +10,16 @@ import {
   Overlay,
   PosterContainer,
   PosterImage,
+  RatingInput,
+  RatingInputContainer,
+  RatingInputLabel,
   RemoveButton,
   StatusBadge,
   StatusBadgeText,
   StatusContainer,
 } from './styles';
-import { AddSerieModalProps } from './types';
-import { useViewModel } from './viewmodel';
+import { AddShowModalProps } from './types';
+import { parseRating, useViewModel } from './viewmodel';
 import { theme } from '@/theme';
 import { STATUS_COLORS } from '@/theme/statusColors';
 import { SeriesStatus } from '@/types/database.types';
@@ -32,7 +35,7 @@ import {
 } from 'phosphor-react-native';
 import { FC, memo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Modal, View } from 'react-native';
+import { ActivityIndicator, Modal, View } from 'react-native';
 
 // ─── Constantes fuera del componente ─────────────────────────────────
 // No dependen de props ni state → definirlas aquí evita que se
@@ -66,7 +69,7 @@ const getStatusIcon = (status: SeriesStatus, color: string) => {
 
 // ─── Componente ──────────────────────────────────────────────────────
 
-const AddSerieModal: FC<AddSerieModalProps> = ({
+const AddShowModal: FC<AddShowModalProps> = ({
   isOpen,
   onCancel,
   onConfirm,
@@ -75,20 +78,19 @@ const AddSerieModal: FC<AddSerieModalProps> = ({
   isRemoving = false,
   item,
   initialStatus,
+  initialRating,
 }) => {
-  const { selectedStatus, handleSelectStatus, resetStatus } =
-    useViewModel(initialStatus);
+  const { selectedStatus, handleSelectStatus, rating, setRating } =
+    useViewModel(initialStatus, initialRating);
   const { t } = useTranslation();
 
   const handleCancel = () => {
-    resetStatus();
     onCancel?.();
   };
 
   const handleConfirm = () => {
     if (selectedStatus) {
-      onConfirm?.(selectedStatus);
-      resetStatus();
+      onConfirm?.(selectedStatus, parseRating(rating));
     }
   };
 
@@ -124,6 +126,25 @@ const AddSerieModal: FC<AddSerieModalProps> = ({
           <ContentTitle>
             {item ? ('name' in item ? item.name : item.title) : ''}
           </ContentTitle>
+
+          {(selectedStatus === SeriesStatus.Completed ||
+            selectedStatus === SeriesStatus.Dropped) && (
+            <RatingInputContainer>
+              <RatingInputLabel>{t('modal.ratingLabel')}</RatingInputLabel>
+              <RatingInput
+                placeholder={
+                  initialRating
+                    ? String(initialRating)
+                    : t('modal.ratingPlaceholder')
+                }
+                placeholderTextColor={theme.colors.textIcon.default.weak}
+                keyboardType="decimal-pad"
+                maxLength={3}
+                onChangeText={setRating}
+                value={rating !== null ? String(rating) : ''}
+              />
+            </RatingInputContainer>
+          )}
 
           <StatusContainer>
             {STATUSES.map((status) => {
@@ -172,7 +193,9 @@ const AddSerieModal: FC<AddSerieModalProps> = ({
                   !selectedStatus ||
                   isLoading ||
                   isRemoving ||
-                  initialStatus === selectedStatus
+                  (initialStatus === selectedStatus &&
+                    initialRating === parseRating(rating)) ||
+                  (!!rating && parseRating(rating) === null)
                 }
                 isLoading={isLoading}
               />
@@ -180,23 +203,31 @@ const AddSerieModal: FC<AddSerieModalProps> = ({
           </ActionRow>
 
           {onRemove && (
-            <RemoveButton
-              onPress={onRemove}
-              disabled={isRemoving}
-              $disabled={isRemoving}
-            >
-              <TrashIcon
-                size={14}
-                weight="fill"
-                color={theme.colors.textIcon.semantic.error.main}
-              />
-              <StatusBadgeText
-                $isSelected
-                $color={theme.colors.textIcon.semantic.error.main}
+            <>
+              {isRemoving && (
+                <ActivityIndicator
+                  style={{ marginTop: 12 }}
+                  color={theme.colors.textIcon.semantic.error.main}
+                />
+              )}
+              <RemoveButton
+                onPress={onRemove}
+                disabled={isRemoving}
+                $disabled={isRemoving}
               >
-                {t('series.status.removeFromList')}
-              </StatusBadgeText>
-            </RemoveButton>
+                <TrashIcon
+                  size={14}
+                  weight="fill"
+                  color={theme.colors.textIcon.semantic.error.main}
+                />
+                <StatusBadgeText
+                  $isSelected
+                  $color={theme.colors.textIcon.semantic.error.main}
+                >
+                  {t('series.status.removeFromList')}
+                </StatusBadgeText>
+              </RemoveButton>
+            </>
           )}
         </Content>
       </Container>
@@ -204,4 +235,4 @@ const AddSerieModal: FC<AddSerieModalProps> = ({
   );
 };
 
-export default memo(AddSerieModal);
+export default memo(AddShowModal);

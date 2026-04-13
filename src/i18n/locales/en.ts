@@ -111,9 +111,11 @@ const en = {
   },
 
   modal: {
-    addSerie: 'Add to my list',
+    addSerie: 'My list',
     cancel: 'Cancel',
     confirm: 'Confirm',
+    ratingLabel: 'Your rating',
+    ratingPlaceholder: '0 - 10',
   },
   seriesCard: {
     seasons: 'season',

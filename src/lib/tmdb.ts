@@ -32,6 +32,7 @@ export type TmdbSeries = {
   first_air_date: string;
   vote_average: number;
   vote_count: number;
+  rating?: number | null; // No viene de TMDB, pero lo añadimos para mostrar la nota del usuario en la lista de resultados
 };
 
 // Resultado del endpoint de detalle /tv/{id}
@@ -55,6 +56,7 @@ export type TmdbMovie = {
   release_date: string;
   vote_average: number;
   vote_count: number;
+  rating?: number | null; // No viene de TMDB, pero lo añadimos para mostrar la nota del usuario en la lista de resultados
 };
 
 // Resultado del endpoint de detalle /movie/{id}

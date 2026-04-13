@@ -12,6 +12,7 @@ export function CustomSnackbar({
   action,
   isSuccess,
   isError,
+  isRemoving,
   duration = 3000,
 }: SnackbarProps) {
   const { bottom: safeBottomInset } = useSafeAreaInsets();
@@ -51,7 +52,7 @@ export function CustomSnackbar({
         )
       }
     >
-      <Message $isSuccess={isSuccess} $isError={isError} variant="label">
+      <Message $isSuccess={isSuccess} $isError={isError} $isRemoving={isRemoving} variant="label">
         {message}
       </Message>
     </Snackbar>

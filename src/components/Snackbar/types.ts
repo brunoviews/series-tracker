@@ -8,5 +8,6 @@ export type SnackbarProps = {
   };
   isSuccess?: boolean;
   isError?: boolean;
+  isRemoving?: boolean;
   duration?: number;
 };

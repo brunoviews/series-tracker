@@ -51,8 +51,10 @@ export default function App() {
       <PaperProvider>
         <AuthProvider>
           <SeriesProvider>
-            <AppNavigator />
-            <StatusBar style="light" />
+            <View style={{ flex: 1, backgroundColor: '#070B11' }}>
+              <AppNavigator />
+            </View>
+            <StatusBar style="light" backgroundColor="#070B11" />
           </SeriesProvider>
         </AuthProvider>
       </PaperProvider>

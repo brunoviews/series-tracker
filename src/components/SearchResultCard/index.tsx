@@ -45,7 +45,7 @@ export default function SearchResultCard({
       >
         {userSeriesMap[serie.id] &&
           (() => {
-            const status = userSeriesMap[serie.id] as SeriesStatus;
+            const status = userSeriesMap[serie.id].status;
             const statusColor = STATUS_COLORS[status];
             const iconProps = {
               size: 16,

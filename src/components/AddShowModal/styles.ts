@@ -5,7 +5,7 @@ export const Container = styled.View`
   flex: 1;
   align-items: center;
   justify-content: center;
-  background-color: rgba(8, 12, 18, 0.8);
+  background-color: rgba(0, 0, 0, 0.5);
 `;
 
 // Capa invisible que cierra el modal al pulsar fuera del Content.
@@ -35,9 +35,10 @@ export const HeaderContainer = styled.View`
   align-items: center;
 `;
 
-export const ModalTitle = styled(Text).attrs({ variant: 'title-3' })`
+export const ModalTitle = styled(Text).attrs({ variant: 'subheadline' })`
   color: ${({ theme }) => theme.colors.textIcon.primary.main};
   font-weight: 700;
+  text-transform: uppercase;
 `;
 
 export const CloseButton = styled.TouchableOpacity`
@@ -48,7 +49,7 @@ export const CloseButton = styled.TouchableOpacity`
 
 export const PosterContainer = styled.View`
   width: 140px;
-  height: 160px;
+  height: 200px;
   border-radius: 12px;
   overflow: hidden;
   align-self: center;
@@ -129,4 +130,33 @@ export const RemoveButton = styled.Pressable<{ $disabled?: boolean }>`
   gap: 6px;
   padding: 10px;
   opacity: ${({ $disabled }) => ($disabled ? 0.4 : 1)};
+`;
+
+export const ActivityIndicator = styled.ActivityIndicator.attrs({
+  size: 'small',
+})`
+`;
+
+// User personal rating
+
+export const RatingInputContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  background-color: ${({ theme }) => theme.colors.fill.default.strong};
+  padding: 10px 16px;
+  border-radius: 12px;
+`;
+
+export const RatingInput = styled.TextInput`
+  flex: 1;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: right;
+  color: ${({ theme }) => theme.colors.textIcon.default.strong};
+`;
+
+export const RatingInputLabel = styled(Text).attrs({ variant: 'body-2-medium' })`
+  color: #13daf4e8;
+  font-weight: 700;
 `;
