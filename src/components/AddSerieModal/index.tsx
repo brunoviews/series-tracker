@@ -168,7 +168,12 @@ const AddSerieModal: FC<AddSerieModalProps> = ({
                 variant="primary"
                 title={t('modal.confirm')}
                 onPress={handleConfirm}
-                disabled={!selectedStatus || isLoading || isRemoving}
+                disabled={
+                  !selectedStatus ||
+                  isLoading ||
+                  isRemoving ||
+                  initialStatus === selectedStatus
+                }
                 isLoading={isLoading}
               />
             </View>

@@ -1,9 +1,10 @@
 import {
   BottomRow,
   CardContainer,
-  EpisodeBadge,
-  EpisodeBadgeText,
+  getRatingColor,
   InfoContainer,
+  MetaRow,
+  MetaText,
   PosterImage,
   PosterPlaceholder,
   RatingContainer,
@@ -12,6 +13,9 @@ import {
   StatusBadge,
   StatusBadgeText,
   TopRow,
+  UserRatingBadge,
+  UserRatingLabel,
+  UserRatingValue,
 } from './styles';
 import type { SeriesCardProps } from './types';
 import { useViewModel } from './viewmodel';
@@ -61,8 +65,9 @@ export default function SeriesCard({
   poster_path,
   status,
   rating,
-  current_season,
-  current_episode,
+  number_of_seasons,
+  number_of_episodes,
+  vote_average,
   id,
   type,
 }: SeriesCardProps) {
@@ -71,7 +76,7 @@ export default function SeriesCard({
   const { onPress } = useViewModel(type);
 
   const hasPoster = poster_path !== null;
-  const hasProgress = current_season !== null && current_episode !== null;
+  const hasProgress = number_of_episodes !== null && number_of_seasons !== null;
 
   return (
     <CardContainer onPress={() => onPress(id)} activeOpacity={0.9}>
@@ -93,14 +98,25 @@ export default function SeriesCard({
       <InfoContainer>
         <TopRow>
           <SeriesTitle numberOfLines={2}>{series_name}</SeriesTitle>
+          {vote_average !== null && (
+            <RatingContainer>
+              <StarIcon size={16} color="#FBBF24" weight="fill" />
+              <RatingText>{vote_average.toFixed(1)}</RatingText>
+            </RatingContainer>
+          )}
         </TopRow>
 
         {hasProgress && (
-          <EpisodeBadge>
-            <EpisodeBadgeText>
-              {`S${current_season} · E${current_episode}`}
-            </EpisodeBadgeText>
-          </EpisodeBadge>
+          <MetaRow>
+            <MetaText>
+              {number_of_seasons}{' '}
+              {number_of_seasons === 1
+                ? t('seriesCard.seasons')
+                : t('seriesCard.seasonsPlural')}
+              {' · '}
+              {number_of_episodes} {t('seriesCard.episodes')}
+            </MetaText>
+          </MetaRow>
         )}
 
         <BottomRow>
@@ -111,10 +127,17 @@ export default function SeriesCard({
             </StatusBadgeText>
           </StatusBadge>
           {rating !== null && (
-            <RatingContainer>
-              <StarIcon size={16} color="#FBBF24" weight="fill" />
-              <RatingText>{rating.toFixed(1)}</RatingText>
-            </RatingContainer>
+            <UserRatingBadge>
+              <UserRatingLabel>{t('seriesCard.userRating')}</UserRatingLabel>
+              <StarIcon
+                size={14}
+                color={getRatingColor(rating)}
+                weight="fill"
+              />
+              <UserRatingValue $color={getRatingColor(rating)}>
+                {rating.toFixed(1)}
+              </UserRatingValue>
+            </UserRatingBadge>
           )}
         </BottomRow>
       </InfoContainer>
