@@ -15,8 +15,8 @@ import {
 } from './styles';
 import type { SeriesCardProps } from './types';
 import { useViewModel } from './viewmodel';
-import { SeriesStatus } from '@/types/database.types';
 import { STATUS_COLORS } from '@/theme/statusColors';
+import { SeriesStatus } from '@/types/database.types';
 import {
   BookmarkIcon,
   CheckCircleIcon,
