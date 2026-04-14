@@ -10,11 +10,11 @@ import {
   RatingContainer,
   RatingText,
   SeriesTitle,
+  StatusAccentBar,
   StatusBadge,
   StatusBadgeText,
   TopRow,
   UserRatingBadge,
-  UserRatingLabel,
   UserRatingValue,
 } from './styles';
 import type { SeriesCardProps } from './types';
@@ -28,6 +28,7 @@ import {
   ProhibitIcon,
   StarIcon,
   TelevisionIcon,
+  UserIcon,
 } from 'phosphor-react-native';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -80,6 +81,7 @@ export default function SeriesCard({
 
   return (
     <CardContainer onPress={() => onPress(id)} activeOpacity={0.9}>
+      <StatusAccentBar $status={status} />
       {hasPoster ? (
         <PosterImage
           source={{ uri: `https://image.tmdb.org/t/p/w185${poster_path}` }}
@@ -127,10 +129,14 @@ export default function SeriesCard({
             </StatusBadgeText>
           </StatusBadge>
           {rating !== null && (
-            <UserRatingBadge>
-              <UserRatingLabel>{t('seriesCard.userRating')}</UserRatingLabel>
+            <UserRatingBadge $color={getRatingColor(rating)}>
+              <UserIcon
+                size={11}
+                color={getRatingColor(rating)}
+                weight="fill"
+              />
               <StarIcon
-                size={14}
+                size={12}
                 color={getRatingColor(rating)}
                 weight="fill"
               />

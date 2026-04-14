@@ -6,7 +6,6 @@ import styled from 'styled-components/native';
 export const Container = styled.View`
   flex: 1;
   background-color: ${({ theme }) => theme.colors.fill.default.base};
-  align-items: left;
   padding: ${({ theme }) => theme.spacing.md}px;
 `;
 
@@ -16,13 +15,12 @@ export const Title = styled.Text`
   color: ${({ theme }) => theme.colors.textIcon.default.strong};
 `;
 
-export const WelcomeText = styled.Text`
-  font-size: ${({ theme }) => theme.typography['subheadline'].fontSize}px;
+export const WelcomeText = styled(Text).attrs({ variant: 'subheadline' })`
   color: ${({ theme }) => theme.colors.textIcon.default.weak};
 `;
 
 export const UserName = styled(Text).attrs({ variant: 'title-2' })`
-  font-weight: 800;
+  font-weight: 700;
 `;
 
 export const WelcomeContainer = styled.View`
@@ -42,7 +40,7 @@ export const HomeHeader = styled(SafeAreaView).attrs({
   background-color: ${({ theme }) => theme.colors.fill.default.base};
   padding: ${({ theme }) => theme.spacing.md}px;
   border-bottom-width: 1px;
-  border-bottom-color: ${({ theme }) => theme.colors.fill.primary.main};
+  border-bottom-color: ${({ theme }) => theme.colors.stroke.default.weak};
 `;
 
 export const GreenDot = styled.View`
@@ -54,14 +52,14 @@ export const GreenDot = styled.View`
   bottom: -4px;
   right: 0px;
   border-width: 3px;
-  border-color: ${({ theme }) => theme.colors.components.bottomTab.fill};
+  border-color: ${({ theme }) => theme.colors.fill.default.base};
 `;
 
 export const AvatarContainer = styled.View`
   position: relative;
   width: 50px;
   height: 50px;
-  border-radius: 50%;
+  border-radius: 25px;
   border-width: 2px;
   border-color: ${({ theme }) => theme.colors.stroke.primary.weak};
   align-items: center;
@@ -82,49 +80,58 @@ export const StatusFilterContainer = styled(ScrollView).attrs({
   showsHorizontalScrollIndicator: false,
   contentContainerStyle: {
     paddingVertical: 12,
+    paddingRight: 16,
   },
 })`
   flex-grow: 0;
 `;
 
-export const StatusPill = styled.TouchableOpacity<{ active: boolean }>`
+export const StatusPill = styled.TouchableOpacity<{
+  active: boolean;
+  $color: string;
+}>`
   flex-direction: row;
   align-items: center;
   gap: 6px;
   padding: 8px 12px;
   margin-left: 8px;
-  border-radius: 8px;
-  background-color: ${({ theme, active }) =>
-    active
-      ? theme.colors.fill.primary.container
-      : theme.colors.fill.default.medium};
+  border-radius: 99px;
+  background-color: ${({ theme, active, $color }) =>
+    active ? `${$color}1A` : theme.colors.fill.default.medium};
+  border-width: 1px;
+  border-color: ${({ theme, active, $color }) =>
+    active ? `${$color}66` : theme.colors.stroke.default.weak};
 `;
 
 export const StatusPillText = styled(Text).attrs({ variant: 'caption' })<{
   active: boolean;
+  $color: string;
 }>`
-  color: ${({ theme, active }) =>
-    active
-      ? theme.colors.textIcon.default.strong
-      : theme.colors.textIcon.default.medium};
+  color: ${({ theme, active, $color }) =>
+    active ? $color : theme.colors.textIcon.default.medium};
   font-weight: 700;
 `;
 
 export const PillCount = styled(Text).attrs({ variant: 'caption' })<{
   active: boolean;
+  $color: string;
 }>`
-  color: ${({ theme, active }) =>
-    active
-      ? theme.colors.textIcon.primary.main
-      : theme.colors.textIcon.default.weak};
-  background-color: ${({ theme, active }) =>
-    active
-      ? theme.colors.fill.primary.variant
-      : theme.colors.fill.default.base};
+  color: ${({ theme, active, $color }) =>
+    active ? $color : theme.colors.textIcon.default.weak};
+  background-color: ${({ theme, active, $color }) =>
+    active ? `${$color}1A` : theme.colors.fill.default.base};
   padding: 1px 6px;
   border-radius: 10px;
   overflow: hidden;
   font-weight: 700;
+`;
+
+export const StatusDot = styled.View<{ $color: string; active: boolean }>`
+  width: 6px;
+  height: 6px;
+  border-radius: 3px;
+  background-color: ${({ $color }) => $color};
+  opacity: ${({ active }) => (active ? 1 : 0.35)};
 `;
 
 export const ItemsCounterContainer = styled.View`
@@ -140,10 +147,9 @@ export const ItemsCounter = styled(Text).attrs({ variant: 'caption' })`
 `;
 
 export const EmptyStateContainer = styled.View`
-  flex: 1;
-  justify-content: center;
   align-items: center;
   padding: ${({ theme }) => theme.spacing.lg}px;
+  padding-top: 80px;
   gap: 12px;
 `;
 
@@ -158,4 +164,14 @@ export const EmptyStateSubtitle = styled(Text).attrs({
 })`
   color: ${({ theme }) => theme.colors.textIcon.default.weak};
   text-align: center;
+`;
+
+export const EmptyStateIcon = styled.View`
+  width: 64px;
+  height: 64px;
+  border-radius: 32px;
+  align-items: center;
+  justify-content: center;
+  background-color: ${({ theme }) => theme.colors.fill.default.strong};
+  margin-bottom: 4px;
 `;

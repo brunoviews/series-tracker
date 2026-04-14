@@ -5,17 +5,17 @@ import styled from 'styled-components/native';
 
 export const Container = styled.TouchableOpacity`
   flex: 1;
-  overflow: hidden;
 `;
 
 export const CardContainer = styled.ImageBackground.attrs({
   resizeMode: 'cover',
 })`
-  flex-direction: row;
-  padding: 16px;
+   width: 180px;
+  height: 210px;
+  border-radius: 8px;
+  overflow: hidden;
   margin-bottom: 4px;
-  width: 155px;
-  height: 200px;
+  justify-content: flex-end;
 `;
 
 export const ResultTitle = styled(Text).attrs({
@@ -41,12 +41,19 @@ export const RatingContainer = styled.View`
   flex-direction: row;
   align-items: center;
   gap: 2px;
-  background-color: rgba(0, 0, 0, 0.8);
-  padding: 2px 4px;
+  padding: 3px 6px;
   border-radius: 4px;
   position: absolute;
   bottom: 8px;
-  left: 6px;
+  left: 8px;
+`;
+
+export const GradientOverlay = styled.View`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
 `;
 export const YearContainer = styled.View`
   flex-direction: row;
@@ -68,11 +75,11 @@ export const CurrentStatusBadge = styled.View<{ status: SeriesStatus }>`
   flex-direction: row;
   align-items: center;
   gap: 4px;
-  padding: 3px 8px 3px 6px;
+  padding: 4px 6px;
   border-radius: 99px;
   position: absolute;
   top: 8px;
-  left: 6px;
+  left: 8px;
   background-color: rgba(8, 12, 18, 0.85);
   border-width: 1px;
   border-color: ${({ status }) => STATUS_COLORS[status]};

@@ -68,6 +68,10 @@ const es = {
   search: {
     title: 'Buscar',
     placeholder: 'Busca una serie...',
+    empty: {
+      title: 'Sin resultados',
+      subtitle: 'Prueba con otro título o revisa la ortografía.',
+    },
   },
   detail: {
     seasons: 'Temporadas',

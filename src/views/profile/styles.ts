@@ -1,3 +1,4 @@
+import Text from '@/components/Text';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import styled from 'styled-components/native';
 
@@ -21,6 +22,8 @@ export const HeaderSection = styled.View`
   padding: ${({ theme }) => theme.spacing.xl}px
     ${({ theme }) => theme.spacing.md}px ${({ theme }) => theme.spacing.lg}px;
   gap: 8px;
+  border-bottom-width: 1px;
+  border-bottom-color: ${({ theme }) => theme.colors.stroke.default.weak};
 `;
 
 export const AvatarCircle = styled.View`
@@ -30,25 +33,24 @@ export const AvatarCircle = styled.View`
   background-color: ${({ theme }) => theme.colors.fill.primary.variant};
   align-items: center;
   justify-content: center;
+  border-width: 2px;
+  border-color: ${({ theme }) => theme.colors.stroke.primary.weak};
+  margin-bottom: 4px;
 `;
 
-export const AvatarInitials = styled.Text`
-  font-family: ${({ theme }) => theme.typography['title-1'].fontFamily};
-  font-size: ${({ theme }) => theme.typography['title-1'].fontSize}px;
-  font-weight: ${({ theme }) => theme.typography['title-1'].fontWeight};
+export const AvatarInitials = styled(Text).attrs({ variant: 'title-1' })`
   color: ${({ theme }) => theme.colors.textIcon.primary.main};
 `;
 
 // ─── Sections ─────────────────────────────────────────────────────────────────
 
-export const SectionTitle = styled.Text`
-  font-family: ${({ theme }) => theme.typography['headline'].fontFamily};
-  font-size: ${({ theme }) => theme.typography['headline'].fontSize}px;
-  font-weight: ${({ theme }) => theme.typography['headline'].fontWeight};
-  color: ${({ theme }) => theme.colors.textIcon.default.medium};
+export const SectionTitle = styled(Text).attrs({ variant: 'label' })`
+  color: ${({ theme }) => theme.colors.textIcon.default.weak};
   margin-top: ${({ theme }) => theme.spacing.lg}px;
   margin-bottom: ${({ theme }) => theme.spacing.sm}px;
   padding: 0 ${({ theme }) => theme.spacing.md}px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
 `;
 
 // ─── Options list ─────────────────────────────────────────────────────────────
@@ -64,6 +66,8 @@ export const OptionRow = styled.TouchableOpacity`
   justify-content: space-between;
   background-color: ${({ theme }) => theme.colors.fill.default.medium};
   border-radius: ${({ theme }) => theme.borderRadius.md}px;
+  border-width: 1px;
+  border-color: rgba(148, 163, 184, 0.1);
   padding: ${({ theme }) => theme.spacing.md}px;
 `;
 
@@ -73,33 +77,30 @@ export const OptionRowContent = styled.View`
   gap: 12px;
 `;
 
-export const OptionLabel = styled.Text`
-  font-family: ${({ theme }) => theme.typography['body-2-regular'].fontFamily};
-  font-size: ${({ theme }) => theme.typography['body-2-regular'].fontSize}px;
-  font-weight: 800;
+export const OptionLabel = styled(Text).attrs({ variant: 'body-2-regular' })`
   color: ${({ theme }) => theme.colors.textIcon.default.main};
+  font-weight: 600;
 `;
 
 // ─── Logout ───────────────────────────────────────────────────────────────────
 
 export const LogoutButton = styled.TouchableOpacity`
-  margin-top: 16px;
-  background-color: transparent;
+  margin: 24px ${({ theme }) => theme.spacing.md}px 0;
+  background-color: ${({ theme }) => theme.colors.fill.semantic.error.weak};
   border-radius: ${({ theme }) => theme.borderRadius.md}px;
-  border-width: 1.5px;
-  border-color: ${({ theme }) => theme.colors.stroke.default.main};
+  border-width: 1px;
+  border-color: ${({ theme }) => theme.colors.textIcon.semantic.error.main}4D;
   padding: ${({ theme }) => theme.spacing.md}px;
   align-items: center;
   justify-content: center;
-  display: flex;
   flex-direction: row;
   gap: 8px;
 `;
 
-export const LogoutButtonText = styled.Text`
-  font-family: ${({ theme }) => theme.typography['body-1-regular'].fontFamily};
-  font-size: ${({ theme }) => theme.typography['body-1-regular'].fontSize}px;
-  font-weight: ${({ theme }) => theme.typography['body-1-regular'].fontWeight};
+export const LogoutButtonText = styled(Text).attrs({
+  variant: 'body-2-medium',
+})`
   color: ${({ theme }) => theme.colors.textIcon.semantic.error.main};
   text-transform: uppercase;
+  letter-spacing: 0.5px;
 `;

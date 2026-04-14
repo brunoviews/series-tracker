@@ -70,6 +70,10 @@ const en = {
   search: {
     title: 'Search',
     placeholder: 'Search for a series...',
+    empty: {
+      title: 'No results found',
+      subtitle: 'Try a different title or check the spelling.',
+    },
   },
   detail: {
     seasons: 'Seasons',
