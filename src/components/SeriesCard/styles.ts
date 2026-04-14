@@ -19,17 +19,29 @@ export const CardContainer = styled.TouchableOpacity`
   padding: 12px;
   margin-bottom: 12px;
   gap: 12px;
+  border-width: 1px;
+  border-color: rgba(148, 163, 184, 0.1);
+  overflow: hidden;
+`;
+
+export const StatusAccentBar = styled.View<{ $status: SeriesStatus }>`
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background-color: ${({ $status }) => getStatusColor($status)};
 `;
 
 export const PosterImage = styled.Image`
-  width: 80px;
-  height: 110px;
+  width: 85px;
+  height: 120px;
   border-radius: 8px;
 `;
 
 export const PosterPlaceholder = styled.View`
-  width: 80px;
-  height: 110px;
+  width: 85px;
+  height: 120px;
   border-radius: 8px;
   background-color: ${({ theme }) => theme.colors.fill.default.strong};
   align-items: center;
@@ -57,10 +69,13 @@ export const RatingContainer = styled.View`
   flex-direction: row;
   align-items: center;
   gap: 3px;
+  background-color: rgba(251, 191, 36, 0.12);
+  padding: 3px 7px;
+  border-radius: 99px;
 `;
 
 export const RatingText = styled(Text).attrs({ variant: 'caption' })`
-  color: ${({ theme }) => theme.colors.textIcon.default.medium};
+  color: #fbbf24;
   font-weight: 700;
 `;
 
@@ -73,7 +88,7 @@ export const MetaRow = styled.View`
 export const MetaText = styled(Text).attrs({ variant: 'label' })`
   color: ${({ theme }) => theme.colors.textIcon.default.main};
   letter-spacing: 0.2px;
-  font-weight: 800;
+  font-weight: 600;
 `;
 
 export const BottomRow = styled.View`
@@ -103,15 +118,15 @@ export const StatusBadgeText = styled(Text).attrs({ variant: 'caption' })<{
   letter-spacing: 0.5px;
 `;
 
-export const UserRatingBadge = styled.View`
+export const UserRatingBadge = styled.View<{ $color: string }>`
   flex-direction: row;
   align-items: center;
   gap: 3px;
-`;
-
-export const UserRatingLabel = styled(Text).attrs({ variant: 'caption' })`
-  color: ${({ theme }) => theme.colors.textIcon.default.medium};
-  font-weight: 700;
+  background-color: ${({ $color }) => `${$color}1A`};
+  padding: 3px 7px;
+  border-radius: 99px;
+  border-width: 1px;
+  border-color: ${({ $color }) => `${$color}66`};
 `;
 
 export const UserRatingValue = styled(Text).attrs({ variant: 'caption' })<{

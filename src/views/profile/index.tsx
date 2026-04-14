@@ -48,13 +48,11 @@ export default function ProfileView() {
           <AppText
             variant="caption"
             color={theme.colors.textIcon.default.medium}
-            style={{ fontSize: 14, lineHeight: 20 }}
           >
             {userEmail}
           </AppText>
         </HeaderSection>
 
-        {/* ── Preferences ── */}
         <SectionTitle>{t('profile.preferences.title')}</SectionTitle>
         <OptionsList>
           <OptionRow onPress={() => {}}>
@@ -92,15 +90,16 @@ export default function ProfileView() {
             </OptionRowContent>
             <CaretRightIcon size={iconSize} color={iconColor} />
           </OptionRow>
-          {/* ── Logout ── */}
-          <LogoutButton onPress={signOut}>
-            <LogoutButtonText>{t('profile.logout')}</LogoutButtonText>
-            <SignOutIcon
-              size={iconSize}
-              color={theme.colors.textIcon.semantic.error.main}
-            />
-          </LogoutButton>
         </OptionsList>
+
+        {/* ── Logout ── */}
+        <LogoutButton onPress={signOut}>
+          <SignOutIcon
+            size={iconSize}
+            color={theme.colors.textIcon.semantic.error.main}
+          />
+          <LogoutButtonText>{t('profile.logout')}</LogoutButtonText>
+        </LogoutButton>
       </ScrollContainer>
     </SafeContainer>
   );

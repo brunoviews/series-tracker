@@ -7,21 +7,26 @@ import {
   CastName,
   CastPhoto,
   CastPhotoPlaceholder,
+  CastPhotoWrapper,
   CastScroll,
   Chip,
   ChipsRow,
   ChipText,
   FABButton,
   GradientWrapper,
+  InfoDivider,
   InfoItem,
   InfoItemLabel,
   InfoRow,
   InfoValue,
+  MetaRow,
   MetaText,
   OverviewText,
   PosterImage,
   PosterPlaceholder,
   PosterRow,
+  RatingPill,
+  RatingPillText,
   SectionLabel,
   SeriesTitle,
   StatusBadge,
@@ -32,6 +37,7 @@ import type { DetailViewProps } from './types';
 import { useViewModel } from './viewmodel';
 import AddShowModal from '@/components/AddShowModal';
 import { CustomSnackbar } from '@/components/Snackbar';
+import { STATUS_COLORS } from '@/theme/statusColors';
 import { SeriesStatus } from '@/types/database.types';
 import DetailLayout from '@components/DetailLayout';
 import type { TmdbMovieDetail, TmdbSeriesDetail } from '@lib/tmdb';
@@ -43,6 +49,7 @@ import {
   PencilSimpleIcon,
   PlusIcon,
   ProhibitIcon,
+  StarIcon,
   TelevisionIcon,
   UserIcon,
 } from 'phosphor-react-native';
@@ -63,18 +70,21 @@ const STATUS_I18N_KEYS: Record<SeriesStatus, StatusI18nKey> = {
   [SeriesStatus.Dropped]: 'series.status.dropped',
 };
 
-const STATUS_ICONS: Record<SeriesStatus, React.ReactElement> = {
-  [SeriesStatus.Watching]: (
-    <TelevisionIcon size={14} color="#0a0a0a" weight="fill" />
+const STATUS_ICONS: Record<
+  SeriesStatus,
+  (color: string) => React.ReactElement
+> = {
+  [SeriesStatus.Watching]: (color) => (
+    <TelevisionIcon size={14} color={color} weight="fill" />
   ),
-  [SeriesStatus.Completed]: (
-    <CheckCircleIcon size={14} color="#0a0a0a" weight="fill" />
+  [SeriesStatus.Completed]: (color) => (
+    <CheckCircleIcon size={14} color={color} weight="fill" />
   ),
-  [SeriesStatus.Planned]: (
-    <BookmarkIcon size={14} color="#0a0a0a" weight="fill" />
+  [SeriesStatus.Planned]: (color) => (
+    <BookmarkIcon size={14} color={color} weight="fill" />
   ),
-  [SeriesStatus.Dropped]: (
-    <ProhibitIcon size={14} color="#0a0a0a" weight="fill" />
+  [SeriesStatus.Dropped]: (color) => (
+    <ProhibitIcon size={14} color={color} weight="fill" />
   ),
 };
 
@@ -164,17 +174,22 @@ export default function DetailView({ route }: DetailViewProps) {
 
           <TitleBlock>
             <SeriesTitle numberOfLines={3}>{title}</SeriesTitle>
-            <MetaText>
-              {year}
-              {detail?.vote_average
-                ? `  ·  ★ ${detail.vote_average.toFixed(1)}`
-                : ''}
-            </MetaText>
+            <MetaRow>
+              {year ? <MetaText>{year}</MetaText> : null}
+              {detail?.vote_average ? (
+                <RatingPill>
+                  <StarIcon size={12} color="#FBBF24" weight="fill" />
+                  <RatingPillText>
+                    {detail.vote_average.toFixed(1)}
+                  </RatingPillText>
+                </RatingPill>
+              ) : null}
+            </MetaRow>
 
             {userStatus && (
               <StatusBadge $status={userStatus}>
-                {STATUS_ICONS[userStatus]}
-                <StatusBadgeText>
+                {STATUS_ICONS[userStatus](STATUS_COLORS[userStatus])}
+                <StatusBadgeText $color={STATUS_COLORS[userStatus]}>
                   {t(STATUS_I18N_KEYS[userStatus])}
                 </StatusBadgeText>
               </StatusBadge>
@@ -201,10 +216,12 @@ export default function DetailView({ route }: DetailViewProps) {
                 <InfoValue>{seriesDetail.number_of_seasons}</InfoValue>
                 <InfoItemLabel>{t('detail.seasons')}</InfoItemLabel>
               </InfoItem>
+              <InfoDivider />
               <InfoItem>
                 <InfoValue>{seriesDetail.number_of_episodes}</InfoValue>
                 <InfoItemLabel>{t('detail.episodes')}</InfoItemLabel>
               </InfoItem>
+              <InfoDivider />
               <InfoItem>
                 <InfoValue>
                   {t(
@@ -224,6 +241,7 @@ export default function DetailView({ route }: DetailViewProps) {
                 <InfoValue>{movieDetail.runtime} min</InfoValue>
                 <InfoItemLabel>{t('detail.duration')}</InfoItemLabel>
               </InfoItem>
+              <InfoDivider />
               <InfoItem>
                 <InfoValue>
                   {t(
@@ -253,12 +271,14 @@ export default function DetailView({ route }: DetailViewProps) {
                 {cast.map((member) => (
                   <CastCard key={member.id}>
                     {member.profile_path ? (
-                      <CastPhoto
-                        source={{
-                          uri: `https://image.tmdb.org/t/p/w185${member.profile_path}`,
-                        }}
-                        resizeMode="cover"
-                      />
+                      <CastPhotoWrapper>
+                        <CastPhoto
+                          source={{
+                            uri: `https://image.tmdb.org/t/p/w185${member.profile_path}`,
+                          }}
+                          resizeMode="cover"
+                        />
+                      </CastPhotoWrapper>
                     ) : (
                       <CastPhotoPlaceholder>
                         <UserIcon
@@ -280,9 +300,13 @@ export default function DetailView({ route }: DetailViewProps) {
 
         {/* ── FAB ── */}
         {detail && (
-          <FABButton onPress={openModal}>
+          <FABButton onPress={openModal} $editing={!!userStatus}>
             {userStatus ? (
-              <PencilSimpleIcon size={18} color="#0a0a0a" weight="bold" />
+              <PencilSimpleIcon
+                size={18}
+                color={theme.colors.textIcon.primary.main}
+                weight="bold"
+              />
             ) : (
               <PlusIcon size={18} color="#0a0a0a" weight="bold" />
             )}

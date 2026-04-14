@@ -2,8 +2,8 @@ import AddButton from '../AddButton';
 import {
   CardContainer,
   Container,
-  CurrentStatus,
   CurrentStatusBadge,
+  GradientOverlay,
   RatingContainer,
   ResultRating,
   ResultTitle,
@@ -16,6 +16,7 @@ import { STATUS_COLORS } from '@/theme/statusColors';
 import { SeriesStatus } from '@/types/database.types';
 import DefaultImg from '@assets/img/default-fallback-image.png';
 import { getPosterUrl } from '@lib/tmdb';
+import { LinearGradient } from 'expo-linear-gradient';
 import {
   BookmarkIcon,
   CheckCircleIcon,
@@ -23,7 +24,6 @@ import {
   StarIcon,
   TelevisionIcon,
 } from 'phosphor-react-native';
-import { useTranslation } from 'react-i18next';
 
 export default function SearchResultCard({
   serie,
@@ -31,18 +31,22 @@ export default function SearchResultCard({
   userSeriesMap,
   id,
 }: SearchResultCardProps) {
-  const { t } = useTranslation();
   const { handleCardPress } = useViewModel();
   return (
     <Container onPress={() => handleCardPress(id)}>
       <CardContainer
-        imageStyle={{ borderRadius: 6 }}
         source={
           serie.poster_path
             ? { uri: getPosterUrl(serie.poster_path) ?? '' }
             : DefaultImg
         }
       >
+        <GradientOverlay>
+          <LinearGradient
+            colors={['transparent', 'rgba(0,0,0,0.75)']}
+            style={{ flex: 1 }}
+          />
+        </GradientOverlay>
         {userSeriesMap[serie.id] &&
           (() => {
             const status = userSeriesMap[serie.id].status;
@@ -63,12 +67,7 @@ export default function SearchResultCard({
                 <ProhibitIcon {...iconProps} />
               );
             return (
-              <CurrentStatusBadge status={status}>
-                {icon}
-                <CurrentStatus $color={statusColor}>
-                  {t(`series.status.${status}`)}
-                </CurrentStatus>
-              </CurrentStatusBadge>
+              <CurrentStatusBadge status={status}>{icon}</CurrentStatusBadge>
             );
           })()}
         <RatingContainer>
