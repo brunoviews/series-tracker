@@ -29,7 +29,7 @@ export const GradientWrapper = styled.View`
 export const PosterRow = styled.View`
   flex-direction: row;
   padding: 0 ${({ theme }) => theme.spacing.md}px;
-  margin-top: -60px;
+  margin-top: -40px;
   gap: 12px;
 `;
 
@@ -52,7 +52,7 @@ export const PosterPlaceholder = styled.View`
 
 export const TitleBlock = styled.View`
   flex: 1;
-  padding-top: 72px;
+  padding-top: 45px;
   gap: 4px;
 `;
 

@@ -173,7 +173,7 @@ export default function DetailView({ route }: DetailViewProps) {
           )}
 
           <TitleBlock>
-            <SeriesTitle numberOfLines={3}>{title}</SeriesTitle>
+            <SeriesTitle numberOfLines={2}>{title}</SeriesTitle>
             <MetaRow>
               {year ? <MetaText>{year}</MetaText> : null}
               {detail?.vote_average ? (
