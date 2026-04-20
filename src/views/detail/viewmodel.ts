@@ -1,7 +1,8 @@
 import { useAuth } from '@/context/AuthContext';
+import { useMovies } from '@/context/MoviesContext';
 import { useSeries } from '@/context/SeriesContext';
-import type { InsertUserSeries } from '@/types/database.types';
-import { SeriesStatus } from '@/types/database.types';
+import type { InsertUserMovie, InsertUserSeries } from '@/types/app.types';
+import { SeriesStatus } from '@/types/app.types';
 import type { TmdbMovieDetail, TmdbSeriesDetail } from '@lib/tmdb';
 import {
   getBackdropUrl,
@@ -14,6 +15,7 @@ import { useTranslation } from 'react-i18next';
 
 export const useViewModel = (tmdbId: number, type: 'series' | 'movie') => {
   const { userSeriesMap, addSeries, deleteSeries } = useSeries();
+  const { addMovie, deleteMovie } = useMovies();
   const { session } = useAuth();
   const { t } = useTranslation();
   const [detail, setDetail] = useState<
@@ -45,34 +47,45 @@ export const useViewModel = (tmdbId: number, type: 'series' | 'movie') => {
     setIsAdding(true);
     setSnackMessage(null);
     try {
-      const name =
-        type === 'series'
-          ? (detail as TmdbSeriesDetail).name
-          : (detail as TmdbMovieDetail).title;
-      const data: InsertUserSeries = {
-        user_id: session.user.id,
-        tmdb_series_id: tmdbId,
-        series_name: name,
-        poster_path: detail.poster_path ?? null,
-        vote_average: detail.vote_average ?? null,
-        rating: rating ?? null,
-        number_of_seasons:
-          type === 'series'
-            ? (detail as TmdbSeriesDetail).number_of_seasons
-            : null,
-        number_of_episodes:
-          type === 'series'
-            ? (detail as TmdbSeriesDetail).number_of_episodes
-            : null,
-        status,
-      };
-      await addSeries(data);
+      if (type === 'series') {
+        const seriesDetail = detail as TmdbSeriesDetail;
+        const data: InsertUserSeries = {
+          user_id: session.user.id,
+          tmdb_series_id: tmdbId,
+          series_name: seriesDetail.name,
+          poster_path: detail.poster_path ?? null,
+          vote_average: detail.vote_average ?? null,
+          rating: rating ?? null,
+          number_of_seasons: seriesDetail.number_of_seasons,
+          number_of_episodes: seriesDetail.number_of_episodes,
+          status,
+        };
+        await addSeries(data);
+        setSnackMessage(t('commonSuccess.Series.Added'));
+      } else {
+        const movieDetail = detail as TmdbMovieDetail;
+        const data: InsertUserMovie = {
+          user_id: session.user.id,
+          tmdb_movie_id: tmdbId,
+          movie_name: movieDetail.title,
+          poster_path: detail.poster_path ?? null,
+          vote_average: detail.vote_average ?? null,
+          runtime: movieDetail.runtime ?? null,
+          rating: rating ?? null,
+          status,
+        };
+        await addMovie(data);
+        setSnackMessage(t('commonSuccess.Movie.Added'));
+      }
       setIsSuccess(true);
-      setSnackMessage(t('commonSuccess.Series.Added'));
       closeModal();
     } catch (error) {
-      console.error('Error al añadir la serie:', error);
-      setSnackMessage(t('commonErrors.Series.AddingError'));
+      console.error('Error al añadir:', error);
+      setSnackMessage(
+        type === 'series'
+          ? t('commonErrors.Series.AddingError')
+          : t('commonErrors.Movie.AddingError'),
+      );
     } finally {
       setIsAdding(false);
     }
@@ -82,13 +95,22 @@ export const useViewModel = (tmdbId: number, type: 'series' | 'movie') => {
     setIsRemoving(true);
     setSnackMessage(null);
     try {
-      await deleteSeries(tmdbId);
+      if (type === 'series') {
+        await deleteSeries(tmdbId);
+        setSnackMessage(t('commonSuccess.Series.Removed'));
+      } else {
+        await deleteMovie(tmdbId);
+        setSnackMessage(t('commonSuccess.Movie.Removed'));
+      }
       setIsRemovingSnack(true);
-      setSnackMessage(t('commonSuccess.Series.Removed'));
       closeModal();
     } catch (error) {
-      console.error('Error al eliminar la serie:', error);
-      setSnackMessage(t('commonErrors.Series.RemovingError'));
+      console.error('Error al eliminar:', error);
+      setSnackMessage(
+        type === 'series'
+          ? t('commonErrors.Series.RemovingError')
+          : t('commonErrors.Movie.RemovingError'),
+      );
     } finally {
       setIsRemoving(false);
     }

@@ -38,7 +38,7 @@ import { useViewModel } from './viewmodel';
 import AddShowModal from '@/components/AddShowModal';
 import { CustomSnackbar } from '@/components/Snackbar';
 import { STATUS_COLORS } from '@/theme/statusColors';
-import { SeriesStatus } from '@/types/database.types';
+import { SeriesStatus } from '@/types/app.types';
 import DetailLayout from '@components/DetailLayout';
 import type { TmdbMovieDetail, TmdbSeriesDetail } from '@lib/tmdb';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -188,7 +188,7 @@ export default function DetailView({ route }: DetailViewProps) {
 
             {userStatus && (
               <StatusBadge $status={userStatus}>
-                {STATUS_ICONS[userStatus](STATUS_COLORS[userStatus])}
+                {STATUS_ICONS[userStatus](STATUS_COLORS[userStatus] )}
                 <StatusBadgeText $color={STATUS_COLORS[userStatus]}>
                   {t(STATUS_I18N_KEYS[userStatus])}
                 </StatusBadgeText>

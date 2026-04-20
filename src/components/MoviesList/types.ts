@@ -1,6 +1,6 @@
-import type { UserSeries } from '@/types/database.types';
+import { UserMovie } from '@/types/app.types';
 
 export type MoviesListProps = {
-  userMovies: UserSeries[];
+  userMovies: UserMovie[];
   isLoading: boolean;
 };

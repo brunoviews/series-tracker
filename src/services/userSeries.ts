@@ -1,5 +1,5 @@
 import { supabase } from '../lib/supabase';
-import type { InsertUserSeries, UserSeries } from '../types/database.types';
+import type { InsertUserSeries, UserSeries } from '@/types/app.types';
 
 export const getUserSeries = async (userId: string): Promise<UserSeries[]> => {
   const { data, error } = await supabase

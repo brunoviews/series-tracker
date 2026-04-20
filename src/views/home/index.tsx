@@ -11,6 +11,7 @@ import {
 import { useViewModel } from './viewmodel';
 import MoviesList from '@/components/MoviesList';
 import SeriesList from '@/components/SeriesList';
+import { useMovies } from '@/context/MoviesContext';
 import { useSeries } from '@/context/SeriesContext';
 import { theme } from '@/theme';
 import React, { useState } from 'react';
@@ -19,11 +20,13 @@ import { SceneMap, TabBar, TabView } from 'react-native-tab-view';
 
 function SeriesRoute() {
   const { userSeries, loading } = useSeries();
+
   return <SeriesList userSeries={userSeries} isLoading={loading} />;
 }
 
 function MoviesRoute() {
-  return <MoviesList userMovies={[]} isLoading={false} />;
+  const { userMovies, isLoading } = useMovies();
+  return <MoviesList userMovies={userMovies} isLoading={isLoading} />;
 }
 
 const renderScene = SceneMap({

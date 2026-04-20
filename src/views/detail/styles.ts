@@ -1,5 +1,5 @@
 import { STATUS_COLORS } from '@/theme/statusColors';
-import { SeriesStatus } from '@/types/database.types';
+import { SeriesStatus } from '@/types/app.types';
 import Text from '@components/Text';
 import styled from 'styled-components/native';
 

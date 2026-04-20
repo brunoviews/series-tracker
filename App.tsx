@@ -1,5 +1,6 @@
 // El import ejecuta la configuración de i18next como efecto de módulo
 import '@/i18n';
+import { MoviesProvider } from '@/context/MoviesContext';
 import AppNavigator from '@/navigation';
 import { theme } from '@/theme';
 import { AuthProvider } from '@context/AuthContext';
@@ -51,10 +52,12 @@ export default function App() {
       <PaperProvider>
         <AuthProvider>
           <SeriesProvider>
-            <View style={{ flex: 1, backgroundColor: '#070B11' }}>
-              <AppNavigator />
-            </View>
-            <StatusBar style="light" backgroundColor="#070B11" />
+            <MoviesProvider>
+              <View style={{ flex: 1, backgroundColor: '#070B11' }}>
+                <AppNavigator />
+              </View>
+              <StatusBar style="light" />
+            </MoviesProvider>
           </SeriesProvider>
         </AuthProvider>
       </PaperProvider>

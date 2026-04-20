@@ -15,6 +15,40 @@ export const Title = styled(Text).attrs({ variant: 'title-1' })`
   color: ${({ theme }) => theme.colors.textIcon.default.strong};
 `;
 
+export const FilterButtonsContainer = styled.View`
+  flex-direction: row;
+  justify-content: space-evenly;
+`;
+
+export const FilterTypeButton = styled.TouchableOpacity<{
+  $active: boolean;
+}>`
+  border-width: 1px;
+  border-color: ${({ theme, $active }) =>
+    $active
+      ? theme.colors.stroke.primary.main
+      : theme.colors.stroke.default.weak};
+  background-color: ${({ theme, $active }) =>
+    $active
+      ? theme.colors.fill.default.bright
+      : theme.colors.fill.default.medium};
+  padding: 12px 40px;
+  border-radius: 12px;
+  margin-top: 8px;
+  
+`;
+
+export const StatusPillText = styled(Text).attrs({ variant: 'label' })<{
+  $active: boolean;
+}>`
+  color: ${({ theme, $active }) =>
+    $active
+      ? theme.colors.textIcon.primary.main
+      : theme.colors.textIcon.default.weak};
+  font-weight: 700;
+  text-transform: uppercase;
+`;
+
 export const SearchInputRow = styled.View<{ hasError: boolean }>`
   flex-direction: row;
   align-items: center;

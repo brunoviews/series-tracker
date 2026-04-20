@@ -13,7 +13,7 @@ import {
 import { SearchResultCardProps } from './types';
 import { useViewModel } from './viewmodel';
 import { STATUS_COLORS } from '@/theme/statusColors';
-import { SeriesStatus } from '@/types/database.types';
+import { SeriesStatus } from '@/types/app.types';
 import DefaultImg from '@assets/img/default-fallback-image.png';
 import { getPosterUrl } from '@lib/tmdb';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -26,18 +26,23 @@ import {
 } from 'phosphor-react-native';
 
 export default function SearchResultCard({
-  serie,
+  item,
   onAdd,
   userSeriesMap,
   id,
 }: SearchResultCardProps) {
-  const { handleCardPress } = useViewModel();
+  const { handleCardPress } = useViewModel(item.media_type);
+
+  const title = item.media_type === 'series' ? item.name : item.title;
+  const date =
+    item.media_type === 'series' ? item.first_air_date : item.release_date;
+
   return (
     <Container onPress={() => handleCardPress(id)}>
       <CardContainer
         source={
-          serie.poster_path
-            ? { uri: getPosterUrl(serie.poster_path) ?? '' }
+          item.poster_path
+            ? { uri: getPosterUrl(item.poster_path) ?? '' }
             : DefaultImg
         }
       >
@@ -47,9 +52,9 @@ export default function SearchResultCard({
             style={{ flex: 1 }}
           />
         </GradientOverlay>
-        {userSeriesMap[serie.id] &&
+        {userSeriesMap[item.id] &&
           (() => {
-            const status = userSeriesMap[serie.id].status;
+            const status = userSeriesMap[item.id].status;
             const statusColor = STATUS_COLORS[status];
             const iconProps = {
               size: 16,
@@ -72,7 +77,7 @@ export default function SearchResultCard({
           })()}
         <RatingContainer>
           <StarIcon size={12} color="#FBBF24" weight="fill" />
-          <ResultRating>{serie.vote_average.toFixed(1)}</ResultRating>
+          <ResultRating>{item.vote_average.toFixed(1)}</ResultRating>
         </RatingContainer>
         <AddButton
           onPress={() => onAdd()}
@@ -81,18 +86,14 @@ export default function SearchResultCard({
           iconSize={16}
           bottom={8}
           right={8}
-          buttonType={userSeriesMap[serie.id] ? 'edit' : 'add'}
+          buttonType={userSeriesMap[item.id] ? 'edit' : 'add'}
           shape="circle"
         />
       </CardContainer>
 
-      <ResultTitle numberOfLines={1}>{serie.name}</ResultTitle>
+      <ResultTitle numberOfLines={1}>{title}</ResultTitle>
       <YearContainer>
-        <ResultYear>
-          {serie.first_air_date
-            ? new Date(serie.first_air_date).getFullYear()
-            : 'N/A'}
-        </ResultYear>
+        <ResultYear>{date ? new Date(date).getFullYear() : 'N/A'}</ResultYear>
       </YearContainer>
     </Container>
   );
