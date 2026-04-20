@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "react-native-design": {
+      "source": "brunoviews/agent-skills",
+      "sourceType": "github",
+      "computedHash": "2d3d771f9d788819cc618d975209e2a93577a1e22432b0dcfb251c55896027e7"
+    }
+  }
+}
