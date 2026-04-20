@@ -42,6 +42,7 @@ export default function SearchView() {
     removeMovie,
     removeSeries,
     userSeriesMap,
+    userMoviesMap,
     error,
     snackMessage,
     isSuccess,
@@ -106,6 +107,7 @@ export default function SearchView() {
                 item={item}
                 onAdd={() => openModal(item)}
                 userSeriesMap={userSeriesMap}
+                userMoviesMap={userMoviesMap}
                 id={item.id}
               />
             )}
@@ -139,16 +141,23 @@ export default function SearchView() {
           item={selectedItem}
           initialStatus={
             selectedItem
-              ? (userSeriesMap[selectedItem.id]?.status ?? null)
+              ? mediaType === 'series'
+                ? (userSeriesMap[selectedItem.id]?.status ?? null)
+                : (userMoviesMap[selectedItem.id]?.status ?? null)
               : null
           }
           initialRating={
             selectedItem
-              ? (userSeriesMap[selectedItem.id]?.rating ?? null)
+              ? mediaType === 'series'
+                ? (userSeriesMap[selectedItem.id]?.rating ?? null)
+                : (userMoviesMap[selectedItem.id]?.rating ?? null)
               : null
           }
           onRemove={
-            selectedItem && userSeriesMap[selectedItem.id]
+            selectedItem &&
+            (mediaType === 'series'
+              ? userSeriesMap[selectedItem.id]
+              : userMoviesMap[selectedItem.id])
               ? mediaType === 'series'
                 ? removeSeries
                 : removeMovie

@@ -15,7 +15,7 @@ import { useTranslation } from 'react-i18next';
 
 export const useViewModel = (tmdbId: number, type: 'series' | 'movie') => {
   const { userSeriesMap, addSeries, deleteSeries } = useSeries();
-  const { addMovie, deleteMovie } = useMovies();
+  const { userMoviesMap, addMovie, deleteMovie } = useMovies();
   const { session } = useAuth();
   const { t } = useTranslation();
   const [detail, setDetail] = useState<
@@ -29,7 +29,10 @@ export const useViewModel = (tmdbId: number, type: 'series' | 'movie') => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [isRemovingSnack, setIsRemovingSnack] = useState(false);
 
-  const userStatus = userSeriesMap[tmdbId]?.status ?? null;
+  const userStatus =
+    type === 'series'
+      ? (userSeriesMap[tmdbId]?.status ?? null)
+      : (userMoviesMap[tmdbId]?.status ?? null);
 
   const clearSnackMessage = () => {
     setSnackMessage(null);
@@ -172,5 +175,7 @@ export const useViewModel = (tmdbId: number, type: 'series' | 'movie') => {
     clearSnackMessage,
     isSuccess,
     isRemovingSnack,
+    userMoviesMap,
+    userSeriesMap,
   };
 };

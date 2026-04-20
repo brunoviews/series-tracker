@@ -18,6 +18,7 @@ import {
 // Tipos
 type MoviesContextValue = {
   userMovies: UserMovie[];
+  userMoviesMap: Record<number, UserMovie>;
   isLoading: boolean;
   refreshMovies: () => Promise<void>;
   addMovie: (movie: InsertUserMovie) => Promise<void>;
@@ -32,6 +33,15 @@ export const MoviesProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [loading, setLoading] = useState(true);
   // estado de las peliculas del usuarios
   const [userMovies, setUserMovies] = useState<UserMovie[]>([]);
+
+    // Mapa derivado: tmdb_movie_id → UserMovie (para lookups rápidos en search)
+    const userMoviesMap = userMovies.reduce<Record<number, UserMovie>>(
+      (acc, m) => {
+        acc[m.tmdb_movie_id] = m;
+        return acc;
+      },
+      {},
+    );
 
   // cargar las peliculas del usuario
   const refreshMovies = useCallback(async () => {
@@ -81,6 +91,7 @@ export const MoviesProvider: FC<{ children: ReactNode }> = ({ children }) => {
         refreshMovies,
         addMovie,
         deleteMovie,
+        userMoviesMap,
       }}
     >
       {children}

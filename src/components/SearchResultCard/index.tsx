@@ -29,6 +29,7 @@ export default function SearchResultCard({
   item,
   onAdd,
   userSeriesMap,
+  userMoviesMap,
   id,
 }: SearchResultCardProps) {
   const { handleCardPress } = useViewModel(item.media_type);
@@ -36,6 +37,11 @@ export default function SearchResultCard({
   const title = item.media_type === 'series' ? item.name : item.title;
   const date =
     item.media_type === 'series' ? item.first_air_date : item.release_date;
+
+  const userStatus =
+    item.media_type === 'series'
+      ? userSeriesMap[item.id]?.status
+      : userMoviesMap[item.id]?.status;
 
   return (
     <Container onPress={() => handleCardPress(id)}>
@@ -52,27 +58,27 @@ export default function SearchResultCard({
             style={{ flex: 1 }}
           />
         </GradientOverlay>
-        {userSeriesMap[item.id] &&
+        {userStatus &&
           (() => {
-            const status = userSeriesMap[item.id].status;
-            const statusColor = STATUS_COLORS[status];
+            
+            const statusColor = STATUS_COLORS[userStatus];
             const iconProps = {
               size: 16,
               color: statusColor,
               weight: 'fill',
             } as const;
             const icon =
-              status === SeriesStatus.Watching ? (
+              userStatus === SeriesStatus.Watching ? (
                 <TelevisionIcon {...iconProps} />
-              ) : status === SeriesStatus.Completed ? (
+              ) : userStatus === SeriesStatus.Completed ? (
                 <CheckCircleIcon {...iconProps} />
-              ) : status === SeriesStatus.Planned ? (
+              ) : userStatus === SeriesStatus.Planned ? (
                 <BookmarkIcon {...iconProps} />
               ) : (
                 <ProhibitIcon {...iconProps} />
               );
             return (
-              <CurrentStatusBadge status={status}>{icon}</CurrentStatusBadge>
+              <CurrentStatusBadge status={userStatus}>{icon}</CurrentStatusBadge>
             );
           })()}
         <RatingContainer>
@@ -86,7 +92,7 @@ export default function SearchResultCard({
           iconSize={16}
           bottom={8}
           right={8}
-          buttonType={userSeriesMap[item.id] ? 'edit' : 'add'}
+          buttonType={userStatus ? 'edit' : 'add'}
           shape="circle"
         />
       </CardContainer>

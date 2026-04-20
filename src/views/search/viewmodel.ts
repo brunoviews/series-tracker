@@ -15,7 +15,7 @@ export const useViewModel = () => {
     addSeries: addSeriesContext,
     deleteSeries,
   } = useSeries();
-  const { addMovie: addMovieContext, deleteMovie } = useMovies();
+  const { userMoviesMap, addMovie: addMovieContext, deleteMovie } = useMovies();
   const [searchText, setSearchText] = useState('');
   const [results, setResults] = useState<SearchResult[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -182,6 +182,7 @@ export const useViewModel = () => {
     removeSeries,
     removeMovie,
     userSeriesMap,
+    userMoviesMap,
     snackMessage,
     isSuccess,
     isRemovingSnack,

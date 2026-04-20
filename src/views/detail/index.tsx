@@ -111,6 +111,8 @@ export default function DetailView({ route }: DetailViewProps) {
     clearSnackMessage,
     isSuccess,
     isRemovingSnack,
+    userMoviesMap,
+    userSeriesMap,
   } = useViewModel(tmdbId, type);
   const theme = useTheme();
   const { t } = useTranslation();
@@ -188,7 +190,7 @@ export default function DetailView({ route }: DetailViewProps) {
 
             {userStatus && (
               <StatusBadge $status={userStatus}>
-                {STATUS_ICONS[userStatus](STATUS_COLORS[userStatus] )}
+                {STATUS_ICONS[userStatus](STATUS_COLORS[userStatus])}
                 <StatusBadgeText $color={STATUS_COLORS[userStatus]}>
                   {t(STATUS_I18N_KEYS[userStatus])}
                 </StatusBadgeText>
@@ -324,6 +326,11 @@ export default function DetailView({ route }: DetailViewProps) {
           isLoading={isAdding}
           isRemoving={isRemoving}
           initialStatus={userStatus}
+          initialRating={
+            type === 'series'
+              ? userSeriesMap[tmdbId]?.rating
+              : userMoviesMap[tmdbId]?.rating
+          }
         />
       </DetailLayout>
       <CustomSnackbar
