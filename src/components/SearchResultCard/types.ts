@@ -1,9 +1,10 @@
-import { TmdbSeries } from '@/lib/tmdb';
-import { UserSeries } from '@/types/database.types';
+import { SearchResult } from '@/lib/tmdb';
+import { UserMovie, UserSeries } from '@/types/app.types';
 
 export type SearchResultCardProps = {
-  serie: TmdbSeries;
+  item: SearchResult;
   onAdd: () => void;
   userSeriesMap: Record<number, UserSeries>;
+  userMoviesMap: Record<number, UserMovie>;
   id: number;
 };

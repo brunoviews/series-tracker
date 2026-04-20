@@ -9,11 +9,21 @@ const es = {
       AddingError: 'Error añadiendo serie. Por favor, inténtalo de nuevo.',
       RemovingError: 'Error eliminando serie. Por favor, inténtalo de nuevo.',
     },
+    Movie: {
+      SearchingError: 'Error buscando película. Por favor, inténtalo de nuevo.',
+      AddingError: 'Error añadiendo película. Por favor, inténtalo de nuevo.',
+      RemovingError:
+        'Error eliminando película. Por favor, inténtalo de nuevo.',
+    },
   },
   commonSuccess: {
     Series: {
       Added: 'Serie actualizada correctamente.',
       Removed: 'Serie eliminada correctamente.',
+    },
+    Movie: {
+      Added: 'Película actualizada correctamente.',
+      Removed: 'Película eliminada correctamente.',
     },
   },
   auth: {
@@ -68,6 +78,11 @@ const es = {
   search: {
     title: 'Buscar',
     placeholder: 'Busca una serie...',
+    placeholderMovie: 'Busca una película...',
+    filter: {
+      series: 'Series',
+      movies: 'Películas',
+    },
     empty: {
       title: 'Sin resultados',
       subtitle: 'Prueba con otro título o revisa la ortografía.',

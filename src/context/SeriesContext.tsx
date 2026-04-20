@@ -3,8 +3,8 @@ import {
   deleteUserSeries,
   getUserSeries,
 } from '../services/userSeries';
-import type { InsertUserSeries, UserSeries } from '../types/database.types';
 import { useAuth } from './AuthContext';
+import type { InsertUserSeries, UserSeries } from '@/types/app.types';
 import React, {
   createContext,
   FC,

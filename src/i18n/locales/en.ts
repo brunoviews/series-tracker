@@ -9,11 +9,20 @@ const en = {
       AddingError: 'Error adding series. Please try again.',
       RemovingError: 'Error removing series. Please try again.',
     },
+    Movie: {
+      SearchingError: 'Error searching for movies. Please try again.',
+      AddingError: 'Error adding movie. Please try again.',
+      RemovingError: 'Error removing movie. Please try again.',
+    },
   },
   commonSuccess: {
     Series: {
       Added: 'Series updated successfully.',
       Removed: 'Series removed successfully.',
+    },
+    Movie: {
+      Added: 'Movie updated successfully.',
+      Removed: 'Movie removed successfully.',
     },
   },
   auth: {
@@ -70,6 +79,11 @@ const en = {
   search: {
     title: 'Search',
     placeholder: 'Search for a series...',
+    placeholderMovie: 'Search for a movie...',
+    filter: {
+      series: 'Series',
+      movies: 'Movies',
+    },
     empty: {
       title: 'No results found',
       subtitle: 'Try a different title or check the spelling.',

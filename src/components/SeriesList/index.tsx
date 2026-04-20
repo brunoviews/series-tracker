@@ -14,7 +14,7 @@ import type { SeriesListProps } from './types';
 import SeriesCard from '@/components/SeriesCard';
 import { theme } from '@/theme';
 import { STATUS_COLORS } from '@/theme/statusColors';
-import { SeriesStatus } from '@/types/database.types';
+import { SeriesStatus } from '@/types/app.types';
 import {
     BookmarkIcon,
     CheckCircleIcon,

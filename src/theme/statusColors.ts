@@ -1,6 +1,5 @@
-import { SeriesStatus } from '@/types/database.types';
+import { SeriesStatus } from '@/types/app.types';
 
-// Fuente de verdad única para los colores de status.
 // Importar siempre desde aquí — nunca definir colores de status inline.
 export const STATUS_COLORS: Record<SeriesStatus, string> = {
   [SeriesStatus.Watching]: '#2DD4BF', // teal   → activamente viendo

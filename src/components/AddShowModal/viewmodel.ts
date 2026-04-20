@@ -1,4 +1,4 @@
-import { SeriesStatus } from '@/types/database.types';
+import { SeriesStatus } from '@/types/app.types';
 import { useCallback, useEffect, useState } from 'react';
 
 export const parseRating = (value: string | null): number | null => {

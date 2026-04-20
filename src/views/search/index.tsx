@@ -4,16 +4,19 @@ import {
   EmptyStateSubtitle,
   EmptyStateText,
   ErrorText,
+  FilterButtonsContainer,
+  FilterTypeButton,
   SearchInput,
   SearchInputContainer,
   SearchInputRow,
+  StatusPillText,
   Title,
 } from './styles';
 import { useViewModel } from './viewmodel';
 import AddShowModal from '@/components/AddShowModal';
 import SearchResultCard from '@/components/SearchResultCard';
 import { CustomSnackbar } from '@/components/Snackbar';
-import type { TmdbSeries } from '@/lib/tmdb';
+import type { SearchResult } from '@/lib/tmdb';
 import { theme } from '@/theme';
 import { MagnifyingGlassIcon } from 'phosphor-react-native';
 import React from 'react';
@@ -31,10 +34,15 @@ export default function SearchView() {
     isModalOpen,
     openModal,
     closeModal,
-    selectedSerie,
+    selectedItem,
+    mediaType,
+    setMediaType,
     addSeries,
+    addMovie,
+    removeMovie,
     removeSeries,
     userSeriesMap,
+    userMoviesMap,
     error,
     snackMessage,
     isSuccess,
@@ -55,18 +63,40 @@ export default function SearchView() {
               weight="bold"
             />
             <SearchInput
-              placeholder={t('search.placeholder')}
+              placeholder={t(
+                mediaType === 'series'
+                  ? 'search.placeholder'
+                  : 'search.placeholderMovie',
+              )}
               placeholderTextColor={theme.colors.textIcon.default.weak}
               value={searchText}
               onChangeText={setSearchText}
             />
           </SearchInputRow>
+          <FilterButtonsContainer>
+            <FilterTypeButton
+              $active={mediaType === 'series'}
+              onPress={() => setMediaType('series')}
+            >
+              <StatusPillText $active={mediaType === 'series'}>
+                {t('search.filter.series')}
+              </StatusPillText>
+            </FilterTypeButton>
+            <FilterTypeButton
+              $active={mediaType === 'movie'}
+              onPress={() => setMediaType('movie')}
+            >
+              <StatusPillText $active={mediaType === 'movie'}>
+                {t('search.filter.movies')}
+              </StatusPillText>
+            </FilterTypeButton>
+          </FilterButtonsContainer>
           {error && <ErrorText>{error}</ErrorText>}
         </SearchInputContainer>
         {isLoading ? (
           <ActivityIndicator color={theme.colors.textIcon.default.medium} />
         ) : (
-          <FlatList<TmdbSeries>
+          <FlatList<SearchResult>
             data={results}
             keyExtractor={(item) => String(item.id)}
             numColumns={2}
@@ -74,9 +104,10 @@ export default function SearchView() {
             contentContainerStyle={{ gap: 16, paddingBottom: 16 }}
             renderItem={({ item }) => (
               <SearchResultCard
-                serie={item}
+                item={item}
                 onAdd={() => openModal(item)}
                 userSeriesMap={userSeriesMap}
+                userMoviesMap={userMoviesMap}
                 id={item.id}
               />
             )}
@@ -101,25 +132,35 @@ export default function SearchView() {
         )}
 
         <AddShowModal
+          key={selectedItem?.id ?? 'empty'}
           isOpen={isModalOpen}
           onCancel={closeModal}
-          onConfirm={addSeries}
+          onConfirm={mediaType === 'series' ? addSeries : addMovie}
           isLoading={isAdding}
           isRemoving={isRemoving}
-          item={selectedSerie}
+          item={selectedItem}
           initialStatus={
-            selectedSerie
-              ? (userSeriesMap[selectedSerie.id]?.status ?? null)
+            selectedItem
+              ? mediaType === 'series'
+                ? (userSeriesMap[selectedItem.id]?.status ?? null)
+                : (userMoviesMap[selectedItem.id]?.status ?? null)
               : null
           }
           initialRating={
-            selectedSerie
-              ? (userSeriesMap[selectedSerie.id]?.rating ?? null)
+            selectedItem
+              ? mediaType === 'series'
+                ? (userSeriesMap[selectedItem.id]?.rating ?? null)
+                : (userMoviesMap[selectedItem.id]?.rating ?? null)
               : null
           }
           onRemove={
-            selectedSerie && userSeriesMap[selectedSerie.id]
-              ? removeSeries
+            selectedItem &&
+            (mediaType === 'series'
+              ? userSeriesMap[selectedItem.id]
+              : userMoviesMap[selectedItem.id])
+              ? mediaType === 'series'
+                ? removeSeries
+                : removeMovie
               : undefined
           }
         />
@@ -132,7 +173,6 @@ export default function SearchView() {
         isError={!isSuccess}
         duration={2500}
         isRemoving={isRemovingSnack}
-
       />
     </>
   );

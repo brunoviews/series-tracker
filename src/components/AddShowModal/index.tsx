@@ -22,7 +22,7 @@ import { AddShowModalProps } from './types';
 import { parseRating, useViewModel } from './viewmodel';
 import { theme } from '@/theme';
 import { STATUS_COLORS } from '@/theme/statusColors';
-import { SeriesStatus } from '@/types/database.types';
+import { SeriesStatus } from '@/types/app.types';
 import DefaultImg from '@assets/img/default-fallback-image.png';
 import { Button } from '@components/Button';
 import { getPosterUrl } from '@lib/tmdb';

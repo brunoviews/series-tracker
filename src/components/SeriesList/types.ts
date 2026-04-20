@@ -1,4 +1,5 @@
-import type { UserSeries } from '@/types/database.types';
+import { UserSeries } from "@/types/app.types";
+
 
 export type SeriesListProps = {
   userSeries: UserSeries[];

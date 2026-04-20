@@ -1,5 +1,5 @@
 import { TmdbMovie, TmdbSeries } from '@/lib/tmdb';
-import { SeriesStatus } from '@/types/database.types';
+import { SeriesStatus } from '@/types/app.types';
 
 export type AddShowModalProps = {
   isOpen: boolean;

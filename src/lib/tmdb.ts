@@ -70,12 +70,14 @@ export type TmdbMovieDetail = TmdbMovie & {
 
 // ─── Respuestas paginadas ─────────────────────────────────────────────────────
 
-type TmdbSearchResponse = {
-  page: number;
-  results: TmdbSeries[];
-  total_pages: number;
-  total_results: number;
+export type SearchSeries = TmdbSeries & {
+  media_type: 'series';
 };
+export type SearchMovie = TmdbMovie & {
+  media_type: 'movie';
+};
+
+export type SearchResult = SearchSeries | SearchMovie;
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -95,7 +97,7 @@ export const getBackdropUrl = (backdropPath: string | null): string | null => {
 
 // Busca series en TMDB por nombre.
 // Devuelve un array de TmdbSeries, o array vacío si no hay resultados.
-export const searchSeries = async (query: string): Promise<TmdbSeries[]> => {
+export const searchSeries = async (query: string): Promise<SearchSeries[]> => {
   const params = new URLSearchParams({
     api_key: apiKey,
     query,
@@ -112,8 +114,35 @@ export const searchSeries = async (query: string): Promise<TmdbSeries[]> => {
     throw new Error(`TMDB error: ${response.status}`);
   }
 
-  const data: TmdbSearchResponse = await response.json();
-  return data.results;
+  const data = await response.json();
+  return data.results.map((series: TmdbSeries) => ({
+    ...series,
+    media_type: 'series' as const,
+  }));
+};
+
+export const searchMovies = async (query: string): Promise<SearchMovie[]> => {
+  const params = new URLSearchParams({
+    api_key: apiKey,
+    query,
+    language: 'es-ES',
+    include_adult: 'false',
+    page: '1',
+  });
+
+  const response = await fetch(
+    `${TMDB_BASE_URL}/search/movie?${params.toString()}`,
+  );
+
+  if (!response.ok) {
+    throw new Error(`TMDB error: ${response.status}`);
+  }
+
+  const data = await response.json();
+  return data.results.map((movie: TmdbMovie) => ({
+    ...movie,
+    media_type: 'movie' as const,
+  }));
 };
 
 export const getSerieById = async (

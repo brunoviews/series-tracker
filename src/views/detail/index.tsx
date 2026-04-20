@@ -38,7 +38,7 @@ import { useViewModel } from './viewmodel';
 import AddShowModal from '@/components/AddShowModal';
 import { CustomSnackbar } from '@/components/Snackbar';
 import { STATUS_COLORS } from '@/theme/statusColors';
-import { SeriesStatus } from '@/types/database.types';
+import { SeriesStatus } from '@/types/app.types';
 import DetailLayout from '@components/DetailLayout';
 import type { TmdbMovieDetail, TmdbSeriesDetail } from '@lib/tmdb';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -111,6 +111,8 @@ export default function DetailView({ route }: DetailViewProps) {
     clearSnackMessage,
     isSuccess,
     isRemovingSnack,
+    userMoviesMap,
+    userSeriesMap,
   } = useViewModel(tmdbId, type);
   const theme = useTheme();
   const { t } = useTranslation();
@@ -324,6 +326,11 @@ export default function DetailView({ route }: DetailViewProps) {
           isLoading={isAdding}
           isRemoving={isRemoving}
           initialStatus={userStatus}
+          initialRating={
+            type === 'series'
+              ? userSeriesMap[tmdbId]?.rating
+              : userMoviesMap[tmdbId]?.rating
+          }
         />
       </DetailLayout>
       <CustomSnackbar
