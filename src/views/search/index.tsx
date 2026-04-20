@@ -130,6 +130,7 @@ export default function SearchView() {
         )}
 
         <AddShowModal
+          key={selectedItem?.id ?? 'empty'}
           isOpen={isModalOpen}
           onCancel={closeModal}
           onConfirm={mediaType === 'series' ? addSeries : addMovie}
