@@ -1,14 +1,14 @@
 import { TmdbMovie, TmdbSeries } from '@/lib/tmdb';
-import { SeriesStatus } from '@/types/app.types';
+import { ItemStatus } from '@/types/app.types';
 
 export type AddShowModalProps = {
   isOpen: boolean;
-  onConfirm?: (status: SeriesStatus, rating?: number | null) => void;
+  onConfirm?: (status: ItemStatus, rating?: number | null) => void;
   onRemove?: () => void;
   onCancel?: () => void;
   isLoading?: boolean;
   isRemoving?: boolean;
   item: TmdbSeries | TmdbMovie | null;
-  initialStatus?: SeriesStatus | null;
+  initialStatus?: ItemStatus | null;
   initialRating?: number | null;
 };

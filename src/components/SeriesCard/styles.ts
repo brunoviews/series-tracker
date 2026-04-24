@@ -1,9 +1,9 @@
 import { STATUS_COLORS } from '@/theme/statusColors';
-import { SeriesStatus } from '@/types/app.types';
+import { ItemStatus } from '@/types/app.types';
 import Text from '@components/Text';
 import styled from 'styled-components/native';
 
-const getStatusColor = (status: SeriesStatus) => STATUS_COLORS[status];
+const getStatusColor = (status: ItemStatus) => STATUS_COLORS[status];
 
 export const getRatingColor = (rating: number): string => {
   if (rating >= 7) return '#2DD4BF';
@@ -24,7 +24,7 @@ export const CardContainer = styled.TouchableOpacity`
   overflow: hidden;
 `;
 
-export const StatusAccentBar = styled.View<{ $status: SeriesStatus }>`
+export const StatusAccentBar = styled.View<{ $status: ItemStatus }>`
   position: absolute;
   left: 0;
   top: 0;
@@ -98,7 +98,7 @@ export const BottomRow = styled.View`
   margin-top: 8px;
 `;
 
-export const StatusBadge = styled.View<{ $status: SeriesStatus }>`
+export const StatusBadge = styled.View<{ $status: ItemStatus }>`
   flex-direction: row;
   align-items: center;
   gap: 4px;

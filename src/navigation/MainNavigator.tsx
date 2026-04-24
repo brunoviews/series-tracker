@@ -24,31 +24,32 @@ export default function MainNavigator() {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
+        tabBarShowLabel: false,
         tabBarStyle: {
           backgroundColor: TAB_BG,
           borderTopWidth: 1,
-          borderTopColor: '#1C2635',
+          borderTopColor: '#2DD4BF33', // Usamos el color activo con transparencia para el borde
           height: 64 + insets.bottom,
-          paddingBottom: 10 + insets.bottom,
-          paddingTop: 8,
+          paddingBottom: insets.bottom,
+          paddingTop: 20,
           elevation: 0,
+        },
+        tabBarItemStyle: {
+          justifyContent: 'center',
+          alignItems: 'center',
         },
         tabBarActiveTintColor: ACTIVE_COLOR,
         tabBarInactiveTintColor: INACTIVE_COLOR,
-        tabBarLabelStyle: {
-          fontSize: 12,
-          letterSpacing: 0.3,
-        },
       }}
     >
       <Tab.Screen
         name={ScreenType.HOME}
         component={HomeView}
         options={{
-          tabBarIcon: ({ color, size, focused }) => (
+          tabBarIcon: ({ color, focused }) => (
             <HouseIcon
               color={color}
-              size={size}
+              size={32}
               weight={focused ? 'fill' : 'regular'}
             />
           ),
@@ -58,10 +59,10 @@ export default function MainNavigator() {
         name={ScreenType.SEARCH}
         component={SearchView}
         options={{
-          tabBarIcon: ({ color, size, focused }) => (
+          tabBarIcon: ({ color, focused }) => (
             <MagnifyingGlassIcon
               color={color}
-              size={size}
+              size={32}
               weight={focused ? 'fill' : 'regular'}
             />
           ),
@@ -71,10 +72,10 @@ export default function MainNavigator() {
         name={ScreenType.PROFILE}
         component={ProfileView}
         options={{
-          tabBarIcon: ({ color, size, focused }) => (
+          tabBarIcon: ({ color, focused }) => (
             <UserIcon
               color={color}
-              size={size}
+              size={32}
               weight={focused ? 'fill' : 'regular'}
             />
           ),

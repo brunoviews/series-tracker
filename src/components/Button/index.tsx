@@ -1,4 +1,4 @@
-import { ButtonText, Container, LoadingSpinner } from './styles';
+import { ButtonText, Container, IconWrapper, LoadingSpinner } from './styles';
 import { ButtonProps } from './types';
 import { FC } from 'react';
 
@@ -8,13 +8,17 @@ export const Button: FC<ButtonProps> = ({
   title,
   isLoading,
   variant,
+  icon,
 }) => {
   return (
     <Container variant={variant} disabled={disabled} onPress={onPress}>
       {isLoading ? (
         <LoadingSpinner />
       ) : (
-        <ButtonText variant={variant}>{title}</ButtonText>
+        <IconWrapper>
+          {icon}
+          <ButtonText variant={variant}>{title}</ButtonText>
+        </IconWrapper>
       )}
     </Container>
   );

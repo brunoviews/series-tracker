@@ -5,7 +5,7 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
 // Detecta el idioma del dispositivo. Si no es 'en', usamos 'es' como fallback.
-const deviceLanguage = getLocales()[0]?.languageCode === 'en' ? 'en' : 'es';
+export const deviceLanguage = getLocales()[0]?.languageCode === 'en' ? 'en' : 'es';
 
 i18n.use(initReactI18next).init({
   resources: {

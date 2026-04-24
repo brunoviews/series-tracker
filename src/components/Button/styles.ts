@@ -29,6 +29,16 @@ const getVariantStyles = (variant: ThemeVariant, theme: AppTheme) => {
         alignItems: 'center',
         justifyContent: 'center',
       };
+    case 'danger':
+      return {
+        backgroundColor: 'transparent',
+        borderRadius: theme.borderRadius.md,
+        padding: theme.spacing.md,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderWidth: 1,
+        borderColor: theme.colors.textIcon.default.weak,
+      };
   }
 };
 
@@ -46,14 +56,21 @@ export const LoadingSpinner = styled.ActivityIndicator.attrs(({ theme }) => ({
   size: 'small',
 }))``;
 
+export const IconWrapper = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+`;
 export const ButtonText = styled.Text<{ variant: ThemeVariant }>`
   color: ${({ variant, theme }) =>
     variant === 'primary'
       ? theme.colors.textIcon.primary.onPrimary
-      : theme.colors.textIcon.default.main};
+      : variant === 'danger'
+        ? theme.colors.textIcon.semantic.error.main
+        : theme.colors.textIcon.default.main};
   font-size: 14px;
   text-transform: uppercase;
-  width: 100%;
   text-align: center;
   font-weight: 800;
 `;

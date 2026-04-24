@@ -1,71 +1,72 @@
 import {
-    EmptyStateContainer,
-    EmptyStateIcon,
-    EmptyStateSubtitle,
-    EmptyStateText,
-    ListContainer,
-    PillCount,
-    StatusDot,
-    StatusFilterContainer,
-    StatusPill,
-    StatusPillText,
+  EmptyStateContainer,
+  EmptyStateIcon,
+  EmptyStateSubtitle,
+  EmptyStateText,
+  ListContainer,
+  PillCount,
+  StatusDot,
+  StatusFilterContainer,
+  StatusPill,
+  StatusPillText,
 } from './styles';
 import type { SeriesListProps } from './types';
+import { useViewModel } from './viewmodel';
 import SeriesCard from '@/components/SeriesCard';
 import { theme } from '@/theme';
 import { STATUS_COLORS } from '@/theme/statusColors';
-import { SeriesStatus } from '@/types/app.types';
+import { ItemStatus } from '@/types/app.types';
 import {
-    BookmarkIcon,
-    CheckCircleIcon,
-    ProhibitIcon,
-    TelevisionIcon,
+  BookmarkIcon,
+  CheckCircleIcon,
+  ProhibitIcon,
+  TelevisionIcon,
 } from 'phosphor-react-native';
-import React, { useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { FlatList } from 'react-native';
 import { ActivityIndicator } from 'react-native-paper';
 
-const STATUSES: SeriesStatus[] = [
-  SeriesStatus.Watching,
-  SeriesStatus.Completed,
-  SeriesStatus.Planned,
-  SeriesStatus.Dropped,
+const STATUSES: ItemStatus[] = [
+  ItemStatus.Watching,
+  ItemStatus.Completed,
+  ItemStatus.Planned,
+  ItemStatus.Dropped,
 ];
 
 const STATUS_I18N_KEYS = {
-  [SeriesStatus.Watching]: 'series.status.watching',
-  [SeriesStatus.Completed]: 'series.status.completed',
-  [SeriesStatus.Planned]: 'series.status.planned',
-  [SeriesStatus.Dropped]: 'series.status.dropped',
+  [ItemStatus.Watching]: 'series.status.watching',
+  [ItemStatus.Completed]: 'series.status.completed',
+  [ItemStatus.Planned]: 'series.status.planned',
+  [ItemStatus.Dropped]: 'series.status.dropped',
 } as const;
 
-const EMPTY_STATUS_ICONS: Record<SeriesStatus, React.ReactNode> = {
-  [SeriesStatus.Watching]: (
+const EMPTY_STATUS_ICONS: Record<ItemStatus, React.ReactNode> = {
+  [ItemStatus.Watching]: (
     <TelevisionIcon
       size={28}
-      color={STATUS_COLORS[SeriesStatus.Watching]}
+      color={STATUS_COLORS[ItemStatus.Watching]}
       weight="duotone"
     />
   ),
-  [SeriesStatus.Completed]: (
+  [ItemStatus.Completed]: (
     <CheckCircleIcon
       size={28}
-      color={STATUS_COLORS[SeriesStatus.Completed]}
+      color={STATUS_COLORS[ItemStatus.Completed]}
       weight="duotone"
     />
   ),
-  [SeriesStatus.Planned]: (
+  [ItemStatus.Planned]: (
     <BookmarkIcon
       size={28}
-      color={STATUS_COLORS[SeriesStatus.Planned]}
+      color={STATUS_COLORS[ItemStatus.Planned]}
       weight="duotone"
     />
   ),
-  [SeriesStatus.Dropped]: (
+  [ItemStatus.Dropped]: (
     <ProhibitIcon
       size={28}
-      color={STATUS_COLORS[SeriesStatus.Dropped]}
+      color={STATUS_COLORS[ItemStatus.Dropped]}
       weight="duotone"
     />
   ),
@@ -73,24 +74,21 @@ const EMPTY_STATUS_ICONS: Record<SeriesStatus, React.ReactNode> = {
 
 const SeriesList = ({ userSeries, isLoading }: SeriesListProps) => {
   const { t } = useTranslation();
-  const [activeStatus, setActiveStatus] = useState<SeriesStatus>(
-    SeriesStatus.Watching,
-  );
+  const { sortByRecentAdded, activeStatus, setActiveStatus } =
+    useViewModel(userSeries);
 
-  const filteredSeries = userSeries.filter((s) => s.status === activeStatus);
-
-  const statusCountMap: Record<SeriesStatus, number> = {
-    [SeriesStatus.Watching]: userSeries.filter(
-      (s) => s.status === SeriesStatus.Watching,
+  const statusCountMap: Record<ItemStatus, number> = {
+    [ItemStatus.Watching]: userSeries.filter(
+      (s) => s.status === ItemStatus.Watching,
     ).length,
-    [SeriesStatus.Completed]: userSeries.filter(
-      (s) => s.status === SeriesStatus.Completed,
+    [ItemStatus.Completed]: userSeries.filter(
+      (s) => s.status === ItemStatus.Completed,
     ).length,
-    [SeriesStatus.Planned]: userSeries.filter(
-      (s) => s.status === SeriesStatus.Planned,
+    [ItemStatus.Planned]: userSeries.filter(
+      (s) => s.status === ItemStatus.Planned,
     ).length,
-    [SeriesStatus.Dropped]: userSeries.filter(
-      (s) => s.status === SeriesStatus.Dropped,
+    [ItemStatus.Dropped]: userSeries.filter(
+      (s) => s.status === ItemStatus.Dropped,
     ).length,
   };
 
@@ -125,13 +123,13 @@ const SeriesList = ({ userSeries, isLoading }: SeriesListProps) => {
       </StatusFilterContainer>
 
       <FlatList
-        data={filteredSeries}
+        data={sortByRecentAdded}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <SeriesCard {...item} id={item.tmdb_series_id} type="series" />
         )}
         style={{ flex: 1 }}
-        contentContainerStyle={{ paddingTop: 4, paddingBottom: 100 }}
+        contentContainerStyle={{ paddingTop: 10, paddingBottom: 100 }}
         showsVerticalScrollIndicator={false}
         ListEmptyComponent={
           isLoading ? (

@@ -1,5 +1,5 @@
 // MANUALLY ADDED TYPES
-export enum SeriesStatus {
+export enum ItemStatus {
   Watching = 'watching',
   Completed = 'completed',
   Planned = 'planned',
@@ -15,13 +15,20 @@ export type Profile = {
   created_at: string;
 };
 
+export type Update = {
+  username?: string | null;
+  first_name?: string | null;
+  last_name?: string | null;
+  avatar_url?: string | null;
+};
+
 export type UserSeries = {
   id: string;
   user_id: string;
   tmdb_series_id: number;
   series_name: string;
   poster_path: string | null;
-  status: SeriesStatus;
+  status: ItemStatus;
   rating: number | null;
   notes: string | null;
   current_season: number | null;
@@ -66,7 +73,7 @@ export type UserMovie = {
   poster_path: string | null;
   rating: number | null;
   runtime: number | null;
-  status: SeriesStatus;
+  status: ItemStatus;
   tmdb_movie_id: number;
   updated_at: string;
   user_id: string;

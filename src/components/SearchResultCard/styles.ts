@@ -1,5 +1,5 @@
 import { STATUS_COLORS } from '@/theme/statusColors';
-import { SeriesStatus } from '@/types/app.types';
+import { ItemStatus } from '@/types/app.types';
 import Text from '@components/Text';
 import styled from 'styled-components/native';
 
@@ -10,7 +10,7 @@ export const Container = styled.TouchableOpacity`
 export const CardContainer = styled.ImageBackground.attrs({
   resizeMode: 'cover',
 })`
-   width: 180px;
+  width: 180px;
   height: 210px;
   border-radius: 8px;
   overflow: hidden;
@@ -71,7 +71,7 @@ export const CurrentStatus = styled(Text).attrs({ variant: 'label' })<{
   letter-spacing: 0.5px;
 `;
 
-export const CurrentStatusBadge = styled.View<{ status: SeriesStatus }>`
+export const CurrentStatusBadge = styled.View<{ status: ItemStatus }>`
   flex-direction: row;
   align-items: center;
   gap: 4px;

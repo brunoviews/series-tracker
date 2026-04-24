@@ -1,6 +1,9 @@
 import {
   AvatarCircle,
   AvatarInitials,
+  DangerSection,
+  DeleteAccountButton,
+  DeleteSectionTitle,
   HeaderSection,
   LogoutButton,
   LogoutButtonText,
@@ -13,20 +16,36 @@ import {
   SectionTitle,
 } from './styles';
 import { useViewModel } from './viewmodel';
+import DeleteAccountModal from '@/components/DeleteAccountModal';
+import { CustomSnackbar } from '@/components/Snackbar';
 import AppText from '@components/Text';
 import {
   BellIcon,
   CaretRightIcon,
-  GlobeIcon,
   PencilSimpleIcon,
   ShieldIcon,
   SignOutIcon,
+  TrashIcon,
 } from 'phosphor-react-native';
 import React from 'react';
 import { useTheme } from 'styled-components/native';
 
 export default function ProfileView() {
-  const { t, signOut, userName, userInitials, userEmail } = useViewModel();
+  const {
+    t,
+    signOut,
+    userName,
+    userInitials,
+    userEmail,
+    isOpen,
+    onDeleteAccount,
+    onConfirmDeleteAccount,
+    isDeleting,
+    onCancelDeleteAccount,
+    error,
+    setError,
+    onEditProfile,
+  } = useViewModel();
   const theme = useTheme();
   const iconColor = theme.colors.textIcon.default.medium;
   const iconSize = 22;
@@ -46,8 +65,8 @@ export default function ProfileView() {
             {userName}
           </AppText>
           <AppText
-            variant="caption"
-            color={theme.colors.textIcon.default.medium}
+            variant="body-2-regular"
+            color={theme.colors.textIcon.default.weak}
           >
             {userEmail}
           </AppText>
@@ -55,7 +74,7 @@ export default function ProfileView() {
 
         <SectionTitle>{t('profile.preferences.title')}</SectionTitle>
         <OptionsList>
-          <OptionRow onPress={() => {}}>
+          <OptionRow onPress={onEditProfile}>
             <OptionRowContent>
               <PencilSimpleIcon size={iconSize} color={iconColor} />
               <OptionLabel>{t('profile.preferences.editProfile')}</OptionLabel>
@@ -75,14 +94,6 @@ export default function ProfileView() {
 
           <OptionRow onPress={() => {}}>
             <OptionRowContent>
-              <GlobeIcon size={iconSize} color={iconColor} />
-              <OptionLabel>{t('profile.preferences.language')}</OptionLabel>
-            </OptionRowContent>
-            <CaretRightIcon size={iconSize} color={iconColor} />
-          </OptionRow>
-
-          <OptionRow onPress={() => {}}>
-            <OptionRowContent>
               <ShieldIcon size={iconSize} color={iconColor} />
               <OptionLabel>
                 {t('profile.preferences.privacySecurity')}
@@ -96,10 +107,41 @@ export default function ProfileView() {
         <LogoutButton onPress={signOut}>
           <SignOutIcon
             size={iconSize}
-            color={theme.colors.textIcon.semantic.error.main}
+            color={theme.colors.textIcon.primary.main}
           />
           <LogoutButtonText>{t('profile.logout')}</LogoutButtonText>
         </LogoutButton>
+
+        {/* ── Danger zone ── */}
+
+        <DangerSection>
+          <DeleteSectionTitle>
+            {t('profile.deleteAccount.sectionTitle')}
+          </DeleteSectionTitle>
+          <DeleteAccountButton
+            onPress={onDeleteAccount}
+            title={t('profile.deleteAccount.title')}
+            variant="danger"
+            icon={
+              <TrashIcon
+                size={iconSize}
+                color={theme.colors.textIcon.semantic.error.main}
+              />
+            }
+          ></DeleteAccountButton>
+        </DangerSection>
+        <DeleteAccountModal
+          isOpen={isOpen}
+          onClose={onCancelDeleteAccount}
+          onConfirm={onConfirmDeleteAccount}
+          isLoading={isDeleting}
+        />
+        <CustomSnackbar
+          message={error ?? ''}
+          visible={!!error}
+          isError={!!error}
+          onDismiss={() => setError(null)}
+        />
       </ScrollContainer>
     </SafeContainer>
   );

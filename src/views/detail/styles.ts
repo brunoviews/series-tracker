@@ -1,5 +1,5 @@
 import { STATUS_COLORS } from '@/theme/statusColors';
-import { SeriesStatus } from '@/types/app.types';
+import { ItemStatus } from '@/types/app.types';
 import Text from '@components/Text';
 import styled from 'styled-components/native';
 
@@ -33,7 +33,7 @@ export const PosterRow = styled.View`
   gap: 12px;
 `;
 
-export const PosterImage = styled.Image<{ $status: SeriesStatus }>`
+export const PosterImage = styled.Image<{ $status: ItemStatus }>`
   width: 120px;
   height: 170px;
   border-radius: 10px;
@@ -87,7 +87,7 @@ export const RatingPillText = styled(Text).attrs({ variant: 'caption' })`
 
 // ─── Status badge ─────────────────────────────────────────────────────────────
 
-export const StatusBadge = styled.View<{ $status: SeriesStatus }>`
+export const StatusBadge = styled.View<{ $status: ItemStatus }>`
   flex-direction: row;
   align-items: center;
   gap: 4px;

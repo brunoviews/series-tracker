@@ -1,3 +1,5 @@
+import { deviceLanguage } from "@/i18n";
+
 const TMDB_BASE_URL = 'https://api.themoviedb.org/3';
 const TMDB_IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w185';
 const TMDB_BACKDROP_BASE_URL = 'https://image.tmdb.org/t/p/w1280';
@@ -97,11 +99,16 @@ export const getBackdropUrl = (backdropPath: string | null): string | null => {
 
 // Busca series en TMDB por nombre.
 // Devuelve un array de TmdbSeries, o array vacío si no hay resultados.
+const getDeviceLanguage = () => {
+  const lang = deviceLanguage === 'en' ? 'en-US' : 'es-ES'; // TMDB tiene un idioma específico para inglés, pero para español se basa en el código de país
+  return lang;
+}
+
 export const searchSeries = async (query: string): Promise<SearchSeries[]> => {
   const params = new URLSearchParams({
     api_key: apiKey,
     query,
-    language: 'es-ES',
+    language: getDeviceLanguage(),
     include_adult: 'false',
     page: '1',
   });
@@ -125,7 +132,7 @@ export const searchMovies = async (query: string): Promise<SearchMovie[]> => {
   const params = new URLSearchParams({
     api_key: apiKey,
     query,
-    language: 'es-ES',
+    language: getDeviceLanguage(),
     include_adult: 'false',
     page: '1',
   });
@@ -150,7 +157,7 @@ export const getSerieById = async (
 ): Promise<TmdbSeriesDetail> => {
   const params = new URLSearchParams({
     api_key: apiKey,
-    language: 'es-ES',
+    language: getDeviceLanguage(),
     append_to_response: 'credits',
   });
 
@@ -170,7 +177,7 @@ export const getMovieById = async (
 ): Promise<TmdbMovieDetail> => {
   const params = new URLSearchParams({
     api_key: apiKey,
-    language: 'es-ES',
+    language: getDeviceLanguage(),
     append_to_response: 'credits',
   });
 

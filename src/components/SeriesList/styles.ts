@@ -12,6 +12,7 @@ export const StatusFilterContainer = styled(ScrollView).attrs({
   contentContainerStyle: {      
     paddingVertical: 12,
     paddingRight: 16,
+    paddingTop: 20,
   },
 })`
   flex-grow: 0; 

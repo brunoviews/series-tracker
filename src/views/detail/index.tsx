@@ -38,7 +38,7 @@ import { useViewModel } from './viewmodel';
 import AddShowModal from '@/components/AddShowModal';
 import { CustomSnackbar } from '@/components/Snackbar';
 import { STATUS_COLORS } from '@/theme/statusColors';
-import { SeriesStatus } from '@/types/app.types';
+import { ItemStatus } from '@/types/app.types';
 import DetailLayout from '@components/DetailLayout';
 import type { TmdbMovieDetail, TmdbSeriesDetail } from '@lib/tmdb';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -63,30 +63,28 @@ type StatusI18nKey =
   | 'series.status.planned'
   | 'series.status.dropped';
 
-const STATUS_I18N_KEYS: Record<SeriesStatus, StatusI18nKey> = {
-  [SeriesStatus.Watching]: 'series.status.watching',
-  [SeriesStatus.Completed]: 'series.status.completed',
-  [SeriesStatus.Planned]: 'series.status.planned',
-  [SeriesStatus.Dropped]: 'series.status.dropped',
+const STATUS_I18N_KEYS: Record<ItemStatus, StatusI18nKey> = {
+  [ItemStatus.Watching]: 'series.status.watching',
+  [ItemStatus.Completed]: 'series.status.completed',
+  [ItemStatus.Planned]: 'series.status.planned',
+  [ItemStatus.Dropped]: 'series.status.dropped',
 };
 
-const STATUS_ICONS: Record<
-  SeriesStatus,
-  (color: string) => React.ReactElement
-> = {
-  [SeriesStatus.Watching]: (color) => (
-    <TelevisionIcon size={14} color={color} weight="fill" />
-  ),
-  [SeriesStatus.Completed]: (color) => (
-    <CheckCircleIcon size={14} color={color} weight="fill" />
-  ),
-  [SeriesStatus.Planned]: (color) => (
-    <BookmarkIcon size={14} color={color} weight="fill" />
-  ),
-  [SeriesStatus.Dropped]: (color) => (
-    <ProhibitIcon size={14} color={color} weight="fill" />
-  ),
-};
+const STATUS_ICONS: Record<ItemStatus, (color: string) => React.ReactElement> =
+  {
+    [ItemStatus.Watching]: (color) => (
+      <TelevisionIcon size={14} color={color} weight="fill" />
+    ),
+    [ItemStatus.Completed]: (color) => (
+      <CheckCircleIcon size={14} color={color} weight="fill" />
+    ),
+    [ItemStatus.Planned]: (color) => (
+      <BookmarkIcon size={14} color={color} weight="fill" />
+    ),
+    [ItemStatus.Dropped]: (color) => (
+      <ProhibitIcon size={14} color={color} weight="fill" />
+    ),
+  };
 
 export default function DetailView({ route }: DetailViewProps) {
   const { tmdbId, type } = route.params;
