@@ -4,6 +4,7 @@ import React, {
   createContext,
   FC,
   ReactNode,
+  useCallback,
   useContext,
   useEffect,
   useState,
@@ -15,8 +16,11 @@ type AuthContextValue = {
   session: Session | null;
   loading: boolean;
   signOut: () => Promise<void>;
+  refreshProfile?: () => void;
   userEmail?: string | null;
   userName?: string | null;
+  userFirstName?: string | null;
+  userLastName?: string | null;
 };
 
 // ─── Contexto ─────────────────────────────────────────────────────────────────
@@ -30,6 +34,8 @@ const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [session, setSession] = useState<Session | null>(null);
   const [userName, setUserName] = useState<string | null>(null);
+  const [userFirstName, setUserFirstName] = useState<string | null>(null);
+  const [userLastName, setUserLastName] = useState<string | null>(null);
   // loading=true hasta que Supabase confirme el estado inicial de la sesión.
   // Evita el flash del login cuando el usuario ya tenía sesión guardada.
   const [loading, setLoading] = useState(true);
@@ -47,7 +53,11 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
       setSession(newSession);
       setLoading(false);
       // Limpia el nombre al cerrar sesión para no mostrar datos del usuario anterior.
-      if (!newSession) setUserName(null);
+      if (!newSession) {
+        setUserName(null);
+        setUserFirstName(null);
+        setUserLastName(null);
+      }
     });
 
     return () => subscription.unsubscribe();
@@ -55,22 +65,26 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
   // 2. Fetch del perfil cuando hay sesión activa.
   //    [session?.user?.id] → solo re-ejecuta si cambia el usuario, no en cada render.
+
+  const fetchProfile = useCallback(async () => {
+    if (!session?.user?.id) return;
+    const { data, error } = await supabase
+      .from('profiles')
+      .select('first_name, last_name')
+      .eq('id', session.user.id)
+      .single();
+
+    if (!error && data) {
+      setUserName(`${data.first_name} ${data.last_name}`);
+      setUserLastName(data.last_name);
+      setUserFirstName(data.first_name);
+    }
+  }, [session?.user?.id]);
   useEffect(() => {
     if (!session?.user?.id) return;
 
-    const fetchProfile = async () => {
-      const { data, error } = await supabase
-        .from('profiles')
-        .select('first_name, last_name')
-        .eq('id', session.user.id)
-        .single();
-
-      if (!error && data) {
-        setUserName(`${data.first_name} ${data.last_name}`);
-      }
-    };
     fetchProfile();
-  }, [session?.user?.id]);
+  }, [session?.user?.id, fetchProfile]);
 
   return (
     <AuthContext.Provider
@@ -78,8 +92,11 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
         session,
         loading,
         signOut,
+        refreshProfile: fetchProfile,
         userEmail: session?.user?.email,
         userName,
+        userFirstName,
+        userLastName,
       }}
     >
       {children}

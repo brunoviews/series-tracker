@@ -125,6 +125,31 @@ const es = {
       privacySecurity: 'Privacidad y seguridad',
     },
     logout: 'Cerrar sesión',
+    deleteAccount: {
+      sectionTitle: 'Zona peligrosa',
+      title: 'Eliminar cuenta',
+      description:
+        'Esta acción es permanente. Todas tus series, películas y datos serán eliminados y no podrán recuperarse.',
+      cancel: 'Cancelar',
+      confirm: 'Eliminar cuenta',
+      error: 'No se pudo eliminar la cuenta. Por favor, inténtalo de nuevo.',
+    },
+  },
+
+  editProfile: {
+    title: 'Editar perfil',
+    avatarHint: 'Avatar con iniciales (foto próximamente)',
+    save: 'Guardar cambios',
+    fields: {
+      firstName: 'Nombre',
+      firstNamePlaceholder: 'Tu nombre',
+      lastName: 'Apellido',
+      lastNamePlaceholder: 'Tu apellido',
+      userEmail: 'Correo electrónico',
+      userEmailPlaceholder: 'Tu correo electrónico',
+    },
+    success: 'Perfil actualizado correctamente.',
+    error: 'No se pudo actualizar el perfil. Inténtalo de nuevo.',
   },
 
   modal: {

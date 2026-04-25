@@ -13,7 +13,7 @@ import {
 import { SearchResultCardProps } from './types';
 import { useViewModel } from './viewmodel';
 import { STATUS_COLORS } from '@/theme/statusColors';
-import { SeriesStatus } from '@/types/app.types';
+import { ItemStatus } from '@/types/app.types';
 import DefaultImg from '@assets/img/default-fallback-image.png';
 import { getPosterUrl } from '@lib/tmdb';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -60,7 +60,6 @@ export default function SearchResultCard({
         </GradientOverlay>
         {userStatus &&
           (() => {
-            
             const statusColor = STATUS_COLORS[userStatus];
             const iconProps = {
               size: 16,
@@ -68,17 +67,19 @@ export default function SearchResultCard({
               weight: 'fill',
             } as const;
             const icon =
-              userStatus === SeriesStatus.Watching ? (
+              userStatus === ItemStatus.Watching ? (
                 <TelevisionIcon {...iconProps} />
-              ) : userStatus === SeriesStatus.Completed ? (
+              ) : userStatus === ItemStatus.Completed ? (
                 <CheckCircleIcon {...iconProps} />
-              ) : userStatus === SeriesStatus.Planned ? (
+              ) : userStatus === ItemStatus.Planned ? (
                 <BookmarkIcon {...iconProps} />
               ) : (
                 <ProhibitIcon {...iconProps} />
               );
             return (
-              <CurrentStatusBadge status={userStatus}>{icon}</CurrentStatusBadge>
+              <CurrentStatusBadge status={userStatus}>
+                {icon}
+              </CurrentStatusBadge>
             );
           })()}
         <RatingContainer>

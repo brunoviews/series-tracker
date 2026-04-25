@@ -1,9 +1,14 @@
 import { useMovies } from '@/context/MoviesContext';
 import { useSeries } from '@/context/SeriesContext';
-import { SeriesStatus } from '@/types/app.types';
+import { ItemStatus } from '@/types/app.types';
 import { useAuth } from '@context/AuthContext';
 import type { SearchResult } from '@lib/tmdb';
-import { getSerieById, searchMovies, searchSeries } from '@lib/tmdb';
+import {
+  getMovieById,
+  getSerieById,
+  searchMovies,
+  searchSeries,
+} from '@lib/tmdb';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -47,7 +52,7 @@ export const useViewModel = () => {
   };
 
   // Series handlers
-  const addSeries = async (status: SeriesStatus, rating?: number | null) => {
+  const addSeries = async (status: ItemStatus, rating?: number | null) => {
     if (!selectedItem || !session?.user.id) return;
     if (selectedItem.media_type !== 'series') return;
     setIsAdding(true);
@@ -93,18 +98,19 @@ export const useViewModel = () => {
   };
 
   // movies handlers
-  const addMovie = async (status: SeriesStatus, rating?: number | null) => {
+  const addMovie = async (status: ItemStatus, rating?: number | null) => {
     if (!selectedItem || !session?.user.id) return;
     if (selectedItem.media_type !== 'movie') return;
     setIsAdding(true);
     try {
+      const details = await getMovieById(selectedItem.id);
       await addMovieContext({
         user_id: session.user.id,
         tmdb_movie_id: selectedItem.id,
         movie_name: selectedItem.title,
         poster_path: selectedItem.poster_path,
         vote_average: selectedItem.vote_average ?? null,
-        runtime: null, // TMDB no devuelve el runtime en el resultado de búsqueda, y no queremos hacer otra llamada para obtenerlo
+        runtime: details.runtime ?? null, // TMDB no devuelve el runtime en el resultado de búsqueda, y no queremos hacer otra llamada para obtenerlo
         rating: rating ?? null,
         status,
       });
@@ -118,7 +124,6 @@ export const useViewModel = () => {
       setIsAdding(false);
     }
   };
-
 
   const removeMovie = async () => {
     if (!selectedItem) return;

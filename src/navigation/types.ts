@@ -13,6 +13,8 @@ export enum ScreenType {
   PROFILE = 'Profile',
   // Detail
   DETAIL = 'Detail',
+  // Edit Profile
+  EDIT_PROFILE = 'EditProfile',
 }
 
 // ─── Param lists ─────────────────────────────────────────────────────────────
@@ -25,6 +27,7 @@ export type RootParamsList = {
     tmdbId: number;
     type: 'series' | 'movie';
   };
+  [ScreenType.EDIT_PROFILE]: undefined;
 };
 
 // TabParamsList: pantallas internas del tab navigator

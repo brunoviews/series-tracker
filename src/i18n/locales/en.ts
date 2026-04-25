@@ -126,6 +126,31 @@ const en = {
       privacySecurity: 'Privacy & Security',
     },
     logout: 'Log out',
+    deleteAccount: {
+      sectionTitle: 'Danger Zone',
+      title: 'Delete Account',
+      description:
+        'This action is permanent. All your series, movies and data will be deleted and cannot be recovered.',
+      cancel: 'Cancel',
+      confirm: 'Delete Account',
+      error: 'Failed to delete account. Please try again.',
+    },
+  },
+
+  editProfile: {
+    title: 'Edit Profile',
+    avatarHint: 'Avatar with initials (photo coming soon)',
+    save: 'Save changes',
+    fields: {
+      firstName: 'First name',
+      firstNamePlaceholder: 'Your first name',
+      lastName: 'Last name',
+      lastNamePlaceholder: 'Your last name',
+      userEmail: 'Email',
+      userEmailPlaceholder: 'Your email',
+    },
+    success: 'Profile updated successfully.',
+    error: 'Failed to update profile. Please try again.',
   },
 
   modal: {

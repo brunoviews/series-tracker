@@ -20,7 +20,7 @@ import {
 import type { SeriesCardProps } from './types';
 import { useViewModel } from './viewmodel';
 import { STATUS_COLORS } from '@/theme/statusColors';
-import { SeriesStatus } from '@/types/app.types';
+import { ItemStatus } from '@/types/app.types';
 import {
   BookmarkIcon,
   CheckCircleIcon,
@@ -40,23 +40,23 @@ type StatusI18nKey =
   | 'series.status.planned'
   | 'series.status.dropped';
 
-const STATUS_I18N_KEYS: Record<SeriesStatus, StatusI18nKey> = {
-  [SeriesStatus.Watching]: 'series.status.watching',
-  [SeriesStatus.Completed]: 'series.status.completed',
-  [SeriesStatus.Planned]: 'series.status.planned',
-  [SeriesStatus.Dropped]: 'series.status.dropped',
+const STATUS_I18N_KEYS: Record<ItemStatus, StatusI18nKey> = {
+  [ItemStatus.Watching]: 'series.status.watching',
+  [ItemStatus.Completed]: 'series.status.completed',
+  [ItemStatus.Planned]: 'series.status.planned',
+  [ItemStatus.Dropped]: 'series.status.dropped',
 };
 
-const getStatusIcon = (status: SeriesStatus, color: string) => {
+const getStatusIcon = (status: ItemStatus, color: string) => {
   const props = { size: 16, color, weight: 'fill' } as const;
   switch (status) {
-    case SeriesStatus.Watching:
+    case ItemStatus.Watching:
       return <TelevisionIcon {...props} />;
-    case SeriesStatus.Completed:
+    case ItemStatus.Completed:
       return <CheckCircleIcon {...props} />;
-    case SeriesStatus.Planned:
+    case ItemStatus.Planned:
       return <BookmarkIcon {...props} />;
-    case SeriesStatus.Dropped:
+    case ItemStatus.Dropped:
       return <ProhibitIcon {...props} />;
   }
 };
@@ -71,6 +71,7 @@ export default function SeriesCard({
   vote_average,
   id,
   type,
+  runtime,
 }: SeriesCardProps) {
   const { t } = useTranslation();
   const theme = useTheme();
@@ -108,7 +109,7 @@ export default function SeriesCard({
           )}
         </TopRow>
 
-        {hasProgress && (
+        {hasProgress && type === 'series' && (
           <MetaRow>
             <MetaText>
               {number_of_seasons}{' '}
@@ -117,6 +118,13 @@ export default function SeriesCard({
                 : t('seriesCard.seasonsPlural')}
               {' · '}
               {number_of_episodes} {t('seriesCard.episodes')}
+            </MetaText>
+          </MetaRow>
+        )}
+        {runtime && type === 'movie' && (
+          <MetaRow>
+            <MetaText>
+              {Math.floor(runtime / 60)}h {runtime % 60}m
             </MetaText>
           </MetaRow>
         )}

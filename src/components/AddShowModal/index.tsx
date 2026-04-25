@@ -22,7 +22,7 @@ import { AddShowModalProps } from './types';
 import { parseRating, useViewModel } from './viewmodel';
 import { theme } from '@/theme';
 import { STATUS_COLORS } from '@/theme/statusColors';
-import { SeriesStatus } from '@/types/app.types';
+import { ItemStatus } from '@/types/app.types';
 import DefaultImg from '@assets/img/default-fallback-image.png';
 import { Button } from '@components/Button';
 import { getPosterUrl } from '@lib/tmdb';
@@ -41,26 +41,26 @@ import { ActivityIndicator, Modal, View } from 'react-native';
 // No dependen de props ni state → definirlas aquí evita que se
 // recreen en cada render (memoria y rendimiento).
 
-const STATUSES: SeriesStatus[] = [
-  SeriesStatus.Watching,
-  SeriesStatus.Completed,
-  SeriesStatus.Planned,
-  SeriesStatus.Dropped,
+const STATUSES: ItemStatus[] = [
+  ItemStatus.Watching,
+  ItemStatus.Completed,
+  ItemStatus.Planned,
+  ItemStatus.Dropped,
 ];
 
 // Colores de status centralizados en theme/statusColors.ts
 
 // Función pura: recibe status + color y devuelve el icono adecuado.
 // Un switch es más legible que un Record de funciones para un junior.
-const getStatusIcon = (status: SeriesStatus, color: string) => {
+const getStatusIcon = (status: ItemStatus, color: string) => {
   switch (status) {
-    case SeriesStatus.Watching:
+    case ItemStatus.Watching:
       return <MonitorPlayIcon size={16} weight="fill" color={color} />;
-    case SeriesStatus.Completed:
+    case ItemStatus.Completed:
       return <CheckCircleIcon size={16} weight="fill" color={color} />;
-    case SeriesStatus.Planned:
+    case ItemStatus.Planned:
       return <CalendarBlankIcon size={16} weight="fill" color={color} />;
-    case SeriesStatus.Dropped:
+    case ItemStatus.Dropped:
       return <TrashIcon size={16} weight="fill" color={color} />;
     default:
       return null;
@@ -127,8 +127,8 @@ const AddShowModal: FC<AddShowModalProps> = ({
             {item ? ('name' in item ? item.name : item.title) : ''}
           </ContentTitle>
 
-          {(selectedStatus === SeriesStatus.Completed ||
-            selectedStatus === SeriesStatus.Dropped) && (
+          {(selectedStatus === ItemStatus.Completed ||
+            selectedStatus === ItemStatus.Dropped) && (
             <RatingInputContainer>
               <RatingInputLabel>{t('modal.ratingLabel')}</RatingInputLabel>
               <RatingInput

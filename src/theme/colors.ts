@@ -51,8 +51,14 @@ export const colors = {
     },
     semantic: {
       error: {
-        main: '#FB7185',
+        main: 'rgb(250, 94, 85)',
       },
+      warning: {
+        main: '#FBBF24',
+      },
+      success: {
+        main: '#22C55E',
+    },
     },
   },
 

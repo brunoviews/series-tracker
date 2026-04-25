@@ -1,3 +1,4 @@
+import { Button } from '@/components/Button';
 import Text from '@/components/Text';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import styled from 'styled-components/native';
@@ -24,6 +25,7 @@ export const HeaderSection = styled.View`
   gap: 8px;
   border-bottom-width: 1px;
   border-bottom-color: ${({ theme }) => theme.colors.stroke.default.weak};
+  margin-bottom: 16px;
 `;
 
 export const AvatarCircle = styled.View`
@@ -45,8 +47,7 @@ export const AvatarInitials = styled(Text).attrs({ variant: 'title-1' })`
 // ─── Sections ─────────────────────────────────────────────────────────────────
 
 export const SectionTitle = styled(Text).attrs({ variant: 'label' })`
-  color: ${({ theme }) => theme.colors.textIcon.default.weak};
-  margin-top: ${({ theme }) => theme.spacing.lg}px;
+  color: ${({ theme }) => theme.colors.textIcon.default.medium};
   margin-bottom: ${({ theme }) => theme.spacing.sm}px;
   padding: 0 ${({ theme }) => theme.spacing.md}px;
   letter-spacing: 0.8px;
@@ -85,11 +86,11 @@ export const OptionLabel = styled(Text).attrs({ variant: 'body-2-regular' })`
 // ─── Logout ───────────────────────────────────────────────────────────────────
 
 export const LogoutButton = styled.TouchableOpacity`
-  margin: 24px ${({ theme }) => theme.spacing.md}px 0;
-  background-color: ${({ theme }) => theme.colors.fill.semantic.error.weak};
+  margin: ${({ theme }) => theme.spacing.md}px;
+  background-color: ${({ theme }) => theme.colors.fill.default.medium};
   border-radius: ${({ theme }) => theme.borderRadius.md}px;
   border-width: 1px;
-  border-color: ${({ theme }) => theme.colors.textIcon.semantic.error.main}4D;
+  border-color: rgba(148, 163, 184, 0.1);
   padding: ${({ theme }) => theme.spacing.md}px;
   align-items: center;
   justify-content: center;
@@ -100,7 +101,38 @@ export const LogoutButton = styled.TouchableOpacity`
 export const LogoutButtonText = styled(Text).attrs({
   variant: 'body-2-medium',
 })`
-  color: ${({ theme }) => theme.colors.textIcon.semantic.error.main};
+  color: ${({ theme }) => theme.colors.textIcon.primary.main};
   text-transform: uppercase;
   letter-spacing: 0.5px;
+`;
+
+// ─── Delete account ───────────────────────────────────────────────────────────
+
+export const DangerSection = styled.View`
+  margin: ${({ theme }) => theme.spacing.md}px;
+  padding: 16px 0;
+  gap: 12px;
+`;
+
+export const DeleteAccountButton = styled(Button)``;
+
+export const DeleteAccountRowContent = styled.View`
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+`;
+
+export const DeleteSectionTitle = styled(Text).attrs({ variant: 'label' })`
+  color: ${({ theme }) => theme.colors.textIcon.semantic.error.main};
+  margin-bottom: ${({ theme }) => theme.spacing.sm}px;
+  padding: 0 ${({ theme }) => theme.spacing.md}px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+`;
+
+export const DeleteAccountText = styled(Text).attrs({
+  variant: 'body-2-regular',
+})`
+  color: ${({ theme }) => theme.colors.textIcon.semantic.error.main};
+  font-weight: 800;
 `;

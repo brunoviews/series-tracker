@@ -1,4 +1,4 @@
-import { SeriesStatus } from '@/types/app.types';
+import { ItemStatus } from '@/types/app.types';
 import { useCallback, useEffect, useState } from 'react';
 
 export const parseRating = (value: string | null): number | null => {
@@ -12,10 +12,10 @@ export const parseRating = (value: string | null): number | null => {
 };
 
 export const useViewModel = (
-  initialStatus?: SeriesStatus | null,
+  initialStatus?: ItemStatus | null,
   initialRating?: number | null,
 ) => {
-  const [selectedStatus, setSelectedStatus] = useState<SeriesStatus | null>(
+  const [selectedStatus, setSelectedStatus] = useState<ItemStatus | null>(
     initialStatus ?? null,
   );
 
@@ -38,11 +38,9 @@ export const useViewModel = (
 
   // useCallback memoriza la función → no se recrea en cada render.
   // Si pulsas la misma badge → deselecciona; si pulsas otra → selecciona.
-  const handleSelectStatus = useCallback((status: SeriesStatus) => {
+  const handleSelectStatus = useCallback((status: ItemStatus) => {
     setSelectedStatus((prev) => (prev === status ? null : status));
   }, []);
 
-
-
-  return { selectedStatus, handleSelectStatus,  rating, setRating };
+  return { selectedStatus, handleSelectStatus, rating, setRating };
 };

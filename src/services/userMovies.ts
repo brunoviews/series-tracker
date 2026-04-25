@@ -1,4 +1,5 @@
-import { supabase } from '../lib/supabase';
+
+import { supabase } from '@/lib/supabase';
 import type { InsertUserMovie, UserMovie } from '@/types/app.types';
 
 export const getUserMovies = async (userId: string): Promise<UserMovie[]> => {

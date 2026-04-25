@@ -2,7 +2,7 @@ import { useAuth } from '@/context/AuthContext';
 import { useMovies } from '@/context/MoviesContext';
 import { useSeries } from '@/context/SeriesContext';
 import type { InsertUserMovie, InsertUserSeries } from '@/types/app.types';
-import { SeriesStatus } from '@/types/app.types';
+import { ItemStatus } from '@/types/app.types';
 import type { TmdbMovieDetail, TmdbSeriesDetail } from '@lib/tmdb';
 import {
   getBackdropUrl,
@@ -43,7 +43,7 @@ export const useViewModel = (tmdbId: number, type: 'series' | 'movie') => {
   const closeModal = () => setModalVisible(false);
 
   const handleAddSeries = async (
-    status: SeriesStatus,
+    status: ItemStatus,
     rating?: number | null,
   ) => {
     if (!detail || !session?.user.id) return;

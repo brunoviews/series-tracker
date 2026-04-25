@@ -11,7 +11,7 @@ export type Fonts =
   | 'DMSerifDisplay_400Regular_Italic';
 
 // Variantes de botón. Se usan en el componente Button con styled-components.
-export type ThemeVariant = 'primary' | 'ghost' | 'neutral';
+export type ThemeVariant = 'primary' | 'ghost' | 'neutral' | 'danger';
 
 // Variantes tipográficas.
 // Uso: styled(Text).attrs({ variant: 'title-1' })

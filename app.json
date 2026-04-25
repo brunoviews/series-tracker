@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "_temp_expo",
-    "slug": "_temp_expo",
+    "name": "Binged",
+    "slug": "binged",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -12,10 +12,12 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.brunoview.binged"
     },
     "android": {
       "backgroundColor": "#070B11",
+      "package": "com.brunoview.binged",
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/android-icon-foreground.png",
@@ -30,6 +32,12 @@
     "plugins": [
       "expo-localization",
       "expo-font"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "d6205b40-e113-4488-bce6-530c48252809"
+      }
+    },
+    "owner": "brunoviews"
   }
 }

@@ -117,7 +117,7 @@ export default function SearchView() {
               searchText.length > 0 ? (
                 <EmptyStateContainer>
                   <MagnifyingGlassIcon
-                    size={32}
+                    size={50}
                     color={theme.colors.textIcon.default.weak}
                     weight="duotone"
                   />

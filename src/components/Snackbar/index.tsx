@@ -25,7 +25,7 @@ export function CustomSnackbar({
         borderRadius: 12,
         backgroundColor: theme.colors.fill.default.strong,
       }}
-      elevation={0}
+      elevation={1}
       visible={visible}
       onDismiss={onDismiss}
       duration={duration}
