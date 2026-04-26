@@ -20,6 +20,7 @@ export default function RegisterView() {
     error,
     signUp,
     goToLogin,
+    isDisabled,
   } = useViewModel();
   const { t } = useTranslation();
 
@@ -71,7 +72,7 @@ export default function RegisterView() {
 
         <Button
           onPress={signUp}
-          disabled={loading}
+          disabled={isDisabled || loading}
           variant="primary"
           isLoading={loading}
           title={t('auth.register.createAccountButton')}

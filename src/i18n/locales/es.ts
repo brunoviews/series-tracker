@@ -39,7 +39,7 @@ const es = {
       firstNamePlaceholder: 'Nombre',
       lastNamePlaceholder: 'Apellidos',
       emailPlaceholder: 'Correo electrónico',
-      passwordPlaceholder: 'Contraseña)',
+      passwordPlaceholder: 'Contraseña (mínimo 6 caracteres)',
       createAccountButton: 'Crear cuenta',
       linkToLogin: '¿Ya tienes cuenta? Inicia sesión',
     },
@@ -47,6 +47,9 @@ const es = {
       invalidCredentials: 'Email o contraseña incorrectos',
       emailAlreadyExists: 'Ya existe una cuenta con ese email',
       generic: 'Algo ha ido mal. Inténtalo de nuevo',
+    },
+    loading: {
+      loadingProfile: 'Cargando perfil...',
     },
   },
   tabs: {

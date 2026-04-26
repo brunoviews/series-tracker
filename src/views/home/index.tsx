@@ -40,7 +40,7 @@ const routes = [
 ];
 
 export default function HomeView() {
-  const { firstName, greetingKey, userInitials } = useViewModel();
+  const { userFirstName, greetingKey, userInitials } = useViewModel();
   const { t } = useTranslation();
   const [index, setIndex] = useState(0);
 
@@ -49,7 +49,7 @@ export default function HomeView() {
       <HomeHeader>
         <WelcomeContainer>
           <WelcomeText>{t(`home.greeting.${greetingKey}`)} 👋</WelcomeText>
-          <UserName>{firstName}</UserName>
+          <UserName>{userFirstName}</UserName>
         </WelcomeContainer>
         <AvatarCircle>
           <AvatarInitials>{userInitials}</AvatarInitials>

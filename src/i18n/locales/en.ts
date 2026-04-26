@@ -39,7 +39,7 @@ const en = {
       firstNamePlaceholder: 'First name',
       lastNamePlaceholder: 'Last name',
       emailPlaceholder: 'Email',
-      passwordPlaceholder: 'Password',
+      passwordPlaceholder: 'Password (minimum 6 characters)',
       createAccountButton: 'Create account',
       linkToLogin: 'Already have an account? Sign in',
     },
@@ -47,6 +47,11 @@ const en = {
       invalidCredentials: 'Invalid email or password',
       emailAlreadyExists: 'An account with that email already exists',
       generic: 'Something went wrong. Please try again',
+    },
+
+    loading: {
+      loadingProfile: 'Loading profile...',
+     
     },
   },
   tabs: {

@@ -1,6 +1,7 @@
 import i18n from '@/i18n';
 import { supabase } from '@/lib/supabase';
 import { RootParamsList, ScreenType } from '@/navigation/types';
+import { checkEmail } from '@/utils/regex';
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useState } from 'react';
@@ -49,8 +50,14 @@ export const useViewModel = () => {
     }
 
     setLoading(false);
-    // onAuthStateChange emite SIGNED_IN y AppNavigator navega a las tabs.
+   
   };
+
+    const isDisabled =
+    !firstName.trim() ||
+    !lastName.trim() ||
+    !checkEmail.test(email) ||
+    password.length < 6;
 
   return {
     firstName,
@@ -65,5 +72,6 @@ export const useViewModel = () => {
     error,
     signUp,
     goToLogin,
+    isDisabled,
   };
 };
