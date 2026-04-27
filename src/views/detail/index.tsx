@@ -243,7 +243,7 @@ export default function DetailView({ route }: DetailViewProps) {
               </InfoItem>
               <InfoDivider />
               <InfoItem>
-                <InfoValue>
+                <InfoValue numberOfLines={1}>
                   {t(
                     ('detail.tmdbStatus.' +
                       movieDetail.status) as `detail.tmdbStatus.${string}`,

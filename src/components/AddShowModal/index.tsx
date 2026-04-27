@@ -80,7 +80,7 @@ const AddShowModal: FC<AddShowModalProps> = ({
   initialStatus,
   initialRating,
 }) => {
-  const { selectedStatus, handleSelectStatus, rating, setRating } =
+  const { selectedStatus, handleSelectStatus, rating, setRating, isDisabled } =
     useViewModel(initialStatus, initialRating);
   const { t } = useTranslation();
 
@@ -182,6 +182,7 @@ const AddShowModal: FC<AddShowModalProps> = ({
                 variant="ghost"
                 title={t('modal.cancel')}
                 onPress={handleCancel}
+                disabled={isLoading || isRemoving}
               />
             </View>
             <View style={{ flex: 1 }}>
@@ -189,14 +190,7 @@ const AddShowModal: FC<AddShowModalProps> = ({
                 variant="primary"
                 title={t('modal.confirm')}
                 onPress={handleConfirm}
-                disabled={
-                  !selectedStatus ||
-                  isLoading ||
-                  isRemoving ||
-                  (initialStatus === selectedStatus &&
-                    initialRating === parseRating(rating)) ||
-                  (!!rating && parseRating(rating) === null)
-                }
+                disabled={isDisabled || isLoading || isRemoving}
                 isLoading={isLoading}
               />
             </View>

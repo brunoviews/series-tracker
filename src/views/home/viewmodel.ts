@@ -1,50 +1,58 @@
-import { useAuth } from '@/context/AuthContext';
-import { supabase } from '@/lib/supabase';
-import { useEffect, useState } from 'react';
-
-const getGreetingKey = (): 'morning' | 'afternoon' | 'evening' => {
-  const hour = new Date().getHours();
-  if (hour < 12) return 'morning';
-  if (hour < 20) return 'afternoon';
-  return 'evening';
-};
+import {
+  getTrendingMovies,
+  getTrendingSeries,
+  type TmdbMovie,
+  type TmdbSeries,
+} from '@/lib/tmdb';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 export const useViewModel = () => {
-  const { session, userName } = useAuth();
-  const [firstName, setFirstName] = useState<string | null>(null);
+  const [trendingMovies, setTrendingMovies] = useState<TmdbMovie[]>([]);
+  const [trendingSeries, setTrendingSeries] = useState<TmdbSeries[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const userInitials = userName
-    ? userName
-        .split(' ')
-        .map((word) => word[0])
-        .join('')
-        .toUpperCase()
-        .slice(0, 2)
-    : '?';
+  const load = useCallback(async () => {
+    try {
+      setError(null);
+      setIsLoading(true);
+
+      const [movies, series] = await Promise.all([
+        getTrendingMovies('week'),
+        getTrendingSeries('week'),
+      ]);
+
+      setTrendingMovies(movies);
+      setTrendingSeries(series);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'Unknown error');
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
-    if (!session?.user?.id) return;
+    load();
+  }, [load]);
 
-    const fetchProfile = async () => {
-      const { data, error } = await supabase
-        .from('profiles')
-        .select('first_name')
-        .eq('id', session.user.id)
-        .single();
-
-      if (!error && data) {
-        setFirstName(data.first_name);
-      }
-    };
-
-    fetchProfile();
-  }, [session?.user?.id]);
-
-  const greetingKey = getGreetingKey();
+  const hero = useMemo(() => {
+    const movie = trendingMovies[0];
+    if (movie) {
+      return { id: movie.id, type: 'movie' as const, item: movie };
+    }
+    const serie = trendingSeries[0];
+    if (serie) {
+      return { id: serie.id, type: 'series' as const, item: serie };
+    }
+    return null;
+  }, [trendingMovies, trendingSeries]);
 
   return {
-    firstName,
-    greetingKey,
-    userInitials,
+    hero,
+    trendingMovies,
+    trendingSeries,
+    isLoading,
+    error,
+    reload: load,
   };
 };

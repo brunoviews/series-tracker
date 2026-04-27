@@ -39,20 +39,60 @@ const en = {
       firstNamePlaceholder: 'First name',
       lastNamePlaceholder: 'Last name',
       emailPlaceholder: 'Email',
-      passwordPlaceholder: 'Password',
+      passwordPlaceholder: 'Password (minimum 6 characters)',
+      confirmPasswordPlaceholder: 'Confirm password',
       createAccountButton: 'Create account',
       linkToLogin: 'Already have an account? Sign in',
     },
     errors: {
       invalidCredentials: 'Invalid email or password',
       emailAlreadyExists: 'An account with that email already exists',
+      passwordsDoNotMatch: 'Passwords do not match',
+      passwordTooShort: 'Password is too short',
+      nameRequired: 'First and last name are required',
+      nameTooShort: 'First and last name must be at least 2 characters',
+      invalidEmail: 'Invalid email address',
       generic: 'Something went wrong. Please try again',
+    },
+
+    loading: {
+      loadingProfile: 'Loading profile...',
+     
     },
   },
   tabs: {
-    home: 'My series',
+    home: 'Home',
+    series: 'Series',
+    movies: 'Movies',
     search: 'Search',
     profile: 'Profile',
+  },
+  library: {
+    kicker: 'Library',
+    series: {
+      title: 'Series',
+      subtitle: 'Your personal list, by status',
+    },
+    movies: {
+      title: 'Movies',
+      subtitle: 'Your personal list, by status',
+    },
+  },
+  homeTab: {
+    hero: {
+      kicker: 'Trending this week',
+      trending: 'Trending',
+    },
+    sections: {
+      movies: 'Movies',
+      series: 'Series',
+      week: 'Week',
+    },
+    error: {
+      title: "Couldn't load Home",
+      subtitle: 'Check your connection or TMDB API key and try again.',
+      retry: 'Retry',
+    },
   },
   home: {
     title: 'My series',
@@ -62,9 +102,13 @@ const en = {
       afternoon: 'Good afternoon,',
       evening: 'Good evening,',
     },
-    empty: {
+    emptySeries: {
       title: 'Nothing here yet',
       subtitle: 'Search for a series and start building your list.',
+    },
+    emptyMovies: {
+      title: 'Nothing here yet',
+      subtitle: 'Search for a movie and start building your list.',
     },
   },
   series: {

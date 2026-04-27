@@ -172,6 +172,7 @@ export const InfoItem = styled.View`
 
 export const InfoValue = styled(Text).attrs({ variant: 'body-1-regular' })`
   color: ${({ theme }) => theme.colors.textIcon.default.strong};
+ text-align: center;
 `;
 
 export const InfoItemLabel = styled(Text).attrs({ variant: 'caption' })`

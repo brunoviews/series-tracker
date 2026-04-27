@@ -6,15 +6,27 @@ import { createNavigationContainerRef } from '@react-navigation/native';
 export const navigationRef = createNavigationContainerRef<RootParamsList>();
 
 // Navega a una pantalla del stack raíz
-export const navigateTo = (screen: keyof RootParamsList) => {
+export const navigateTo = <RouteName extends keyof RootParamsList>(
+  ...args: RootParamsList[RouteName] extends undefined
+    ? [screen: RouteName] | [screen: RouteName, params: RootParamsList[RouteName]]
+    : [screen: RouteName, params: RootParamsList[RouteName]]
+) => {
   if (navigationRef.isReady()) {
-    navigationRef.navigate(screen);
+    navigationRef.navigate(...(args as never));
   }
 };
 
 // Resetea el stack con una única pantalla (útil para logout / login redirect)
-export const resetTo = (screen: keyof RootParamsList) => {
+export const resetTo = <RouteName extends keyof RootParamsList>(
+  ...args: RootParamsList[RouteName] extends undefined
+    ? [screen: RouteName] | [screen: RouteName, params: RootParamsList[RouteName]]
+    : [screen: RouteName, params: RootParamsList[RouteName]]
+) => {
   if (navigationRef.isReady()) {
-    navigationRef.reset({ index: 0, routes: [{ name: screen }] });
+    const [name, params] = args;
+    navigationRef.reset({
+      index: 0,
+      routes: params === undefined ? [{ name }] : [{ name, params }],
+    });
   }
 };

@@ -1,74 +1,144 @@
 import Text from '@/components/Text';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { LinearGradient } from 'expo-linear-gradient';
+import { ImageBackground } from 'react-native';
 import styled from 'styled-components/native';
 
-export const Container = styled.View`
+export const Scroll = styled.ScrollView.attrs({
+  showsVerticalScrollIndicator: false,
+})`
   flex: 1;
-  background-color: ${({ theme }) => theme.colors.fill.default.base};
-  padding: ${({ theme }) => theme.spacing.md}px;
 `;
 
-export const TabContainer = styled.View`
-  flex: 1;
-  background-color: ${({ theme }) => theme.colors.fill.default.base};
+export const Section = styled.View`
+  margin-top: ${({ theme }) => theme.spacing.lg}px;
+  gap: 12px;
 `;
 
-export const WelcomeText = styled(Text).attrs({ variant: 'subheadline' })`
+export const SectionHeader = styled.View`
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: space-between;
+`;
+
+export const SectionTitle = styled(Text).attrs({ variant: 'headline' })`
+  color: ${({ theme }) => theme.colors.textIcon.default.strong};
+`;
+
+export const SectionHint = styled(Text).attrs({ variant: 'caption' })`
   color: ${({ theme }) => theme.colors.textIcon.default.weak};
 `;
 
-export const UserName = styled(Text).attrs({ variant: 'title-2' })`
+export const HeroCard = styled.Pressable`
+  height: 210px;
+  border-radius: ${({ theme }) => theme.borderRadius.lg}px;
+  overflow: hidden;
+  background-color: ${({ theme }) => theme.colors.fill.default.weak};
+  border-width: 1px;
+  border-color: ${({ theme }) => theme.colors.stroke.default.subtle};
+`;
+
+export const HeroBackdrop = styled(ImageBackground)`
+  flex: 1;
+`;
+
+export const HeroGradient = styled(LinearGradient).attrs({
+  colors: ['rgba(7,11,17,0.1)', 'rgba(7,11,17,0.9)'],
+  start: { x: 0.5, y: 0 },
+  end: { x: 0.5, y: 1 },
+})`
+  flex: 1;
+  justify-content: flex-end;
+  padding: 16px;
+  gap: 10px;
+`;
+
+export const HeroKicker = styled(Text).attrs({ variant: 'overline' })`
+  color: ${({ theme }) => theme.colors.textIcon.default.weak};
+`;
+
+export const HeroTitle = styled(Text).attrs({ variant: 'title-1' })`
+  color: ${({ theme }) => theme.colors.textIcon.default.strong};
+`;
+
+export const HeroMetaRow = styled.View`
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+`;
+
+export const MetaPill = styled.View`
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: ${({ theme }) => theme.borderRadius.full}px;
+  background-color: ${({ theme }) => theme.colors.fill.default.dim};
+  border-width: 1px;
+  border-color: ${({ theme }) => theme.colors.stroke.default.subtle};
+`;
+
+export const MetaText = styled(Text).attrs({ variant: 'caption' })`
+  color: ${({ theme }) => theme.colors.textIcon.default.main};
   font-weight: 700;
 `;
 
-export const WelcomeContainer = styled.View`
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 4px;
-  margin-top: ${({ theme }) => theme.spacing.sm}px;
+export const PosterCard = styled.Pressable`
+  width: 118px;
+  gap: 8px;
 `;
 
-export const HomeHeader = styled(SafeAreaView).attrs({
-  edges: ['top'],
+export const PosterImageWrap = styled(ImageBackground)`
+  width: 118px;
+  height: 176px;
+  border-radius: ${({ theme }) => theme.borderRadius.md}px;
+  overflow: hidden;
+  background-color: ${({ theme }) => theme.colors.fill.default.weak};
+  border-width: 1px;
+  border-color: ${({ theme }) => theme.colors.stroke.default.subtle};
+`;
+
+export const PosterGradient = styled(LinearGradient).attrs({
+  colors: ['rgba(0,0,0,0)', 'rgba(0,0,0,0.75)'],
+  start: { x: 0.5, y: 0 },
+  end: { x: 0.5, y: 1 },
 })`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  background-color: ${({ theme }) => theme.colors.fill.default.base};
-  padding: ${({ theme }) => theme.spacing.md}px;
-  border-bottom-width: 1px;
-  border-bottom-color: ${({ theme }) => theme.colors.stroke.default.weak};
+  flex: 1;
+  justify-content: flex-end;
+  padding: 10px;
 `;
 
-export const AvatarCircle = styled.View`
-  width: 44px;
-  height: 44px;
-  border-radius: ${({ theme }) => theme.borderRadius.full}px;
-  background-color: ${({ theme }) => theme.colors.fill.primary.variant};
-  align-items: center;
-  justify-content: center;
-  border-width: 2px;
-  border-color: ${({ theme }) => theme.colors.stroke.primary.weak};
+export const PosterTitle = styled(Text).attrs({ variant: 'caption' })`
+  color: ${({ theme }) => theme.colors.textIcon.default.strong};
+  font-weight: 700;
 `;
 
-export const AvatarInitials = styled(Text).attrs({ variant: 'label' })`
-  color: ${({ theme }) => theme.colors.textIcon.primary.main};
-`;
-
-export const EmptyStateSubtitle = styled(Text).attrs({
-  variant: 'body-2-regular',
-})`
+export const PosterSub = styled(Text).attrs({ variant: 'caption' })`
   color: ${({ theme }) => theme.colors.textIcon.default.weak};
-  text-align: center;
 `;
 
-export const EmptyStateIcon = styled.View`
-  width: 64px;
-  height: 64px;
-  border-radius: 32px;
+export const LoadingWrap = styled.View`
+  padding-top: ${({ theme }) => theme.spacing.lg}px;
   align-items: center;
-  justify-content: center;
-  background-color: ${({ theme }) => theme.colors.fill.default.strong};
-  margin-bottom: 4px;
+`;
+
+export const ErrorWrap = styled.View`
+  margin-top: ${({ theme }) => theme.spacing.lg}px;
+  padding: ${({ theme }) => theme.spacing.md}px;
+  border-radius: ${({ theme }) => theme.borderRadius.lg}px;
+  background-color: ${({ theme }) => theme.colors.fill.default.weak};
+  border-width: 1px;
+  border-color: ${({ theme }) => theme.colors.stroke.default.weak};
+  gap: 10px;
+`;
+
+export const ErrorTitle = styled(Text).attrs({ variant: 'headline' })`
+  color: ${({ theme }) => theme.colors.textIcon.default.strong};
+`;
+
+export const ErrorText = styled(Text).attrs({ variant: 'body-2-regular' })`
+  color: ${({ theme }) => theme.colors.textIcon.default.medium};
+`;
+
+export const RetryRow = styled.View`
+  align-items: flex-start;
 `;

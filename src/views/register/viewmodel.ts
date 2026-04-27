@@ -1,3 +1,4 @@
+import { type RegisterFormValues } from './schema';
 import i18n from '@/i18n';
 import { supabase } from '@/lib/supabase';
 import { RootParamsList, ScreenType } from '@/navigation/types';
@@ -12,31 +13,26 @@ type RegisterNavProp = NativeStackNavigationProp<
 
 export const useViewModel = () => {
   const navigation = useNavigation<RegisterNavProp>();
-
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const goToLogin = () => navigation.goBack();
 
-  const signUp = async () => {
-    setError(null);
+  const signUp = async (values: RegisterFormValues): Promise<void> => {
+    setSubmitError(null);
     setLoading(true);
 
     const { data, error: authError } = await supabase.auth.signUp({
-      email: email.trim(),
-      password,
+      email: values.email.trim(),
+      password: values.password,
     });
 
     if (authError) {
       setLoading(false);
       if (authError.message.includes('User already registered')) {
-        setError(i18n.t('auth.errors.emailAlreadyExists'));
+        setSubmitError(i18n.t('auth.errors.emailAlreadyExists'));
       } else {
-        setError(i18n.t('auth.errors.generic'));
+        setSubmitError(i18n.t('auth.errors.generic'));
       }
       return;
     }
@@ -44,25 +40,19 @@ export const useViewModel = () => {
     if (data.user) {
       await supabase
         .from('profiles')
-        .update({ first_name: firstName.trim(), last_name: lastName.trim() })
+        .update({
+          first_name: values.firstName.trim(),
+          last_name: values.lastName.trim(),
+        })
         .eq('id', data.user.id);
     }
 
     setLoading(false);
-    // onAuthStateChange emite SIGNED_IN y AppNavigator navega a las tabs.
   };
 
   return {
-    firstName,
-    setFirstName,
-    lastName,
-    setLastName,
-    email,
-    setEmail,
-    password,
-    setPassword,
+    submitError,
     loading,
-    error,
     signUp,
     goToLogin,
   };

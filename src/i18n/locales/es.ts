@@ -39,20 +39,58 @@ const es = {
       firstNamePlaceholder: 'Nombre',
       lastNamePlaceholder: 'Apellidos',
       emailPlaceholder: 'Correo electrónico',
-      passwordPlaceholder: 'Contraseña)',
+      passwordPlaceholder: 'Contraseña (mínimo 6 caracteres)',
+      confirmPasswordPlaceholder: 'Confirmar contraseña',
       createAccountButton: 'Crear cuenta',
       linkToLogin: '¿Ya tienes cuenta? Inicia sesión',
     },
     errors: {
       invalidCredentials: 'Email o contraseña incorrectos',
       emailAlreadyExists: 'Ya existe una cuenta con ese email',
+      passwordsDoNotMatch: 'Las contraseñas no coinciden',
+      passwordTooShort: 'La contraseña es demasiado corta',
+      nameRequired: 'Nombre y apellidos son obligatorios',
+      nameTooShort: 'Nombre y apellidos deben tener al menos 2 caracteres',
+      invalidEmail: 'Correo electrónico no válido',
       generic: 'Algo ha ido mal. Inténtalo de nuevo',
+    },
+    loading: {
+      loadingProfile: 'Cargando perfil...',
     },
   },
   tabs: {
-    home: 'Mis series',
+    home: 'Inicio',
+    series: 'Series',
+    movies: 'Películas',
     search: 'Buscar',
     profile: 'Perfil',
+  },
+  library: {
+    kicker: 'Biblioteca',
+    series: {
+      title: 'Series',
+      subtitle: 'Tu lista personal, por estado',
+    },
+    movies: {
+      title: 'Películas',
+      subtitle: 'Tu lista personal, por estado',
+    },
+  },
+  homeTab: {
+    hero: {
+      kicker: 'Lo más visto esta semana',
+      trending: 'Trending',
+    },
+    sections: {
+      movies: 'Películas',
+      series: 'Series',
+      week: 'Semana',
+    },
+    error: {
+      title: 'No se pudo cargar el Home',
+      subtitle: 'Revisa tu conexión o la API key de TMDB y vuelve a intentarlo.',
+      retry: 'Reintentar',
+    },
   },
   home: {
     title: 'Mis series',
@@ -61,9 +99,13 @@ const es = {
       afternoon: 'Buenas tardes,',
       evening: 'Buenas noches,',
     },
-    empty: {
+    emptySeries: {
       title: 'Nada por aquí todavía',
       subtitle: 'Busca una serie y empieza a construir tu lista.',
+    },
+    emptyMovies: {
+      title: 'Nada por aquí todavía',
+      subtitle: 'Busca una película y empieza a construir tu lista.',
     },
   },
   series: {
