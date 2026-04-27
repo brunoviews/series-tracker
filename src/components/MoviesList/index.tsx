@@ -148,9 +148,9 @@ const MoviesList = ({ userMovies, isLoading }: MoviesListProps) => {
               <EmptyStateIcon>
                 {EMPTY_STATUS_ICONS[activeStatus]}
               </EmptyStateIcon>
-              <EmptyStateText>{t('home.empty.title')}</EmptyStateText>
+              <EmptyStateText>{t('home.emptyMovies.title')}</EmptyStateText>
               <EmptyStateSubtitle>
-                {t('home.empty.subtitle')}
+                {t('home.emptyMovies.subtitle')}
               </EmptyStateSubtitle>
             </EmptyStateContainer>
           )

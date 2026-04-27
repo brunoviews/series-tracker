@@ -139,9 +139,9 @@ const SeriesList = ({ userSeries, isLoading }: SeriesListProps) => {
               <EmptyStateIcon>
                 {EMPTY_STATUS_ICONS[activeStatus]}
               </EmptyStateIcon>
-              <EmptyStateText>{t('home.empty.title')}</EmptyStateText>
+              <EmptyStateText>{t('home.emptySeries.title')}</EmptyStateText>
               <EmptyStateSubtitle>
-                {t('home.empty.subtitle')}
+                {t('home.emptySeries.subtitle')}
               </EmptyStateSubtitle>
             </EmptyStateContainer>
           )

@@ -59,8 +59,9 @@ export default function ProfileView() {
             <AvatarInitials>{userInitials}</AvatarInitials>
           </AvatarCircle>
           <AppText
-            variant="title-2"
+            variant="title-3"
             color={theme.colors.textIcon.default.strong}
+            numberOfLines={1}
           >
             {userName}
           </AppText>

@@ -40,12 +40,18 @@ const en = {
       lastNamePlaceholder: 'Last name',
       emailPlaceholder: 'Email',
       passwordPlaceholder: 'Password (minimum 6 characters)',
+      confirmPasswordPlaceholder: 'Confirm password',
       createAccountButton: 'Create account',
       linkToLogin: 'Already have an account? Sign in',
     },
     errors: {
       invalidCredentials: 'Invalid email or password',
       emailAlreadyExists: 'An account with that email already exists',
+      passwordsDoNotMatch: 'Passwords do not match',
+      passwordTooShort: 'Password is too short',
+      nameRequired: 'First and last name are required',
+      nameTooShort: 'First and last name must be at least 2 characters',
+      invalidEmail: 'Invalid email address',
       generic: 'Something went wrong. Please try again',
     },
 
@@ -67,9 +73,13 @@ const en = {
       afternoon: 'Good afternoon,',
       evening: 'Good evening,',
     },
-    empty: {
+    emptySeries: {
       title: 'Nothing here yet',
       subtitle: 'Search for a series and start building your list.',
+    },
+    emptyMovies: {
+      title: 'Nothing here yet',
+      subtitle: 'Search for a movie and start building your list.',
     },
   },
   series: {

@@ -40,12 +40,18 @@ const es = {
       lastNamePlaceholder: 'Apellidos',
       emailPlaceholder: 'Correo electrónico',
       passwordPlaceholder: 'Contraseña (mínimo 6 caracteres)',
+      confirmPasswordPlaceholder: 'Confirmar contraseña',
       createAccountButton: 'Crear cuenta',
       linkToLogin: '¿Ya tienes cuenta? Inicia sesión',
     },
     errors: {
       invalidCredentials: 'Email o contraseña incorrectos',
       emailAlreadyExists: 'Ya existe una cuenta con ese email',
+      passwordsDoNotMatch: 'Las contraseñas no coinciden',
+      passwordTooShort: 'La contraseña es demasiado corta',
+      nameRequired: 'Nombre y apellidos son obligatorios',
+      nameTooShort: 'Nombre y apellidos deben tener al menos 2 caracteres',
+      invalidEmail: 'Correo electrónico no válido',
       generic: 'Algo ha ido mal. Inténtalo de nuevo',
     },
     loading: {
@@ -64,9 +70,13 @@ const es = {
       afternoon: 'Buenas tardes,',
       evening: 'Buenas noches,',
     },
-    empty: {
+    emptySeries: {
       title: 'Nada por aquí todavía',
       subtitle: 'Busca una serie y empieza a construir tu lista.',
+    },
+    emptyMovies: {
+      title: 'Nada por aquí todavía',
+      subtitle: 'Busca una película y empieza a construir tu lista.',
     },
   },
   series: {

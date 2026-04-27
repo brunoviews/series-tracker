@@ -90,7 +90,7 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
     if (!session?.user?.id) return;
 
     fetchProfile();
-  }, [session?.user?.id, fetchProfile]);
+  }, [session?.user?.id, fetchProfile, userName]);
 
   return (
     <AuthContext.Provider

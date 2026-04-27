@@ -42,5 +42,11 @@ export const useViewModel = (
     setSelectedStatus((prev) => (prev === status ? null : status));
   }, []);
 
-  return { selectedStatus, handleSelectStatus, rating, setRating };
+  const isDisabled =
+    !selectedStatus ||
+    (initialStatus === selectedStatus &&
+      initialRating === parseRating(rating)) ||
+    (!!rating && parseRating(rating) === null);
+
+  return { selectedStatus, handleSelectStatus, rating, setRating, isDisabled };
 };

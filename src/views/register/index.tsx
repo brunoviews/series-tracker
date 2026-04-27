@@ -1,78 +1,143 @@
+import { makeRegisterSchema, type RegisterFormValues } from './schema';
 import { Container, CustomContainer, ErrorText, Link, Title } from './styles';
 import { useViewModel } from './viewmodel';
 import { Button } from '@/components/Button';
 import { GridBackground } from '@/components/GridBackground';
-import React from 'react';
+import { zodResolver } from '@hookform/resolvers/zod';
+import React, { useMemo } from 'react';
+import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { TextInput } from 'react-native-paper';
 
 export default function RegisterView() {
-  const {
-    firstName,
-    setFirstName,
-    lastName,
-    setLastName,
-    email,
-    setEmail,
-    password,
-    setPassword,
-    loading,
-    error,
-    signUp,
-    goToLogin,
-    isDisabled,
-  } = useViewModel();
+  const { loading, signUp, goToLogin, submitError } = useViewModel();
   const { t } = useTranslation();
+  const schema = useMemo(() => makeRegisterSchema(t), [t]);
 
+  const {
+    control,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm<RegisterFormValues>({
+    resolver: zodResolver(schema),
+    mode: 'onChange',
+    defaultValues: {
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+    },
+  });
   return (
     <CustomContainer>
       <GridBackground />
       <Container>
         <Title>{t('auth.register.title')}</Title>
 
-        <TextInput
-          label={t('auth.register.firstNamePlaceholder')}
-          value={firstName}
-          onChangeText={setFirstName}
-          autoCapitalize="words"
-          autoComplete="given-name"
-          style={{ width: '100%' }}
+        <Controller
+          control={control}
+          name="firstName"
+          render={({ field: { onChange, onBlur, value } }) => (
+            <TextInput
+              label={t('auth.register.firstNamePlaceholder')}
+              value={value}
+              onChangeText={onChange}
+              onBlur={onBlur}
+              autoCapitalize="words"
+              autoComplete="given-name"
+              style={{ width: '100%' }}
+              error={!!errors.firstName}
+            />
+          )}
         />
-
-        <TextInput
-          label={t('auth.register.lastNamePlaceholder')}
-          value={lastName}
-          onChangeText={setLastName}
-          autoCapitalize="words"
-          autoComplete="family-name"
-          style={{ width: '100%' }}
+        {errors.firstName?.message && (
+          <ErrorText>{errors.firstName.message}</ErrorText>
+        )}
+        <Controller
+          control={control}
+          name="lastName"
+          render={({ field: { onChange, onBlur, value } }) => (
+            <TextInput
+              label={t('auth.register.lastNamePlaceholder')}
+              value={value}
+              onChangeText={onChange}
+              onBlur={onBlur}
+              autoCapitalize="words"
+              autoComplete="family-name"
+              style={{ width: '100%' }}
+              error={!!errors.lastName}
+            />
+          )}
         />
+        {errors.lastName?.message && (
+          <ErrorText>{errors.lastName.message}</ErrorText>
+        )}
 
-        <TextInput
-          label={t('auth.register.emailPlaceholder')}
-          value={email}
-          onChangeText={setEmail}
-          autoCapitalize="none"
-          keyboardType="email-address"
-          autoComplete="email"
-          style={{ width: '100%' }}
+        <Controller
+          control={control}
+          name="email"
+          render={({ field: { onChange, onBlur, value } }) => (
+            <TextInput
+              label={t('auth.register.emailPlaceholder')}
+              value={value}
+              onChangeText={onChange}
+              onBlur={onBlur}
+              autoCapitalize="none"
+              keyboardType="email-address"
+              autoComplete="email"
+              style={{ width: '100%' }}
+              error={!!errors.email}
+            />
+          )}
         />
-
-        <TextInput
-          label={t('auth.register.passwordPlaceholder')}
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry
-          autoComplete="new-password"
-          mode="flat"
-          style={{ width: '100%' }}
+        {errors.email?.message && <ErrorText>{errors.email.message}</ErrorText>}
+        <Controller
+          control={control}
+          name="password"
+          render={({ field: { onChange, onBlur, value } }) => (
+            <TextInput
+              label={t('auth.register.passwordPlaceholder')}
+              value={value}
+              onChangeText={onChange}
+              onBlur={onBlur}
+              secureTextEntry
+              autoComplete="new-password"
+              mode="flat"
+              style={{ width: '100%' }}
+              error={!!errors.password}
+            />
+          )}
         />
+        {errors.password?.message && (
+          <ErrorText>{errors.password.message}</ErrorText>
+        )}
+        <Controller
+          control={control}
+          name="confirmPassword"
+          render={({ field: { onChange, onBlur, value } }) => (
+            <TextInput
+              label={t('auth.register.confirmPasswordPlaceholder')}
+              value={value}
+              onChangeText={onChange}
+              onBlur={onBlur}
+              secureTextEntry
+              autoComplete="new-password"
+              mode="flat"
+              style={{ width: '100%' }}
+              error={!!errors.confirmPassword}
+            />
+          )}
+        />
+        {errors.confirmPassword?.message && (
+          <ErrorText>{errors.confirmPassword.message}</ErrorText>
+        )}
 
-        {error && <ErrorText>{error}</ErrorText>}
+        {submitError && <ErrorText>{submitError}</ErrorText>}
 
         <Button
-          onPress={signUp}
-          disabled={isDisabled || loading}
+          onPress={handleSubmit(signUp)}
+          disabled={!isValid || loading}
           variant="primary"
           isLoading={loading}
           title={t('auth.register.createAccountButton')}
