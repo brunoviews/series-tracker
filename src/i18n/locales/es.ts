@@ -59,9 +59,38 @@ const es = {
     },
   },
   tabs: {
-    home: 'Mis series',
+    home: 'Inicio',
+    series: 'Series',
+    movies: 'Películas',
     search: 'Buscar',
     profile: 'Perfil',
+  },
+  library: {
+    kicker: 'Biblioteca',
+    series: {
+      title: 'Series',
+      subtitle: 'Tu lista personal, por estado',
+    },
+    movies: {
+      title: 'Películas',
+      subtitle: 'Tu lista personal, por estado',
+    },
+  },
+  homeTab: {
+    hero: {
+      kicker: 'Lo más visto esta semana',
+      trending: 'Trending',
+    },
+    sections: {
+      movies: 'Películas',
+      series: 'Series',
+      week: 'Semana',
+    },
+    error: {
+      title: 'No se pudo cargar el Home',
+      subtitle: 'Revisa tu conexión o la API key de TMDB y vuelve a intentarlo.',
+      retry: 'Reintentar',
+    },
   },
   home: {
     title: 'Mis series',

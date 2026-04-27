@@ -31,6 +31,7 @@ export type TmdbSeries = {
   name: string;
   overview: string;
   poster_path: string | null;
+  backdrop_path: string | null;
   first_air_date: string;
   vote_average: number;
   vote_count: number;
@@ -39,7 +40,6 @@ export type TmdbSeries = {
 
 // Resultado del endpoint de detalle /tv/{id}
 export type TmdbSeriesDetail = TmdbSeries & {
-  backdrop_path: string | null;
   genres: TmdbGenre[];
   number_of_seasons: number;
   number_of_episodes: number;
@@ -55,6 +55,7 @@ export type TmdbMovie = {
   title: string;
   overview: string;
   poster_path: string | null;
+  backdrop_path: string | null;
   release_date: string;
   vote_average: number;
   vote_count: number;
@@ -63,7 +64,6 @@ export type TmdbMovie = {
 
 // Resultado del endpoint de detalle /movie/{id}
 export type TmdbMovieDetail = TmdbMovie & {
-  backdrop_path: string | null;
   genres: TmdbGenre[];
   runtime: number;
   status: string;
@@ -190,4 +190,53 @@ export const getMovieById = async (
   }
 
   return response.json() as Promise<TmdbMovieDetail>;
+};
+
+type TmdbPagedResponse<T> = {
+  page: number;
+  results: T[];
+  total_pages: number;
+  total_results: number;
+};
+
+export const getTrendingMovies = async (
+  timeWindow: 'day' | 'week' = 'week',
+): Promise<TmdbMovie[]> => {
+  const params = new URLSearchParams({
+    api_key: apiKey,
+    language: getDeviceLanguage(),
+    page: '1',
+  });
+
+  const response = await fetch(
+    `${TMDB_BASE_URL}/trending/movie/${timeWindow}?${params.toString()}`,
+  );
+
+  if (!response.ok) {
+    throw new Error(`TMDB error: ${response.status}`);
+  }
+
+  const data = (await response.json()) as TmdbPagedResponse<TmdbMovie>;
+  return data.results;
+};
+
+export const getTrendingSeries = async (
+  timeWindow: 'day' | 'week' = 'week',
+): Promise<TmdbSeries[]> => {
+  const params = new URLSearchParams({
+    api_key: apiKey,
+    language: getDeviceLanguage(),
+    page: '1',
+  });
+
+  const response = await fetch(
+    `${TMDB_BASE_URL}/trending/tv/${timeWindow}?${params.toString()}`,
+  );
+
+  if (!response.ok) {
+    throw new Error(`TMDB error: ${response.status}`);
+  }
+
+  const data = (await response.json()) as TmdbPagedResponse<TmdbSeries>;
+  return data.results;
 };

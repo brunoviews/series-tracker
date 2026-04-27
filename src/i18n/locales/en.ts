@@ -61,9 +61,38 @@ const en = {
     },
   },
   tabs: {
-    home: 'My series',
+    home: 'Home',
+    series: 'Series',
+    movies: 'Movies',
     search: 'Search',
     profile: 'Profile',
+  },
+  library: {
+    kicker: 'Library',
+    series: {
+      title: 'Series',
+      subtitle: 'Your personal list, by status',
+    },
+    movies: {
+      title: 'Movies',
+      subtitle: 'Your personal list, by status',
+    },
+  },
+  homeTab: {
+    hero: {
+      kicker: 'Trending this week',
+      trending: 'Trending',
+    },
+    sections: {
+      movies: 'Movies',
+      series: 'Series',
+      week: 'Week',
+    },
+    error: {
+      title: "Couldn't load Home",
+      subtitle: 'Check your connection or TMDB API key and try again.',
+      retry: 'Retry',
+    },
   },
   home: {
     title: 'My series',
