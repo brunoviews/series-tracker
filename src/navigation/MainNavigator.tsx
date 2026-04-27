@@ -1,11 +1,13 @@
-import HomeView from '../views/home';
 import ProfileView from '../views/profile';
 import SearchView from '../views/search';
+import SeriesView from '../views/series';
 import { ScreenType, type TabParamsList } from './types';
+import MoviesView from '@/views/movies';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {
-  HouseIcon,
   MagnifyingGlassIcon,
+  PopcornIcon,
+  TelevisionIcon,
   UserIcon,
 } from 'phosphor-react-native';
 import React from 'react';
@@ -24,14 +26,14 @@ export default function MainNavigator() {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarShowLabel: false,
+        animation: 'fade',
         tabBarStyle: {
           backgroundColor: TAB_BG,
           borderTopWidth: 1,
           borderTopColor: '#2DD4BF33', // Usamos el color activo con transparencia para el borde
           height: 64 + insets.bottom,
           paddingBottom: insets.bottom,
-          paddingTop: 20,
+          paddingTop: 10,
           elevation: 0,
         },
         tabBarItemStyle: {
@@ -43,11 +45,24 @@ export default function MainNavigator() {
       }}
     >
       <Tab.Screen
-        name={ScreenType.HOME}
-        component={HomeView}
+        name={ScreenType.SERIES}
+        component={SeriesView}
         options={{
           tabBarIcon: ({ color, focused }) => (
-            <HouseIcon
+            <TelevisionIcon
+              color={color}
+              size={32}
+              weight={focused ? 'fill' : 'regular'}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name={ScreenType.MOVIES}
+        component={MoviesView}
+        options={{
+          tabBarIcon: ({ color, focused }) => (
+            <PopcornIcon
               color={color}
               size={32}
               weight={focused ? 'fill' : 'regular'}

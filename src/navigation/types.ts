@@ -8,7 +8,8 @@ export enum ScreenType {
   // Main (contenedor de tabs)
   TABS = 'Tabs',
   // Tabs
-  HOME = 'Home',
+  SERIES = 'Series',
+  MOVIES = 'Movies',
   SEARCH = 'Search',
   PROFILE = 'Profile',
   // Detail
@@ -32,7 +33,8 @@ export type RootParamsList = {
 
 // TabParamsList: pantallas internas del tab navigator
 export type TabParamsList = {
-  [ScreenType.HOME]: undefined;
+  [ScreenType.SERIES]: undefined;
+  [ScreenType.MOVIES]: undefined;
   [ScreenType.SEARCH]: undefined;
   [ScreenType.PROFILE]: undefined;
 };

@@ -9,7 +9,6 @@ const getGreetingKey = (): 'morning' | 'afternoon' | 'evening' => {
 
 export const useViewModel = () => {
   const { userName, userFirstName } = useAuth();
-
   const userInitials = userName
     ? userName
         .split(' ')
