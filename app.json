@@ -9,17 +9,17 @@
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "rgb(26, 26, 29)"
+      "backgroundColor": "#1a1a1d"
     },
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.brunoview.binged"
     },
     "android": {
-      "backgroundColor": "rgb(26, 26, 29)",
+      "backgroundColor": "#1a1a1d",
       "package": "com.brunoview.binged",
       "adaptiveIcon": {
-        "backgroundColor": "rgb(26, 26, 29)",
+        "backgroundColor": "#1a1a1d",
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
