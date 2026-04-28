@@ -7,7 +7,7 @@
 - styled-components/native con ThemeProvider
 - i18next + react-i18next + expo-localization (es + en)
 - TypeScript
-- App llamada: **MyWatchList**
+- App llamada: **Binged**
 
 ## Estructura de carpetas
 
