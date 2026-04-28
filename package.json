@@ -1,5 +1,5 @@
 {
-  "name": "series-tracker",
+  "name": "binged-app",
   "version": "1.0.0",
   "main": "index.ts",
   "scripts": {
@@ -25,7 +25,7 @@
     "@supabase/supabase-js": "^2.100.0",
     "autoskills": "^0.2.7",
     "babel-preset-expo": "~55.0.8",
-    "expo": "~55.0.15",
+    "expo": "~55.0.18",
     "expo-blur": "~55.0.14",
     "expo-font": "~55.0.6",
     "expo-linear-gradient": "~55.0.13",
@@ -43,7 +43,6 @@
     "react-native-safe-area-context": "~5.6.2",
     "react-native-screens": "~4.23.0",
     "react-native-svg": "15.15.3",
-    "react-native-tab-view": "^4.3.0",
     "react-native-url-polyfill": "^3.0.0",
     "styled-components": "^6.3.12",
     "zod": "^4.3.6"

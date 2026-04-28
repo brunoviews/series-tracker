@@ -16,6 +16,7 @@ export const Title = styled(Text).attrs({ variant: 'title-1' })`
 `;
 
 export const FilterButtonsContainer = styled.View`
+  width: 100%;
   flex-direction: row;
   justify-content: space-evenly;
 `;
@@ -35,7 +36,6 @@ export const FilterTypeButton = styled.TouchableOpacity<{
   padding: 12px 40px;
   border-radius: 12px;
   margin-top: 8px;
-  
 `;
 
 export const StatusPillText = styled(Text).attrs({ variant: 'label' })<{

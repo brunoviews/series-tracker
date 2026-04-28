@@ -22,6 +22,7 @@ import {
   SectionHeader,
   SectionHint,
   SectionTitle,
+  Separator,
 } from './styles';
 import { useViewModel } from './viewmodel';
 import { Button } from '@/components/Button';
@@ -46,7 +47,7 @@ export default function HomeView() {
 
   return (
     <HomeLayout>
-      <Scroll contentContainerStyle={{ paddingBottom: 120 }}>
+      <Scroll contentContainerStyle={{ paddingBottom: 80, gap: 24 }}>
         {error ? (
           <ErrorWrap>
             <ErrorTitle>{t('homeTab.error.title')}</ErrorTitle>
@@ -149,14 +150,17 @@ export default function HomeView() {
                   </PosterGradient>
                 </PosterImageWrap>
                 <PosterSub numberOfLines={1}>
-                  {item.release_date ? new Date(item.release_date).getFullYear() : '—'}
+                  {item.release_date
+                    ? new Date(item.release_date).getFullYear()
+                    : '—'}
                 </PosterSub>
               </PosterCard>
             )}
           />
         </Section>
-
+        <Separator />
         <Section>
+          
           <SectionHeader>
             <SectionTitle>{t('homeTab.sections.series')}</SectionTitle>
             <SectionHint>{t('homeTab.sections.week')}</SectionHint>

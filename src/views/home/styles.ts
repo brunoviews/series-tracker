@@ -10,7 +10,6 @@ export const Scroll = styled.ScrollView.attrs({
 `;
 
 export const Section = styled.View`
-  margin-top: ${({ theme }) => theme.spacing.lg}px;
   gap: 12px;
 `;
 
@@ -24,7 +23,7 @@ export const SectionTitle = styled(Text).attrs({ variant: 'headline' })`
   color: ${({ theme }) => theme.colors.textIcon.default.strong};
 `;
 
-export const SectionHint = styled(Text).attrs({ variant: 'caption' })`
+export const SectionHint = styled(Text).attrs({ variant: 'label' })`
   color: ${({ theme }) => theme.colors.textIcon.default.weak};
 `;
 
@@ -141,4 +140,10 @@ export const ErrorText = styled(Text).attrs({ variant: 'body-2-regular' })`
 
 export const RetryRow = styled.View`
   align-items: flex-start;
+`;
+
+export const Separator = styled.View`
+  height: 1px;
+  background-color: ${({ theme }) => theme.colors.stroke.primary.weak};
+  padding: 0 ${({ theme }) => theme.spacing.lg}px;
 `;

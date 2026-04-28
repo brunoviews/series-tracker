@@ -84,7 +84,7 @@ const es = {
     sections: {
       movies: 'Películas',
       series: 'Series',
-      week: 'Semana',
+      week: 'Lo más visto esta semana',
     },
     error: {
       title: 'No se pudo cargar el Home',

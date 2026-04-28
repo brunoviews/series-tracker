@@ -11,7 +11,7 @@ export const SafeContainer = styled(SafeAreaView).attrs({
 `;
 
 export const ScrollContainer = styled.ScrollView.attrs({
-  contentContainerStyle: { paddingBottom: 40 },
+  contentContainerStyle: { paddingBottom: 40, justifyContent: 'space-evenly' },
 })`
   flex: 1;
 `;
@@ -86,7 +86,7 @@ export const OptionLabel = styled(Text).attrs({ variant: 'body-2-regular' })`
 // ─── Logout ───────────────────────────────────────────────────────────────────
 
 export const LogoutButton = styled.TouchableOpacity`
-  margin: ${({ theme }) => theme.spacing.md}px;
+  width: 100%;
   background-color: ${({ theme }) => theme.colors.fill.default.medium};
   border-radius: ${({ theme }) => theme.borderRadius.md}px;
   border-width: 1px;
@@ -112,6 +112,7 @@ export const DangerSection = styled.View`
   margin: ${({ theme }) => theme.spacing.md}px;
   padding: 16px 0;
   gap: 12px;
+  background-color: ${({ theme }) => theme.colors.fill.default.weak};
 `;
 
 export const DeleteAccountButton = styled(Button)``;

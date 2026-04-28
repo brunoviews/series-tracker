@@ -86,7 +86,7 @@ const en = {
     sections: {
       movies: 'Movies',
       series: 'Series',
-      week: 'Week',
+      week: 'Trending this week',
     },
     error: {
       title: "Couldn't load Home",

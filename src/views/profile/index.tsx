@@ -20,7 +20,6 @@ import DeleteAccountModal from '@/components/DeleteAccountModal';
 import { CustomSnackbar } from '@/components/Snackbar';
 import AppText from '@components/Text';
 import {
-  BellIcon,
   CaretRightIcon,
   PencilSimpleIcon,
   ShieldIcon,
@@ -83,7 +82,7 @@ export default function ProfileView() {
             <CaretRightIcon size={iconSize} color={iconColor} />
           </OptionRow>
 
-          <OptionRow onPress={() => {}}>
+          {/*{<OptionRow onPress={() => {}}>
             <OptionRowContent>
               <BellIcon size={iconSize} color={iconColor} />
               <OptionLabel>
@@ -91,7 +90,7 @@ export default function ProfileView() {
               </OptionLabel>
             </OptionRowContent>
             <CaretRightIcon size={iconSize} color={iconColor} />
-          </OptionRow>
+          </OptionRow>} */}
 
           <OptionRow onPress={() => {}}>
             <OptionRowContent>
@@ -102,16 +101,16 @@ export default function ProfileView() {
             </OptionRowContent>
             <CaretRightIcon size={iconSize} color={iconColor} />
           </OptionRow>
-        </OptionsList>
 
-        {/* ── Logout ── */}
-        <LogoutButton onPress={signOut}>
-          <SignOutIcon
-            size={iconSize}
-            color={theme.colors.textIcon.primary.main}
-          />
-          <LogoutButtonText>{t('profile.logout')}</LogoutButtonText>
-        </LogoutButton>
+          {/* ── Logout ── */}
+          <LogoutButton onPress={signOut}>
+            <SignOutIcon
+              size={iconSize}
+              color={theme.colors.textIcon.primary.main}
+            />
+            <LogoutButtonText>{t('profile.logout')}</LogoutButtonText>
+          </LogoutButton>
+        </OptionsList>
 
         {/* ── Danger zone ── */}
 
