@@ -7,7 +7,7 @@ export const Container = styled.View`
   padding: ${({ theme }) => theme.spacing.md}px;
   gap: 16px;
   width: 100%;
-  border-radius: ${({ theme }) => theme.borderRadius.lg}px;
+
 `;
 
 export const Title = styled(Text).attrs({ variant: 'title-1' })`
@@ -40,11 +40,29 @@ export const Link = styled.Text`
   text-decoration: underline;
 `;
 
-export const CustomContainer = styled.View`
-  background-color: ${({ theme }) => theme.colors.fill.default.base};
+export const CustomContainer = styled.ImageBackground`
   padding: ${({ theme }) => theme.spacing.md}px;
   flex: 1;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+`;
+
+//icon container
+export const IconContainer = styled.ImageBackground`
+  width: 120px;
+  height: 120px;
+  align-items: center;
+  justify-content: center;
+
+`;
+
+//shadow background for the view
+export const GridBackground = styled.View`
+position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.65);
 `;

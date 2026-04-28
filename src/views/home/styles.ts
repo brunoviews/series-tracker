@@ -24,7 +24,7 @@ export const SectionTitle = styled(Text).attrs({ variant: 'headline' })`
   color: ${({ theme }) => theme.colors.textIcon.default.strong};
 `;
 
-export const SectionHint = styled(Text).attrs({ variant: 'caption' })`
+export const SectionHint = styled(Text).attrs({ variant: 'label' })`
   color: ${({ theme }) => theme.colors.textIcon.default.weak};
 `;
 
