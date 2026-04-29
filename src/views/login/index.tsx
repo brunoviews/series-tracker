@@ -3,15 +3,14 @@ import {
   Container,
   CustomContainer,
   ErrorText,
-  GridBackground,
-  IconContainer,
   Link,
   SubTitle,
   Title,
+  TitleContainer,
 } from './styles';
 import { useViewModel } from './viewmodel';
 import { Button } from '@/components/Button';
-import { TitlesContainer } from '@/components/TitlesContainer';
+import { FancyBackground } from '@/components/FancyBackground';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { TextInput } from 'react-native-paper';
@@ -31,54 +30,48 @@ export default function LoginView() {
   const { t } = useTranslation();
 
   return (
-    <>
-      
-      <CustomContainer source={require('@assets/appIcon/bg_app.png')}>
-      <GridBackground />
-        <TitlesContainer>
-          <IconContainer
-            source={require('@assets/appIcon/appIcon.png')}
-          ></IconContainer>
+    <CustomContainer>
+      <FancyBackground />
 
-          <AppName>Binged</AppName>
-          <SubTitle>Track what you watch</SubTitle>
-        </TitlesContainer>
-        <Container>
-          <Title>Log in</Title>
+      <TitleContainer>
+        <AppName>{t('homeView.appName')}</AppName>
 
-          <TextInput
-            label={t('auth.login.emailPlaceholder')}
-            value={email}
-            onChangeText={setEmail}
-            autoCapitalize="none"
-            keyboardType="email-address"
-            autoComplete="email"
-            style={{ width: '100%' }}
-          />
+        <SubTitle>Track what you watch</SubTitle>
+      </TitleContainer>
+      <Container>
+        <Title>Log in</Title>
 
-          <TextInput
-            label={t('auth.login.passwordPlaceholder')}
-            value={password}
-            onChangeText={setPassword}
-            secureTextEntry
-            autoComplete="password"
-            mode="flat"
-            style={{ width: '100%' }}
-          />
+        <TextInput
+          label={t('auth.login.emailPlaceholder')}
+          value={email}
+          onChangeText={setEmail}
+          autoCapitalize="none"
+          keyboardType="email-address"
+          autoComplete="email"
+          style={{ width: '100%' }}
+        />
 
-          {error && <ErrorText>{error}</ErrorText>}
+        <TextInput
+          label={t('auth.login.passwordPlaceholder')}
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry
+          autoComplete="password"
+          style={{ width: '100%' }}
+        />
 
-          <Button
-            onPress={signIn}
-            disabled={isDisable || loading}
-            variant="primary"
-            isLoading={loading}
-            title={t('auth.login.submitButton')}
-          />
+        {error && <ErrorText>{error}</ErrorText>}
 
-          <Link onPress={goToRegister}>{t('auth.login.linkToRegister')}</Link>
-        </Container>
-      </CustomContainer>
-    </>
+        <Button
+          onPress={signIn}
+          disabled={isDisable || loading}
+          variant="primary"
+          isLoading={loading}
+          title={t('auth.login.submitButton')}
+        />
+
+        <Link onPress={goToRegister}>{t('auth.login.linkToRegister')}</Link>
+      </Container>
+    </CustomContainer>
   );
 }

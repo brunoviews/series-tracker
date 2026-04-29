@@ -2,7 +2,7 @@ import { makeRegisterSchema, type RegisterFormValues } from './schema';
 import { Container, CustomContainer, ErrorText, Link, Title } from './styles';
 import { useViewModel } from './viewmodel';
 import { Button } from '@/components/Button';
-import { GridBackground } from '@/components/GridBackground';
+import { FancyBackground } from '@/components/FancyBackground';
 import { zodResolver } from '@hookform/resolvers/zod';
 import React, { useMemo } from 'react';
 import { Controller, useForm } from 'react-hook-form';
@@ -31,7 +31,7 @@ export default function RegisterView() {
   });
   return (
     <CustomContainer>
-      <GridBackground />
+      <FancyBackground />
       <Container>
         <Title>{t('auth.register.title')}</Title>
 

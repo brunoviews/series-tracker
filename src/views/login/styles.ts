@@ -7,7 +7,6 @@ export const Container = styled.View`
   padding: ${({ theme }) => theme.spacing.md}px;
   gap: 16px;
   width: 100%;
-
 `;
 
 export const Title = styled(Text).attrs({ variant: 'title-1' })`
@@ -15,12 +14,20 @@ export const Title = styled(Text).attrs({ variant: 'title-1' })`
   width: 100%;
 `;
 
+export const TitleContainer = styled.View`
+  align-items: center;  
+  justify-content: center;
+  gap: 12px; 
+  margin-bottom: 32px;
+
+`;
+
 export const AppName = styled(Text).attrs({ variant: 'title-1' })`
   text-align: center;
-  width: 100%;
-  color: ${({ theme }) => theme.colors.textIcon.default.strong};
-  font-size: 42px;
-  line-height: 48px;
+  color: ${({ theme }) => theme.colors.stroke.primary.main};
+ font-size: 48px;
+line-height: 100%;
+ 
 `;
 
 export const SubTitle = styled(Text).attrs({ variant: 'title-3' })`
@@ -29,40 +36,19 @@ export const SubTitle = styled(Text).attrs({ variant: 'title-3' })`
   color: ${({ theme }) => theme.colors.textIcon.default.weak};
 `;
 
-export const ErrorText = styled.Text`
+export const ErrorText = styled(Text).attrs({ variant: 'body-2-regular' })`
   color: ${({ theme }) => theme.colors.textIcon.semantic.error.main};
-  font-size: ${({ theme }) => theme.typography['body-2-regular'].fontSize}px;
 `;
 
-export const Link = styled.Text`
+export const Link = styled(Text).attrs({ variant: 'body-1-regular' })`
   color: ${({ theme }) => theme.colors.textIcon.default.strong};
-  font-size: ${({ theme }) => theme.typography['body-1-regular'].fontSize}px;
   text-decoration: underline;
 `;
 
-export const CustomContainer = styled.ImageBackground`
+export const CustomContainer = styled.View`
+  background-color: ${({ theme }) => theme.colors.fill.default.weak};
   padding: ${({ theme }) => theme.spacing.md}px;
   flex: 1;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-`;
-
-//icon container
-export const IconContainer = styled.ImageBackground`
-  width: 120px;
-  height: 120px;
-  align-items: center;
-  justify-content: center;
-
-`;
-
-//shadow background for the view
-export const GridBackground = styled.View`
-position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.65);
 `;

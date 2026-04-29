@@ -208,7 +208,7 @@ const es = {
     userRating: 'Mi nota',
   },
   homeView: {
-    appName: 'MyWatchList',
+    appName: 'Binged',
     welcome: 'Hola, {{name}}',
   },
 } as const;
