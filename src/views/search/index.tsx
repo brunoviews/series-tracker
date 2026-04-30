@@ -46,6 +46,7 @@ export default function SearchView() {
     error,
     snackMessage,
     isSuccess,
+    isError,
     isRemovingSnack,
     clearSnackMessage,
   } = useViewModel();
@@ -101,7 +102,12 @@ export default function SearchView() {
             keyExtractor={(item) => String(item.id)}
             numColumns={2}
             columnWrapperStyle={{ gap: 12, justifyContent: 'center' }}
-            contentContainerStyle={{ gap: 16, paddingBottom: 16 }}
+            contentContainerStyle={{
+              gap: 24,
+              paddingLeft: 16,
+              paddingBottom: 24,
+              paddingTop: 24,
+            }}
             renderItem={({ item }) => (
               <SearchResultCard
                 item={item}
@@ -170,7 +176,7 @@ export default function SearchView() {
         onDismiss={clearSnackMessage}
         message={snackMessage ?? ''}
         isSuccess={isSuccess}
-        isError={!isSuccess}
+        isError={isError}
         duration={2500}
         isRemoving={isRemovingSnack}
       />

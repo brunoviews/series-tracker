@@ -11,7 +11,7 @@ export const SafeContainer = styled(SafeAreaView).attrs({
 `;
 
 export const ScrollContainer = styled.ScrollView.attrs({
-  contentContainerStyle: { paddingBottom: 40, justifyContent: 'space-evenly' },
+  contentContainerStyle: { paddingBottom: 40 },
 })`
   flex: 1;
 `;
@@ -110,18 +110,11 @@ export const LogoutButtonText = styled(Text).attrs({
 
 export const DangerSection = styled.View`
   margin: ${({ theme }) => theme.spacing.md}px;
-  padding: 16px 0;
+  padding: 160px 0;
   gap: 12px;
-  background-color: ${({ theme }) => theme.colors.fill.default.weak};
 `;
 
 export const DeleteAccountButton = styled(Button)``;
-
-export const DeleteAccountRowContent = styled.View`
-  flex-direction: row;
-  align-items: center;
-  gap: 12px;
-`;
 
 export const DeleteSectionTitle = styled(Text).attrs({ variant: 'label' })`
   color: ${({ theme }) => theme.colors.textIcon.semantic.error.main};

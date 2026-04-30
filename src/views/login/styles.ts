@@ -1,32 +1,38 @@
 import Text from '@components/Text';
 import styled from 'styled-components/native';
 
-export const Container = styled.View`
+export const ScreenContainer = styled.View`
+  flex: 1;
+  background-color: ${({ theme }) => theme.colors.fill.default.base};
   align-items: center;
   justify-content: center;
-  padding: ${({ theme }) => theme.spacing.md}px;
-  gap: 16px;
-  width: 100%;
-
+  overflow: hidden;
 `;
 
-export const Title = styled(Text).attrs({ variant: 'title-1' })`
+export const AppName = styled(Text).attrs({ variant: 'display-2' })`
   text-align: center;
-  width: 100%;
-`;
-
-export const AppName = styled(Text).attrs({ variant: 'title-1' })`
-  text-align: center;
-  width: 100%;
-  color: ${({ theme }) => theme.colors.textIcon.default.strong};
-  font-size: 42px;
-  line-height: 48px;
+  color: ${({ theme }) => theme.colors.textIcon.primary.main};
 `;
 
 export const SubTitle = styled(Text).attrs({ variant: 'title-3' })`
   text-align: center;
+  color: ${({ theme }) => theme.colors.textIcon.default.medium};
+`;
+
+export const FormCard = styled.View`
   width: 100%;
-  color: ${({ theme }) => theme.colors.textIcon.default.weak};
+  padding: ${({ theme }) => theme.spacing.lg}px;
+  background-color: ${({ theme }) => theme.colors.fill.default.weak};
+  border-radius: ${({ theme }) => theme.borderRadius.lg}px;
+  border-width: 1px;
+  border-color: ${({ theme }) => theme.colors.stroke.default.subtle};
+  gap: 16px;
+  align-items: center;
+`;
+
+export const Title = styled(Text).attrs({ variant: 'title-2' })`
+  text-align: center;
+  width: 100%;
 `;
 
 export const ErrorText = styled.Text`
@@ -35,34 +41,16 @@ export const ErrorText = styled.Text`
 `;
 
 export const Link = styled.Text`
-  color: ${({ theme }) => theme.colors.textIcon.default.strong};
+  color: ${({ theme }) => theme.colors.textIcon.default.medium};
   font-size: ${({ theme }) => theme.typography['body-1-regular'].fontSize}px;
-  text-decoration: underline;
+  text-decoration-line: underline;
 `;
 
-export const CustomContainer = styled.ImageBackground`
-  padding: ${({ theme }) => theme.spacing.md}px;
+export const ContentWrapper = styled.View`
   flex: 1;
+  width: 100%;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-`;
-
-//icon container
-export const IconContainer = styled.ImageBackground`
-  width: 120px;
-  height: 120px;
-  align-items: center;
-  justify-content: center;
-
-`;
-
-//shadow background for the view
-export const GridBackground = styled.View`
-position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.65);
+  padding: ${({ theme }) => theme.spacing.md}px;
+  gap: ${({ theme }) => theme.spacing.xl}px;
 `;

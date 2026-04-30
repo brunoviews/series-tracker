@@ -97,7 +97,7 @@ const AddShowModal: FC<AddShowModalProps> = ({
   return (
     <Modal
       visible={isOpen}
-      animationType="fade"
+    
       transparent
       onRequestClose={handleCancel}
     >

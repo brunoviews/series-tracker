@@ -1,17 +1,16 @@
 import {
   AppName,
-  Container,
-  CustomContainer,
+  ContentWrapper,
   ErrorText,
-  GridBackground,
-  IconContainer,
+  FormCard,
   Link,
+  ScreenContainer,
   SubTitle,
   Title,
 } from './styles';
 import { useViewModel } from './viewmodel';
 import { Button } from '@/components/Button';
-import { TitlesContainer } from '@/components/TitlesContainer';
+import { GridBackground } from '@/components/GridBackground';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { TextInput } from 'react-native-paper';
@@ -31,19 +30,13 @@ export default function LoginView() {
   const { t } = useTranslation();
 
   return (
-    <>
-      
-      <CustomContainer source={require('@assets/appIcon/bg_app.png')}>
+    <ScreenContainer>
       <GridBackground />
-        <TitlesContainer>
-          <IconContainer
-            source={require('@assets/appIcon/appIcon.png')}
-          ></IconContainer>
+      <ContentWrapper>
+        <AppName>Binged</AppName>
+        <SubTitle>Track what you watch</SubTitle>
 
-          <AppName>Binged</AppName>
-          <SubTitle>Track what you watch</SubTitle>
-        </TitlesContainer>
-        <Container>
+        <FormCard>
           <Title>Log in</Title>
 
           <TextInput
@@ -77,8 +70,8 @@ export default function LoginView() {
           />
 
           <Link onPress={goToRegister}>{t('auth.login.linkToRegister')}</Link>
-        </Container>
-      </CustomContainer>
-    </>
+        </FormCard>
+      </ContentWrapper>
+    </ScreenContainer>
   );
 }

@@ -3,6 +3,7 @@ module.exports = function (api) {
     return {
         presets: ['babel-preset-expo'],
         plugins: [
+
             [
                 'module-resolver',
                 {
@@ -24,3 +25,4 @@ module.exports = function (api) {
         ],
     };
 };
+0

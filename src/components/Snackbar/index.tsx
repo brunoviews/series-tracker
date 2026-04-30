@@ -43,13 +43,13 @@ export function CustomSnackbar({
             color={theme.colors.textIcon.primary.main}
             weight="fill"
           />
-        ) : (
+        ) : isError ? (
           <XIcon
             size={24}
             color={theme.colors.textIcon.semantic.error.main}
             weight="bold"
           />
-        )
+        ) : null
       }
     >
       <Message $isSuccess={isSuccess} $isError={isError} $isRemoving={isRemoving} variant="label">

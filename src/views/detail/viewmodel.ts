@@ -83,6 +83,7 @@ export const useViewModel = (tmdbId: number, type: 'series' | 'movie') => {
       setIsSuccess(true);
       closeModal();
     } catch (error) {
+      closeModal();
       console.error('Error al añadir:', error);
       setSnackMessage(
         type === 'series'
