@@ -19,7 +19,7 @@ export default function MoviesView() {
       icon={
         <PopcornIcon
           size={22}
-          color={theme.colors.textIcon.default.strong}
+          color={theme.colors.textIcon.primary.main}
           weight="duotone"
         />
       }

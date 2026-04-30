@@ -31,12 +31,14 @@ export const useViewModel = () => {
   const [selectedItem, setSelectedItem] = useState<SearchResult | null>(null);
   const [snackMessage, setSnackMessage] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isError, setIsError] = useState(false);
   const [isRemovingSnack, setIsRemovingSnack] = useState(false);
   const [mediaType, setMediaType] = useState<'series' | 'movie'>('series');
 
   const clearSnackMessage = () => {
     setSnackMessage(null);
     setIsSuccess(false);
+    setIsError(false);
     setIsRemovingSnack(false);
   };
 
@@ -75,6 +77,7 @@ export const useViewModel = () => {
       closeModal();
     } catch (e) {
       console.error('Error añadiendo serie:', e);
+      setIsError(true);
       setSnackMessage(t('commonErrors.Series.AddingError'));
     } finally {
       setIsAdding(false);
@@ -91,6 +94,7 @@ export const useViewModel = () => {
       closeModal();
     } catch (e) {
       console.error('Error eliminando serie:', e);
+      setIsError(true);
       setSnackMessage(t('commonErrors.Series.RemovingError'));
     } finally {
       setIsRemoving(false);
@@ -119,6 +123,7 @@ export const useViewModel = () => {
       closeModal();
     } catch (e) {
       console.error('Error añadiendo película:', e);
+      setIsError(true);
       setSnackMessage(t('commonErrors.Movie.AddingError'));
     } finally {
       setIsAdding(false);
@@ -190,6 +195,7 @@ export const useViewModel = () => {
     userMoviesMap,
     snackMessage,
     isSuccess,
+    isError,
     isRemovingSnack,
     clearSnackMessage,
   };
