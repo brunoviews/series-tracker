@@ -4,6 +4,9 @@ import { useCallback, useEffect, useState } from 'react';
 export const parseRating = (value: string | null): number | null => {
   if (!value) return null;
 
+  // Prevent values like ',4' or '.4' (must have at least one digit before comma/period)
+  if (/^[,.]/.test(value.trim())) return null;
+
   const parsed = parseFloat(value.replace(',', '.'));
   if (isNaN(parsed)) return null;
   if (parsed < 0 || parsed > 10) return null;
