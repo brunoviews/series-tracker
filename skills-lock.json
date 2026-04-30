@@ -4,7 +4,8 @@
     "react-native-design": {
       "source": "brunoviews/agent-skills",
       "sourceType": "github",
-      "computedHash": "2d3d771f9d788819cc618d975209e2a93577a1e22432b0dcfb251c55896027e7"
+      "skillPath": "react-native-design/SKILL.md",
+      "computedHash": "a791ee820b999aa4968820c926cd810cccf80779124d311487bbd2c0d4985c07"
     }
   }
 }

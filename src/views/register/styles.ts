@@ -1,16 +1,41 @@
 import Text from '@components/Text';
 import styled from 'styled-components/native';
 
-export const Container = styled.View`
+export const ScreenContainer = styled.View`
+  flex: 1;
+  background-color: ${({ theme }) => theme.colors.fill.default.base};
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+`;
+
+export const ContentWrapper = styled.View`
+  flex: 1;
+  width: 100%;
   align-items: center;
   justify-content: center;
   padding: ${({ theme }) => theme.spacing.md}px;
-  gap: 16px;
-  width: 100%;
-  border-radius: ${({ theme }) => theme.borderRadius.lg}px;
+  gap: ${({ theme }) => theme.spacing.lg}px;
 `;
 
-export const Title = styled(Text).attrs({ variant: 'title-1' })`
+export const AppName = styled(Text).attrs({ variant: 'display-1' })`
+  text-align: center;
+  color: ${({ theme }) => theme.colors.textIcon.primary.main};
+`;
+
+
+export const FormCard = styled.View`
+  width: 100%;
+  padding: ${({ theme }) => theme.spacing.lg}px;
+  background-color: ${({ theme }) => theme.colors.fill.default.weak};
+  border-radius: ${({ theme }) => theme.borderRadius.lg}px;
+  border-width: 1px;
+  border-color: ${({ theme }) => theme.colors.stroke.default.subtle};
+  gap: 12px;
+  align-items: center;
+`;
+
+export const Title = styled(Text).attrs({ variant: 'title-2' })`
   text-align: center;
   width: 100%;
 `;
@@ -21,16 +46,7 @@ export const ErrorText = styled.Text`
 `;
 
 export const Link = styled.Text`
-  color: ${({ theme }) => theme.colors.textIcon.default.strong};
+  color: ${({ theme }) => theme.colors.textIcon.default.medium};
   font-size: ${({ theme }) => theme.typography['body-1-regular'].fontSize}px;
-  text-decoration: underline;
-`;
-
-export const CustomContainer = styled.View`
-  background-color: ${({ theme }) => theme.colors.fill.default.base};
-  padding: ${({ theme }) => theme.spacing.md}px;
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
+  text-decoration-line: underline;
 `;
