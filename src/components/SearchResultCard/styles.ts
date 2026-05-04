@@ -3,49 +3,54 @@ import { ItemStatus } from '@/types/app.types';
 import Text from '@components/Text';
 import styled from 'styled-components/native';
 
-export const Container = styled.TouchableOpacity`
-  flex: 1;
+export const Container = styled.TouchableOpacity.attrs({
+  activeOpacity: 0.88,
+})`
+  width: 48%;
+  gap: ${({ theme }) => theme.spacing.sm}px;
 `;
 
 export const CardContainer = styled.ImageBackground.attrs({
   resizeMode: 'cover',
 })`
-  width: 180px;
-  height: 210px;
-  border-radius: 8px;
+  width: 100%;
+  aspect-ratio: 0.68;
+  border-radius: ${({ theme }) => theme.borderRadius.md}px;
   overflow: hidden;
-  margin-bottom: 4px;
   justify-content: flex-end;
+  background-color: ${({ theme }) => theme.colors.fill.default.weak};
+  border-width: 1px;
+  border-color: ${({ theme }) => theme.colors.stroke.default.subtle};
 `;
 
 export const ResultTitle = styled(Text).attrs({
-  variant: 'caption',
+  variant: 'body-2-medium',
   numberOfLines: 1,
 })`
-  font-weight: bold;
   color: ${({ theme }) => theme.colors.textIcon.default.strong};
 `;
 
-export const ResultYear = styled(Text).attrs({ variant: 'label' })`
-  font-weight: bold;
-  color: ${({ theme }) => theme.colors.textIcon.default.weak};
+export const ResultYear = styled(Text).attrs({ variant: 'caption' })`
+  color: ${({ theme }) => theme.colors.textIcon.default.medium};
   text-align: left;
 `;
 
 export const ResultRating = styled(Text).attrs({ variant: 'label' })`
-  font-weight: bold;
-  color: white;
+  color: ${({ theme }) => theme.colors.textIcon.default.strong};
 `;
 
 export const RatingContainer = styled.View`
   flex-direction: row;
   align-items: center;
   gap: 2px;
-  padding: 3px 6px;
-  border-radius: 4px;
+  padding: 4px 7px;
+  border-radius: ${({ theme }) => theme.borderRadius.full}px;
   position: absolute;
   bottom: 8px;
   left: 8px;
+  background-color: ${({ theme }) => theme.colors.fill.default.dim};
+  border-width: 1px;
+  border-color: ${({ theme }) => theme.colors.stroke.default.subtle};
 `;
 
 export const GradientOverlay = styled.View`
@@ -53,12 +58,11 @@ export const GradientOverlay = styled.View`
   bottom: 0;
   left: 0;
   right: 0;
-  height: 80px;
+  height: 96px;
 `;
 export const YearContainer = styled.View`
   flex-direction: row;
   align-items: center;
-  margin-top: 4px;
   gap: 2px;
 `;
 
@@ -80,7 +84,7 @@ export const CurrentStatusBadge = styled.View<{ status: ItemStatus }>`
   position: absolute;
   top: 8px;
   left: 8px;
-  background-color: rgba(8, 12, 18, 0.85);
+  background-color: ${({ theme }) => theme.colors.fill.default.dim};
   border-width: 1px;
   border-color: ${({ status }) => STATUS_COLORS[status]};
 `;

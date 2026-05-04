@@ -28,7 +28,6 @@ export default function MainNavigator() {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        animation: 'fade',
         tabBarStyle: {
           backgroundColor: theme.colors.components.bottomTab.fill,
           borderTopWidth: 1,

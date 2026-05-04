@@ -121,16 +121,32 @@ const en = {
     },
   },
   search: {
+    kicker: 'Explore',
     title: 'Search',
+    subtitle: 'Your next watch starts here.',
     placeholder: 'Search for a series...',
     placeholderMovie: 'Search for a movie...',
+    inputLabel: 'Search field',
+    clear: 'Clear search',
+    loading: 'Searching...',
+    resultsCount: {
+      one: '{{count}} result',
+      other: '{{count}} results',
+    },
     filter: {
       series: 'Series',
       movies: 'Movies',
     },
+    initial: {
+      title: 'What are we watching?',
+      subtitle: "Series, movies, and hidden gems for tonight's queue.",
+    },
     empty: {
       title: 'No results found',
       subtitle: 'Try a different title or check the spelling.',
+    },
+    error: {
+      title: "Search couldn't load",
     },
   },
   detail: {

@@ -24,6 +24,7 @@ import {
   StarIcon,
   TelevisionIcon,
 } from 'phosphor-react-native';
+import { useTheme } from 'styled-components/native';
 
 export default function SearchResultCard({
   item,
@@ -33,6 +34,7 @@ export default function SearchResultCard({
   id,
 }: SearchResultCardProps) {
   const { handleCardPress } = useViewModel(item.media_type);
+  const theme = useTheme();
 
   const title = item.media_type === 'series' ? item.name : item.title;
   const date =
@@ -54,7 +56,10 @@ export default function SearchResultCard({
       >
         <GradientOverlay>
           <LinearGradient
-            colors={['transparent', 'rgba(0,0,0,0.75)']}
+            colors={[
+              theme.colors.transparent,
+              theme.colors.fill.default.dim,
+            ]}
             style={{ flex: 1 }}
           />
         </GradientOverlay>
@@ -83,7 +88,11 @@ export default function SearchResultCard({
             );
           })()}
         <RatingContainer>
-          <StarIcon size={12} color="#FBBF24" weight="fill" />
+          <StarIcon
+            size={12}
+            color={theme.colors.textIcon.semantic.warning.main}
+            weight="fill"
+          />
           <ResultRating>{item.vote_average.toFixed(1)}</ResultRating>
         </RatingContainer>
         <AddButton
