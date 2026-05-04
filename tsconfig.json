@@ -2,18 +2,17 @@
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
     "strict": true,
-    "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "@assets/*": ["assets/*"],
-      "@components/*": ["src/components/*"],
-      "@theme/*": ["src/theme/*"],
-      "@navigation/*": ["src/navigation/*"],
-      "@views/*": ["src/views/*"],
-      "@context/*": ["src/context/*"],
-      "@lib/*": ["src/lib/*"],
-      "@i18n/*": ["src/i18n/*"],
-      "@types/*": ["src/types/*"]
+      "@/*": ["./src/*"],
+      "@assets/*": ["./assets/*"],
+      "@components/*": ["./src/components/*"],
+      "@theme/*": ["./src/theme/*"],
+      "@navigation/*": ["./src/navigation/*"],
+      "@views/*": ["./src/views/*"],
+      "@context/*": ["./src/context/*"],
+      "@lib/*": ["./src/lib/*"],
+      "@i18n/*": ["./src/i18n/*"],
+      "@types/*": ["./src/types/*"]
     }
   }
 }
