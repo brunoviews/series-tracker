@@ -5,6 +5,9 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Linking } from 'react-native';
+
+const PRIVACY_POLICY_URL = process.env.EXPO_PUBLIC_PRIVACY_POLICY_URL ?? '';
 
 export const useViewModel = () => {
   const { t } = useTranslation();
@@ -16,6 +19,19 @@ export const useViewModel = () => {
 
   const onEditProfile = () => {
     navigation.navigate(ScreenType.EDIT_PROFILE);
+  };
+
+  const onPrivacySecurity = async () => {
+    setError(null);
+    try {
+      const supported = await Linking.canOpenURL(PRIVACY_POLICY_URL);
+      if (supported) {
+        await Linking.openURL(PRIVACY_POLICY_URL);
+      }
+    } catch (error) {
+      console.error('Error opening privacy policy:', error);
+      setError(t('profile.privacyError'));
+    }
   };
 
   const onDeleteAccount = () => {
@@ -62,6 +78,7 @@ export const useViewModel = () => {
     onConfirmDeleteAccount,
     onCancelDeleteAccount,
     onEditProfile,
+    onPrivacySecurity,
     error,
     setError,
   };

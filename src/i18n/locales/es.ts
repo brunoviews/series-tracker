@@ -166,6 +166,7 @@ const es = {
       appearance: 'Apariencia',
       privacySecurity: 'Privacidad y seguridad',
     },
+    privacyError: 'No se pudo abrir la política de privacidad',
     logout: 'Cerrar sesión',
     deleteAccount: {
       sectionTitle: 'Zona peligrosa',

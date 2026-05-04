@@ -169,6 +169,7 @@ const en = {
       appearance: 'Appearance',
       privacySecurity: 'Privacy & Security',
     },
+    privacyError: 'Could not open the privacy policy',
     logout: 'Log out',
     deleteAccount: {
       sectionTitle: 'Danger Zone',
