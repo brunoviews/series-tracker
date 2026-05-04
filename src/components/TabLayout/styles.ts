@@ -1,7 +1,25 @@
 import Text from '@/components/Text';
-import { LinearGradient } from 'expo-linear-gradient';
+import { LinearGradient, type LinearGradientProps } from 'expo-linear-gradient';
+import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import styled from 'styled-components/native';
+import styled, { useTheme } from 'styled-components/native';
+
+type AccentGradientProps = Omit<LinearGradientProps, 'colors' | 'start' | 'end'>;
+
+const AccentGradientBase = (props: AccentGradientProps) => {
+  const theme = useTheme();
+
+  return React.createElement(LinearGradient, {
+    ...props,
+    colors: [
+      'rgba(45, 212, 191, 0.0)',
+      theme.colors.fill.primary.main,
+      'rgba(45, 212, 191, 0.0)',
+    ] as const,
+    start: { x: 0, y: 0.5 },
+    end: { x: 1, y: 0.5 },
+  });
+};
 
 export const Header = styled(SafeAreaView).attrs({
   edges: ['top'],
@@ -71,15 +89,7 @@ export const IconBadge = styled.View`
   border-color: ${({ theme }) => theme.colors.stroke.default.weak};
 `;
 
-export const Accent = styled(LinearGradient).attrs(({ theme }) => ({
-  colors: [
-    'rgba(45, 212, 191, 0.0)',
-    theme.colors.fill.primary.main,
-    'rgba(45, 212, 191, 0.0)',
-  ],
-  start: { x: 0, y: 0.5 },
-  end: { x: 1, y: 0.5 },
-}))`
+export const Accent = styled(AccentGradientBase)`
   height: 2px;
   opacity: 0.35;
 `;
@@ -89,4 +99,3 @@ export const Container = styled.View`
   background-color: ${({ theme }) => theme.colors.fill.default.base};
   padding: ${({ theme }) => theme.spacing.md}px;
 `;
-
