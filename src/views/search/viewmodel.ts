@@ -35,6 +35,27 @@ export const useViewModel = () => {
   const [isRemovingSnack, setIsRemovingSnack] = useState(false);
   const [mediaType, setMediaType] = useState<'series' | 'movie'>('series');
 
+  const hasSearchText = searchText.trim().length > 0;
+  const resultsCount = results.length;
+  const showInitialState = !isLoading && !error && !hasSearchText;
+  const showEmptyState = !isLoading && !error && hasSearchText && !resultsCount;
+  const showErrorState = !isLoading && !!error && !resultsCount;
+  const showResultsMeta = isLoading || resultsCount > 0;
+
+  const handleMediaTypeChange = (nextMediaType: 'series' | 'movie') => {
+    if (nextMediaType === mediaType) return;
+
+    setMediaType(nextMediaType);
+    setResults([]);
+    setError(null);
+  };
+
+  const clearSearchText = () => {
+    setSearchText('');
+    setResults([]);
+    setError(null);
+  };
+
   const clearSnackMessage = () => {
     setSnackMessage(null);
     setIsSuccess(false);
@@ -147,24 +168,34 @@ export const useViewModel = () => {
   };
 
   useEffect(() => {
-    if (searchText.trim() === '') {
+    const query = searchText.trim();
+
+    if (query === '') {
       setResults([]);
+      setError(null);
       return;
     }
 
     const timer = setTimeout(async () => {
       setIsLoading(true);
       setError(null);
+      setResults([]);
 
       try {
         const data =
           mediaType === 'series'
-            ? await searchSeries(searchText)
-            : await searchMovies(searchText);
+            ? await searchSeries(query)
+            : await searchMovies(query);
         setResults(data);
       } catch (e) {
-        console.log(`Error buscando series: ${e}`);
-        setError(t('commonErrors.Series.SearchingError'));
+        console.log(`Error buscando en TMDB: ${e}`);
+        setError(
+          t(
+            mediaType === 'series'
+              ? 'commonErrors.Series.SearchingError'
+              : 'commonErrors.Movie.SearchingError',
+          ),
+        );
       } finally {
         setIsLoading(false);
       }
@@ -176,7 +207,9 @@ export const useViewModel = () => {
   return {
     searchText,
     setSearchText,
+    clearSearchText,
     results,
+    resultsCount,
     isLoading,
     isAdding,
     isRemoving,
@@ -186,7 +219,7 @@ export const useViewModel = () => {
     closeModal,
     selectedItem,
     mediaType,
-    setMediaType,
+    setMediaType: handleMediaTypeChange,
     addSeries,
     addMovie,
     removeSeries,
@@ -198,5 +231,10 @@ export const useViewModel = () => {
     isError,
     isRemovingSnack,
     clearSnackMessage,
+    hasSearchText,
+    showInitialState,
+    showEmptyState,
+    showErrorState,
+    showResultsMeta,
   };
 };

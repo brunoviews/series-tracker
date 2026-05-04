@@ -44,6 +44,7 @@ export default function ProfileView() {
     error,
     setError,
     onEditProfile,
+    onPrivacySecurity,
   } = useViewModel();
   const theme = useTheme();
   const iconColor = theme.colors.textIcon.default.medium;
@@ -92,7 +93,7 @@ export default function ProfileView() {
             <CaretRightIcon size={iconSize} color={iconColor} />
           </OptionRow>} */}
 
-          <OptionRow onPress={() => {}}>
+          <OptionRow onPress={onPrivacySecurity}>
             <OptionRowContent>
               <ShieldIcon size={iconSize} color={iconColor} />
               <OptionLabel>

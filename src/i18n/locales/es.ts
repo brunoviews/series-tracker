@@ -118,16 +118,32 @@ const es = {
     },
   },
   search: {
+    kicker: 'Explorar',
     title: 'Buscar',
+    subtitle: 'Tu próxima sesión empieza aquí.',
     placeholder: 'Busca una serie...',
     placeholderMovie: 'Busca una película...',
+    inputLabel: 'Campo de búsqueda',
+    clear: 'Limpiar búsqueda',
+    loading: 'Buscando...',
+    resultsCount: {
+      one: '{{count}} resultado',
+      other: '{{count}} resultados',
+    },
     filter: {
       series: 'Series',
       movies: 'Películas',
     },
+    initial: {
+      title: '¿Qué te apetece ver?',
+      subtitle: 'Series, películas y joyas pendientes para tu lista.',
+    },
     empty: {
       title: 'Sin resultados',
       subtitle: 'Prueba con otro título o revisa la ortografía.',
+    },
+    error: {
+      title: 'No se pudo completar la búsqueda',
     },
   },
   detail: {
@@ -166,6 +182,7 @@ const es = {
       appearance: 'Apariencia',
       privacySecurity: 'Privacidad y seguridad',
     },
+    privacyError: 'No se pudo abrir la política de privacidad',
     logout: 'Cerrar sesión',
     deleteAccount: {
       sectionTitle: 'Zona peligrosa',

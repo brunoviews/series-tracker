@@ -1,7 +1,26 @@
 import Text from '@/components/Text';
-import { LinearGradient } from 'expo-linear-gradient';
+import { LinearGradient, type LinearGradientProps } from 'expo-linear-gradient';
+import React from 'react';
 import { ImageBackground } from 'react-native';
 import styled from 'styled-components/native';
+
+type FixedGradientProps = Omit<LinearGradientProps, 'colors' | 'start' | 'end'>;
+
+const HeroGradientBase = (props: FixedGradientProps) =>
+  React.createElement(LinearGradient, {
+    ...props,
+    colors: ['rgba(7,11,17,0.1)', 'rgba(7,11,17,0.9)'] as const,
+    start: { x: 0.5, y: 0 },
+    end: { x: 0.5, y: 1 },
+  });
+
+const PosterGradientBase = (props: FixedGradientProps) =>
+  React.createElement(LinearGradient, {
+    ...props,
+    colors: ['rgba(0,0,0,0)', 'rgba(0,0,0,0.75)'] as const,
+    start: { x: 0.5, y: 0 },
+    end: { x: 0.5, y: 1 },
+  });
 
 export const Scroll = styled.ScrollView.attrs({
   showsVerticalScrollIndicator: false,
@@ -40,11 +59,7 @@ export const HeroBackdrop = styled(ImageBackground)`
   flex: 1;
 `;
 
-export const HeroGradient = styled(LinearGradient).attrs({
-  colors: ['rgba(7,11,17,0.1)', 'rgba(7,11,17,0.9)'],
-  start: { x: 0.5, y: 0 },
-  end: { x: 0.5, y: 1 },
-})`
+export const HeroGradient = styled(HeroGradientBase)`
   flex: 1;
   justify-content: flex-end;
   padding: 16px;
@@ -96,11 +111,7 @@ export const PosterImageWrap = styled(ImageBackground)`
   border-color: ${({ theme }) => theme.colors.stroke.default.subtle};
 `;
 
-export const PosterGradient = styled(LinearGradient).attrs({
-  colors: ['rgba(0,0,0,0)', 'rgba(0,0,0,0.75)'],
-  start: { x: 0.5, y: 0 },
-  end: { x: 0.5, y: 1 },
-})`
+export const PosterGradient = styled(PosterGradientBase)`
   flex: 1;
   justify-content: flex-end;
   padding: 10px;
